@@ -2,10 +2,11 @@
 
     <div id="SchedulesView">
 
-        <!-- BOX1 First row - Header -->
+        <!-- BOX1 First row - Header NOT BLURED-->
 
-        <div id="box1" v-on:click="turnOff"><a id="title"> Schedules View !</a>
+        <div id="box1" v-on:click="turnOff" v-if="bluredScreen==false"><a id="title"> Schedules View !</a>
         
+          <!-- DropDown menu -->
           <div id="dropDownButton" v-on:click="dropDownOnOff">&#9776;</div>
           <div id="routeMessageView" v-if="dropDown!=true" v-on:click="goToMessage">Messages</div>
           <div id="routeScheduleView" v-if="dropDown!=true" v-on:click="goToSchedule">Schedules</div>
@@ -13,16 +14,28 @@
 
         </div>
 
-        <!-- BOX2 Left side with buttons -->
+         <!-- BOX1 First row - Header BLURED-->
 
-        <div id="box2" v-on:click="turnOff">
+        <div id="box1Blured" v-on:click="turnOff" v-if="bluredScreen==true"><a id="title"> Schedules View !</a>
+        
+          <!-- DropDown menu -->
+          <div id="dropDownButton" v-on:click="dropDownOnOff">&#9776;</div>
+          <div id="routeMessageView" v-if="dropDown!=true" v-on:click="goToMessage">Messages</div>
+          <div id="routeScheduleView" v-if="dropDown!=true" v-on:click="goToSchedule">Schedules</div>
+          <div id="routeTriggerView" v-if="dropDown!=true" v-on:click="goToTrigger">Triggers</div>
+
+        </div>
+
+        <!-- BOX2 Left side with buttons NOT BLURED-->
+
+        <div id="box2" v-on:click="turnOff" v-if="bluredScreen==false">
             <MessageButton></MessageButton>
             <ScheduleButton></ScheduleButton>
             <TriggerButton></TriggerButton>
 
             <div v-if="createSwitch!=false">
 
-              <!-- Legend -->
+              <!-- Legend for computer screen-->
               <p class="inputForm" v-if="message==''">Message:<br>Required</p>
               <p class="inputFormTrue" v-if="message!=''">Message:<br>Required &#x2713;</p>
 
@@ -33,13 +46,33 @@
 
         </div>
 
-        <!-- BOX3 Right side with table -->
+        <!-- BOX2 Left side with buttons BLURED -->
 
-        <div id="box3" v-on:click="turnOff">
+        <div id="box2Blured" v-on:click="turnOff" v-if="bluredScreen==true">
+            <MessageButton></MessageButton>
+            <ScheduleButton></ScheduleButton>
+            <TriggerButton></TriggerButton>
+
+            <div v-if="createSwitch!=false">
+
+              <!-- Legend for computer screen-->
+              <p class="inputForm" v-if="message==''">Message:<br>Required</p>
+              <p class="inputFormTrue" v-if="message!=''">Message:<br>Required &#x2713;</p>
+
+              <p class="inputForm" v-if="date==''">Run At:<br>Required</p>
+              <p class="inputFormTrue" v-if="date!=''">Run At:<br>Required &#x2713;</p>
+            </div>
+            
+
+        </div>
+
+        <!-- BOX3 Right side with table NOT BLURED-->
+
+        <div id="box3" v-on:click="turnOff" v-if="bluredScreen==false">
           <ScheduleTable></ScheduleTable>
         </div>
 
-          <!-- CreatedON - New div for input new messages -->
+          <!-- CreatedON - New div for input new schedule -->
 
           <div id="createdOn" v-if="createSwitch!=false">
 
@@ -78,9 +111,21 @@
 
         </div>
 
-        <!-- BOX4 - Bottom div ( footer ) -->
 
-        <div id="box4" v-on:click="turnOff"></div>
+        <!-- BOX3 Right side with table BLURED-->
+
+        <div id="box3Blured" v-on:click="turnOff" v-if="bluredScreen==true">
+          <ScheduleTable></ScheduleTable>
+        </div>
+
+        <!-- BOX4 - Bottom div ( footer ) NOT BLURED -->
+
+        <div id="box4" v-on:click="turnOff" v-if="bluredScreen==false"></div>
+
+         <!-- BOX4 - Bottom div ( footer ) BLURED -->
+
+        <div id="box4Blured" v-on:click="turnOff" v-if="bluredScreen==true"></div>
+
 
         <!-- AddButton switch - For opening "CreatedON" div -->
 
@@ -106,6 +151,7 @@ export default {
     ScheduleTable,
     
   },
+
   data(){
     return{
       dropDown:true,
@@ -114,8 +160,10 @@ export default {
       message:'',
       repeat:0,
       checkRepeat:false,
+      bluredScreen:false,
     }
   },
+
   methods:{
     
     changeRepeat() {
@@ -164,13 +212,22 @@ export default {
       else{
         self.createSwitch=false;
       }
+      if(self.bluredScreen==false){
+        self.bluredScreen=true;
+      }
+      else{ 
+        self.bluredScreen=false
+      }
     },
 
     //Function for closing "CreatedOn" div by clicking outside of it
     turnOff(){
       let self = this;
       if(self.createSwitch==true){
-        self.createSwitch=false
+        self.createSwitch=false;
+      }
+      if(self.bluredScreen==true){
+        self.bluredScreen=false;
       }
     },
   }
@@ -183,7 +240,7 @@ export default {
   display: grid;
   grid-template-columns: 20% 80%;
   grid-template-rows: 5% 85% 10%;
-  width: 80vh;
+  width: 120vh;
   height: 80vh;
   margin: auto;
   top:0;
@@ -192,6 +249,20 @@ export default {
   right:0;
   position: absolute;
   background-color: rgb(207, 206, 206);
+  animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@keyframes slide-in-left {
+  0% {
+    -webkit-transform: translateX(-1000px);
+            transform: translateX(-1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 #box1{
@@ -200,6 +271,15 @@ export default {
   grid-row-start: 1;
   grid-row-end: 2;
   border: 0.1vh solid black;
+}
+
+#box1Blured{
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  border: 0.1vh solid black;
+  filter: blur(3px);
 }
 
 #title{
@@ -218,6 +298,14 @@ export default {
   grid-row-end: 3;
 }
 
+#box2Blured{
+  grid-column-start: 1;
+  grid-column-end: 2;
+  border: 0.1vh solid rgb(207, 206, 206);
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
 #box3{
   grid-column-start: 2;
   grid-column-end: 3;
@@ -226,12 +314,30 @@ export default {
   grid-row-end: 3;
 }
 
+#box3Blured{
+  grid-column-start: 2;
+  grid-column-end: 3;
+  border: 0.1vh solid black;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  filter: blur(3px);
+}
+
 #box4{
   grid-column-start: 1;
   grid-column-end: 3;
   border: 0.1vh solid black;
   grid-row-start: 3;
   grid-row-end: 4;
+}
+
+#box4Blured{
+  grid-column-start: 1;
+  grid-column-end: 3;
+  border: 0.1vh solid black;
+  grid-row-start: 3;
+  grid-row-end: 4;
+  filter:blur(3px)
 }
 
 #dropDownButton{
@@ -263,13 +369,32 @@ export default {
   margin: auto;
   width: 60%;
   height: 60%;
-  border: 0.2vh solid;
+  border: 0.4vh solid black;
+  z-index: 1;
+  animation: slit-in-vertical 0.45s ease-out both;
+}
+
+@keyframes slit-in-vertical {
+  0% {
+    -webkit-transform: translateZ(-800px) rotateY(90deg);
+            transform: translateZ(-800px) rotateY(90deg);
+    opacity: 0;
+  }
+  54% {
+    -webkit-transform: translateZ(-160px) rotateY(87deg);
+            transform: translateZ(-160px) rotateY(87deg);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateZ(0) rotateY(0);
+            transform: translateZ(0) rotateY(0);
+  }
 }
 
 #header{
   grid-column-start: 1;
   grid-column-end: 3;
-  border: 0.1vh solid black;
+  border-bottom: 0.1vh solid black;
   grid-row-start: 1;
   grid-row-end: 2;
   font-size: 3vh;
@@ -294,6 +419,7 @@ export default {
   width: 40vh;
   height: 5vh;
   font-size: 2.5vh;
+  margin-left: 1%;
 }
 
 #runLabel{
@@ -315,6 +441,7 @@ export default {
   width: 40vh;
   height: 5vh;
   font-size: 2.5vh;
+  left: 1%;
 }
 
 #repeatLabel{
@@ -433,6 +560,18 @@ export default {
   border-radius: 10%;
   background-color: white;
   border: 1px solid white;
+  animation: flip-vertical-left 1s cubic-bezier(0.455, 0.030, 0.515, 0.955) none;
+}
+
+@keyframes flip-vertical-left {
+  0% {
+    -webkit-transform: rotateY(0);
+            transform: rotateY(0);
+  }
+  100% {
+    -webkit-transform: rotateY(-360deg);
+            transform: rotateY(-360deg);
+  }
 }
 
 .mobileReqMessage{
@@ -459,7 +598,20 @@ export default {
   border-radius: 10%;
   background-color: white;
   border: 1px solid white;
+  animation: flip-vertical-left 1s cubic-bezier(0.455, 0.030, 0.515, 0.955) none;
 }
+
+@keyframes flip-vertical-left {
+  0% {
+    -webkit-transform: rotateY(0);
+            transform: rotateY(0);
+  }
+  100% {
+    -webkit-transform: rotateY(-360deg);
+            transform: rotateY(-360deg);
+  }
+}
+
 #legentTitle{
   display: none;
 }
@@ -493,6 +645,15 @@ export default {
   border: 0.1vw solid black;
 }
 
+#box1Blured{
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  border: 0.1vw solid black;
+  filter: blur(3px);
+}
+
 #title{
   font-size: 4vh;
   font-weight: bolder;
@@ -510,6 +671,15 @@ export default {
   grid-row-end: 3;
 }
 
+#box2Blured{
+  display: none;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  border: 0.1vw solid rgb(207, 206, 206);
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
 #box3{
   grid-column-start: 1;
   grid-column-end: 2;
@@ -518,12 +688,30 @@ export default {
   grid-row-end: 3;
 }
 
+#box3Blured{
+  grid-column-start: 1;
+  grid-column-end: 2;
+  border: 0.1vw solid black;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  filter: blur(3px);
+}
+
 #box4{
   grid-column-start: 1;
   grid-column-end: 2;
   border: 0.1vw solid black;
   grid-row-start: 3;
   grid-row-end: 4;
+}
+
+#box4Blured{
+  grid-column-start: 1;
+  grid-column-end: 2;
+  border: 0.1vw solid black;
+  grid-row-start: 3;
+  grid-row-end: 4;
+  filter: blur(3px);
 }
 
 #dropDownButton{
@@ -622,6 +810,7 @@ export default {
   line-height: 10vw;
   cursor: pointer;
 }
+
 #routeTriggerView{
   display: unset;
   height: 10vw;
@@ -640,7 +829,7 @@ export default {
 }
 
 #routeTriggerView:hover{
-display: unset;
+  display: unset;
   height: 10vw;
   width: 25vw;
   background-color: cornflowerblue;
@@ -669,7 +858,7 @@ display: unset;
   margin: auto;
   width: 80%;
   height: 80%;
-  border: 0.2vw solid;
+  border: 0.6vw solid black;
 }
 
 #selectRepeat{
@@ -688,7 +877,7 @@ display: unset;
 #header{
   grid-column-start: 1;
   grid-column-end: 3;
-  border: 0.1vh solid black;
+  border-bottom: 0.1vh solid black;
   grid-row-start: 1;
   grid-row-end: 2;
   font-size: 4vh;
@@ -759,6 +948,7 @@ display: unset;
   width: 60vw;
   height: 8vw;
   font-size: 3vw;
+  margin-left: 1%;
 }
 
 #runLabel{
@@ -780,6 +970,7 @@ display: unset;
   width: 40vw;
   height: 8vw;
   font-size: 3vw;
+  left: 1%;
 }
 
 #repeatLabel{
@@ -887,6 +1078,15 @@ display: unset;
   border: 0.01vh solid black;
 }
 
+#box1Blured{
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  border: 0.01vh solid black;
+  filter: blur(3px);
+}
+
 #title{
   font-size: 4vh;
   font-weight: bolder;
@@ -904,6 +1104,15 @@ display: unset;
   grid-row-end: 3;
 }
 
+#box2Blured{
+  display: none;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  border: 0.01vh solid rgb(207, 206, 206);
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
 #box3{
   grid-column-start: 1;
   grid-column-end: 2;
@@ -912,12 +1121,30 @@ display: unset;
   grid-row-end: 3;
 }
 
+#box3Blured{
+  grid-column-start: 1;
+  grid-column-end: 2;
+  border: 0.01vh solid black;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  filter: blur(3px);
+}
+
 #box4{
   grid-column-start: 1;
   grid-column-end: 2;
   border: 0.01vh solid black;
   grid-row-start: 3;
   grid-row-end: 4;
+}
+
+#box4Blured{
+  grid-column-start: 1;
+  grid-column-end: 2;
+  border: 0.01vh solid black;
+  grid-row-start: 3;
+  grid-row-end: 4;
+  filter: blur(3px);
 }
 
 #dropDownButton{
@@ -1138,6 +1365,32 @@ display: unset;
   left: 23%;
   top:5%;
   position: absolute;
+  font-size: 3vh;
+}
+
+#createdOn{
+  position: absolute;
+  display: grid;
+  grid-template-columns: 10% 90%;
+  grid-template-rows: 10% 15% 15% 15% 15% 10% 10% 10%;
+  background-color: rgb(202, 202, 202);
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: 60%;
+  height: 60%;
+  border: 0.5vh solid black;
+  z-index: 1;
+}
+
+#header{
+  grid-column-start: 1;
+  grid-column-end: 3;
+  border-bottom: 0.1vh solid black;
+  grid-row-start: 1;
+  grid-row-end: 2;
   font-size: 3vh;
 }
 }

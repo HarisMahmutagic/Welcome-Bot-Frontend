@@ -1,13 +1,21 @@
 <template>
 
   <div id="MessageView">
+    
+    <!-- Extra button NOT BLURED -->
+    <div id="extraButton" v-on:click="openExtra" v-if="bluredScreen==false && extraClicked==false">?</div>  
 
-    <div id="extraButton" v-on:click="openExtra">?</div>  
+    <!-- Extra button NOT BLURED CLICKED -->
+    <div id="extraButtonClicked" v-on:click="openExtra" v-if="bluredScreen==false && extraClicked==true">?</div>
 
-    <!-- BOX1 First row - Header -->
+    <!-- Extra button BLURED -->
+    <div id="extraButtonBlur" v-on:click="openExtra" v-if="bluredScreen==true">?</div>  
 
-    <div id="box1" v-on:click="turnOff"><a id="title">Messages View !</a>
+    <!-- BOX1 First row - Header NOT BLURED-->
+
+    <div id="box1" v-on:click="turnOff" v-if="bluredScreen==false"><a id="title">Messages View !</a>
       
+      <!-- DropDown menu -->
       <div id="dropDownButton" v-on:click="dropDownOnOff">&#9776;</div>
       <div id="routeMessageView" v-if="dropDown!=true" v-on:click="goToMessage">Messages</div>
       <div id="routeScheduleView" v-if="dropDown!=true" v-on:click="goToSchedule">Schedules</div>
@@ -15,9 +23,21 @@
 
     </div>
 
-    <!-- BOX2 Left side with buttons -->
+    <!-- BOX1 First row - Header BLURED -->
 
-    <div id="box2" v-on:click="turnOff">
+    <div id="box1Blur" v-on:click="turnOff" v-if="bluredScreen==true"><a id="title">Messages View !</a>
+      
+      <!-- DropDown menu -->
+      <div id="dropDownButton" v-on:click="dropDownOnOff">&#9776;</div>
+      <div id="routeMessageView" v-if="dropDown!=true" v-on:click="goToMessage">Messages</div>
+      <div id="routeScheduleView" v-if="dropDown!=true" v-on:click="goToSchedule">Schedules</div>
+      <div id="routeTriggerView" v-if="dropDown!=true" v-on:click="goToTrigger">Triggers</div>
+
+    </div>
+
+    <!-- BOX2 Left side with buttons NOT BLURED -->
+
+    <div id="box2" v-on:click="turnOff" v-if="bluredScreen==false">
 
       <MessageButton></MessageButton>
       <ScheduleButton></ScheduleButton>
@@ -25,7 +45,7 @@
       
       <div v-if="createSwitch!=false">
 
-        <!-- Legend -->
+        <!-- Legend for computer screen-->
 
         <p class="inputForm" v-if="title.length<1">Title:Required</p>
         <p class="inputFormTrue" v-if="title.length>=1">Title:Requred &#x2713;</p>
@@ -45,9 +65,45 @@
 
     </div>
 
-    <!-- BOX3 Right side with table -->
+    <!-- BOX2 Left side with buttons Blured -->
 
-    <div id="box3" v-on:click="turnOff">
+    <div id="box2Blur" v-on:click="turnOff" v-if="bluredScreen==true">
+
+      <MessageButton></MessageButton>
+      <ScheduleButton></ScheduleButton>
+      <TriggerButton></TriggerButton>
+      
+      <div v-if="createSwitch!=false">
+
+        <!-- Legend for computer screen-->
+
+        <p class="inputForm" v-if="title.length<1">Title:Required</p>
+        <p class="inputFormTrue" v-if="title.length>=1">Title:Requred &#x2713;</p>
+
+        <p class="inputForm" v-if="title.length<5">Title:<br>Min Length:5</p>
+        <p class="inputFormTrue" v-if="title.length>=5">Title:<br>Min Length:5 &#x2713;</p>
+
+        <p class="inputForm" v-if="title.length>30 || title.length<1">Title:<br>Max Length:30</p>
+        <p class="inputFormTrue" v-if="title.length<=30 && title.length>=1">Title:<br>Max Length:30 &#x2713;</p>
+
+        <p class="inputForm" v-if="text.length<1">Text: Required</p>
+        <p class="inputFormTrue" v-if="text.length>=1">Text:Requred &#x2713;</p>
+
+        <p class="inputForm" v-if="text.length<20" >Text<br>Min Length:20</p>
+        <p class="inputFormTrue" v-if="text.length>=20">Text<br>Min Length:20 &#x2713;</p>
+      </div>
+
+    </div>
+
+    <!-- BOX3 Right side with table NOT BLURED-->
+
+    <div id="box3" v-on:click="turnOff" v-if="bluredScreen==false">
+      <MessageTable></MessageTable>
+    </div>
+
+     <!-- BOX3 Right side with table BLURED -->
+
+    <div id="box3Blur" v-on:click="turnOff" v-if="bluredScreen==true">
       <MessageTable></MessageTable>
     </div>
 
@@ -72,7 +128,8 @@
             <a class="mobText" v-if="text.length<1 || text.length<20">X</a>
             <a class="mobTextTrue" v-if="text.length>=20">&#x2713;</a>
 
-            <input type="Text" id="inputForText" v-model="text">
+            <textarea id="inputForText" rows="4" cols="50" v-model="text"></textarea>
+
           </form>
 
             <button id="saveButton">SAVE</button>
@@ -98,16 +155,25 @@
         </div>
 
 
-        <!-- BOX4 - Bottom div ( footer ) -->
+        <!-- BOX4 - Bottom div ( footer ) NOT BLURED-->
 
-        <div id="box4" v-on:click="turnOff"></div>
+        <div id="box4" v-on:click="turnOff" v-if="bluredScreen==false"></div>
 
-        <!-- AddButton switch - For opening "CreatedON" div -->
+        <!-- BOX4 - Bottom div ( footer ) BLURED -->
 
-        <div id="addButton" v-on:click="createNew">Add</div>
+        <div id="box4Blur" v-on:click="turnOff" v-if="bluredScreen==true"></div>
+
+        <!-- AddButton switch - For opening "CreatedON" div NOT BLURED -->
+
+        <div id="addButton" v-on:click="createNew" v-if="bluredScreen==false">Add</div>
+
+        <!-- AddButton switch - For opening "CreatedON" div BLURED -->
+
+        <div id="addButtonBlur" v-on:click="createNew" v-if="bluredScreen==true">Add</div>
             
-      </div>
-
+       
+  </div>  
+  
 </template>
 
 <script>
@@ -133,7 +199,9 @@ export default {
           checkTitle:false,
           extra:false,
           title:'',
-          text:''
+          text:'',
+          bluredScreen:false,
+          extraClicked:false
         }
   },
   methods:{
@@ -176,6 +244,10 @@ export default {
       if(self.extra == true){
         self.extra = false;
       }
+      if(self.bluredScreen == false){
+        self.bluredScreen = true;
+      }
+      else self.bluredScreen = false
     },
 
     //Function for closing "CreatedOn" div by clicking outside of it
@@ -187,6 +259,13 @@ export default {
       if(self.extra==true){
         self.extra=false;
       }
+      if(self.bluredScreen==true){
+        self.bluredScreen=false;
+      }
+      if(self.extraClicked==true){
+        self.extraClicked=false;
+      }
+     
     },
 
     //Function for opening Extra div
@@ -198,6 +277,10 @@ export default {
       else{
         self.extra = false;
       }
+      if(self.extraClicked==false){
+        self.extraClicked=true;
+      }
+      else{self.extraClicked=false}
     },
     
   }
@@ -205,14 +288,13 @@ export default {
 }
 </script>
 
-
 <style scoped>
 
 #MessageView{
   display: grid;
   grid-template-columns: 20% 80%;
   grid-template-rows: 5% 85% 10%;
-  width: 80vh;
+  width: 120vh;
   height: 80vh;
   margin: auto;
   top:0;
@@ -221,6 +303,20 @@ export default {
   right:0;
   position: absolute;
   background-color: rgb(207, 206, 206);
+  animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@keyframes slide-in-left {
+  0% {
+    -webkit-transform: translateX(-1000px);
+            transform: translateX(-1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 #box1{
@@ -231,7 +327,20 @@ export default {
   border: 0.1vh solid black;
 }
 
+#box1Blur{
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  border: 0.1vh solid black;
+  filter: blur(3px);
+}
+
 #extraButton{
+display: none;
+}
+
+#extraButtonBlur{
 display: none;
 }
 
@@ -246,6 +355,7 @@ display: none;
 #routeMessageView{
   display: none;
 }
+
 #routeScheduleView{
   display: none;
 }
@@ -270,6 +380,14 @@ display: none;
   grid-row-end: 3;
 }
 
+#box2Blur{
+  grid-column-start: 1;
+  grid-column-end: 2;
+  border: 0.1vh solid rgb(207, 206, 206);
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
 #box3{
   grid-column-start: 2;
   grid-column-end: 3;
@@ -278,12 +396,30 @@ display: none;
   grid-row-end: 3;
 }
 
+#box3Blur{
+  grid-column-start: 2;
+  grid-column-end: 3;
+  border: 0.1vh solid black;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  filter: blur(3px);
+}
+
 #box4{
   grid-column-start: 1;
   grid-column-end: 3;
   border: 0.1vh solid black;
   grid-row-start: 3;
   grid-row-end: 4;
+}
+
+#box4Blur{
+  grid-column-start: 1;
+  grid-column-end: 3;
+  border: 0.1vh solid black;
+  grid-row-start: 3;
+  grid-row-end: 4;
+  filter: blur(3px);
 }
 
 .mobTitle{
@@ -315,7 +451,26 @@ display: none;
   margin: auto;
   width: 60%;
   height: 60%;
-  border: 0.2vh solid;
+  border: 0.3vh solid black;
+  animation: slit-in-vertical 0.45s ease-out both;
+  z-index: 1;
+}
+
+@keyframes slit-in-vertical {
+  0% {
+    -webkit-transform: translateZ(-800px) rotateY(90deg);
+            transform: translateZ(-800px) rotateY(90deg);
+    opacity: 0;
+  }
+  54% {
+    -webkit-transform: translateZ(-160px) rotateY(87deg);
+            transform: translateZ(-160px) rotateY(87deg);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateZ(0) rotateY(0);
+            transform: translateZ(0) rotateY(0);
+  }
 }
 
 #header{
@@ -323,7 +478,7 @@ display: none;
   grid-row-end: 2;
   grid-column-start: 1;
   grid-column-end: 2;
-  border: 0.1vh solid black;
+  border-bottom: black 0.2vh solid;
   font-size: 3vh;
 }
 
@@ -344,8 +499,9 @@ display: none;
 #inputForTitle{
   top: 35%;
   position: absolute;
-  width: 20vh;
+  width: 25vh;
   height: 3vh;
+  left: 1%;
 }
 
 #inputText{
@@ -365,8 +521,9 @@ display: none;
 #inputForText{
   top: 70%;
   position: absolute;
-  width: 35vh;
+  width: 50vh;
   height: 7vh;
+  left: 1%;
 }
 
 #saveButton{
@@ -408,6 +565,24 @@ display: none;
   line-height: 150%;
 }
 
+
+#addButtonBlur{
+  width: 13vh;
+  height: 5vh;
+  color: black;
+  background-color:white;
+  border: 0.1vh solid rgb(0, 0, 0);
+  position: absolute;
+  right: 1%;
+  bottom: 1%;
+  text-align: center;
+  font-size:3vh;
+  font-weight: bolder;
+  cursor: pointer;
+  line-height: 150%;
+  filter: blur(3px);
+}
+
 #addButton:hover{
   width: 13vh;
   height: 5vh;
@@ -432,6 +607,18 @@ display: none;
   border-radius: 10%;
   background-color: white;
   border: 1px solid white;
+  animation: flip-vertical-left 1s cubic-bezier(0.455, 0.030, 0.515, 0.955) none;
+}
+
+@keyframes flip-vertical-left {
+  0% {
+    -webkit-transform: rotateY(0);
+            transform: rotateY(0);
+  }
+  100% {
+    -webkit-transform: rotateY(-360deg);
+            transform: rotateY(-360deg);
+  }
 }
 
 .inputFormTrue{
@@ -442,6 +629,17 @@ display: none;
   border-radius: 10%;
   background-color: white;
   border: 1px solid white;
+	animation: flip-vertical-right 1s cubic-bezier(0.455, 0.030, 0.515, 0.955) none;
+}
+
+@keyframes flip-vertical-right {
+  0% {
+  transform: rotateY(0deg);
+  }
+
+  100% {
+  transform: rotateY(360deg);
+  }
 }
 
 @media screen and (max-width: 600px){
@@ -469,6 +667,15 @@ display: none;
   border: 0.1vw solid black;
 }
 
+#box1Blur{
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  border: 0.1vw solid black;
+  filter: blur(3px);
+}
+
 #title{
   font-size: 4vh;
   font-weight: bolder;
@@ -478,6 +685,15 @@ display: none;
 }
 
 #box2{
+  display: none;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  border: 0.1vw solid black;
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
+#box2Blur{
   display: none;
   grid-column-start: 1;
   grid-column-end: 2;
@@ -498,7 +714,41 @@ display: none;
   text-align: center;
   font-weight: bolder;
   cursor: pointer;
-  font-size: 4vh;
+  font-size: 5vw;
+}
+
+#extraButtonClicked{
+ display: unset;
+  height: 5.4%;
+  width: 10vw;
+  background-color: white;
+  position: absolute;
+  border: none;
+  border-top: black solid 0.3vw;
+  border-left: black solid 0.3vw;
+  right: 30%;
+  top:0.1%;
+  text-align: center;
+  font-weight: bolder;
+  cursor: pointer;
+  font-size: 5vw;
+ 
+}
+
+#extraButtonBlur{
+  display: unset;
+  height: 5.4%;
+  width: 10vw;
+  background-color: white;
+  position: absolute;
+  border: solid 0.3vw black;
+  right: 30%;
+  top:0.1%;
+  text-align: center;
+  font-weight: bolder;
+  cursor: pointer;
+  font-size: 5vw;
+  filter: blur(3px);
 }
 
 #extra{
@@ -524,12 +774,30 @@ display: none;
   grid-row-end: 3;
 }
 
+#box3Blur{
+  grid-column-start: 1;
+  grid-column-end: 2;
+  border: 0.1vw solid black;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  filter: blur(3px);
+}
+
 #box4{
   grid-column-start: 1;
   grid-column-end: 2;
   border: 0.1vw solid black;
   grid-row-start: 3;
   grid-row-end: 4;
+}
+
+#box4Blur{
+  grid-column-start: 1;
+  grid-column-end: 2;
+  border: 0.1vw solid black;
+  grid-row-start: 3;
+  grid-row-end: 4;
+  filter: blur(3px);
 }
 
 #dropDownButton{
@@ -594,6 +862,7 @@ display: none;
   line-height: 10vw;
   cursor: pointer;
 }
+
 #routeScheduleView{
   display: unset;
   height: 10vw;
@@ -673,9 +942,9 @@ display: none;
   top: 0;
   bottom: 0;
   margin: auto;
-  width: 90%;
-  height: 90%;
-  border: 0.2vw solid;
+  width: 80%;
+  height: 80%;
+  border: 0.5vw solid black;
 }
 
 #header{
@@ -683,7 +952,7 @@ display: none;
   grid-row-end: 2;
   grid-column-start: 1;
   grid-column-end: 2;
-  border: 0.1vw solid black;
+  border-bottom: 0.1vw solid black;
   font-size: 7vw;
 }
 
@@ -693,7 +962,6 @@ display: none;
   grid-column-start: 1;
   grid-column-end: 2;
 }
-
 
 #labelForTitle{
   top: 20%;
@@ -826,6 +1094,22 @@ display: none;
   color: black;
 }
 
+#addButtonBlur{
+  width: 17vw;
+  height: 8vw;
+  color: aliceblue;
+  background-color: rgb(252, 252, 252);
+  border: 0.1vw solid rgb(0, 0, 0);
+  position: absolute;
+  right: 1%;
+  bottom: 1%;
+  text-align: center;
+  font-size:5vw;
+  cursor: pointer;
+  color: black;
+  filter: blur(3px);
+}
+
 #addButton:hover{
   width: 17vw;
   height: 8vw;
@@ -866,6 +1150,15 @@ display: none;
   border: 0.01vh solid black;
 }
 
+#box1Blur{
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  border: 0.01vh solid black;
+  filter: blur(3px);
+}
+
 #title{
   font-size: 4vh;
   font-weight: bolder;
@@ -883,6 +1176,15 @@ display: none;
   grid-row-end: 3;
 }
 
+#box2Blur{
+  display: none;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  border: 0.01vh solid black;
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
 #box3{
   grid-column-start: 1;
   grid-column-end: 2;
@@ -891,12 +1193,30 @@ display: none;
   grid-row-end: 3;
 }
 
+#box3Blur{
+  grid-column-start: 1;
+  grid-column-end: 2;
+  border: 0.01vh solid black;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  filter: blur(3px);
+}
+
 #box4{
   grid-column-start: 1;
   grid-column-end: 2;
   border: 0.01vh solid black;
   grid-row-start: 3;
   grid-row-end: 4;
+}
+
+#box4Blur{
+  grid-column-start: 1;
+  grid-column-end: 2;
+  border: 0.01vh solid black;
+  grid-row-start: 3;
+  grid-row-end: 4;
+  filter: blur(3px);
 }
 
 .mobTitle{
@@ -947,11 +1267,44 @@ display: none;
   position: absolute;
   border: solid 0.3vh black;
   right: 20%;
+  top:0.5%;
+  text-align: center;
+  font-weight: bolder;
+  cursor: pointer;
+  font-size: 4vh;
+}
+
+#extraButtonClicked{
+  display: unset;
+  height: 6%;
+  width: 10vh;
+  background-color: white;
+  position: absolute;
+  border: none;
+  border-left: 0.3vh solid black;
+  border-top: 0.3vh solid black;
+  right: 20%;
+  top:0.5%;
+  text-align: center;
+  font-weight: bolder;
+  cursor: pointer;
+  font-size: 4vh;
+}
+
+#extraButtonBlur{
+  display: unset;
+  height: 6%;
+  width: 10vh;
+  background-color: white;
+  position: absolute;
+  border: solid 0.3vh black;
+  right: 20%;
   top:0.1%;
   text-align: center;
   font-weight: bolder;
   cursor: pointer;
   font-size: 4vh;
+  filter: blur(3px);
 }
 
 #extra{
@@ -973,6 +1326,7 @@ display: none;
   height: 80%;
   width: 22vh;
   margin-right: 2%;
+  margin-top: 0.1%;
   display: unset;
   background-color: rgb(255, 255, 255);
   float: right;
@@ -1099,12 +1453,29 @@ display: none;
   cursor: pointer;
 }
 
+#createdOn{
+  position: absolute;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 10% 40% 40% 10%;
+  background-color: rgb(202, 202, 202);
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: 60%;
+  height: 60%;
+  border: 0.8vh solid black;
+  z-index: 1;
+}
+
 #header{
   grid-row-start: 1;
   grid-row-end: 2;
   grid-column-start: 1;
   grid-column-end: 2;
-  border: 0.1vh solid black;
+  border-bottom: 0.1vh solid black;
   font-size: 4vh;
 }
 
@@ -1142,6 +1513,23 @@ display: none;
   font-weight: bolder;
   cursor: pointer;
   line-height: 220%;
+}
+
+#addButtonBlur{
+  width: 13vh;
+  height: 7vh;
+  color: black;
+  background-color:white;
+  border: 0.1vh solid rgb(0, 0, 0);
+  position: absolute;
+  right: 1%;
+  bottom: 1%;
+  text-align: center;
+  font-size:3vh;
+  font-weight: bolder;
+  cursor: pointer;
+  line-height: 220%;
+  filter: blur(3px);
 }
 
 #addButton:hover{

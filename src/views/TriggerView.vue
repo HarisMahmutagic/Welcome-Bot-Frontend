@@ -2,10 +2,19 @@
 
     <div id="TriggerView">
 
-        <div id="extraButton" v-on:click="openExtra">?</div> 
-        <!-- BOX1 First row - Header -->
+        <!-- Extra Button NOT BLURED -->
+        <div id="extraButton" v-on:click="openExtra" v-if="bluredScreen==false && extraClicked==false">?</div> 
 
-        <div id="box1" v-on:click="turnOff()"><a id="title"> Trigger View !</a>
+         <!-- Extra Button NOT BLURED CLICKED-->
+        <div id="extraButtonClicked" v-on:click="openExtra" v-if="bluredScreen==false && extraClicked==true">?</div> 
+
+        <!-- Extra Button BLURED -->
+        <div id="extraButtonBlured" v-on:click="openExtra" v-if="bluredScreen==true">?</div> 
+
+
+        <!-- BOX1 First row - Header NOT BLURED -->
+
+        <div id="box1" v-on:click="turnOff" v-if="bluredScreen==false"><a id="title"> Trigger View !</a>
         
           <div id="dropDownButton" v-on:click="dropDownOnOff">&#9776;</div>
           <div id="routeMessageView" v-if="dropDown!=true" v-on:click="goToMessage">Messages</div>
@@ -14,18 +23,29 @@
 
         </div>
 
-        <!-- BOX2 Left side with buttons -->
+        <!-- BOX1 First row - Header BLURED-->
 
-        <div id="box2" v-on:click="turnOff()">
+        <div id="box1Blured" v-on:click="turnOff" v-if="bluredScreen==true"><a id="title"> Trigger View !</a>
+        
+          <div id="dropDownButton" v-on:click="dropDownOnOff">&#9776;</div>
+          <div id="routeMessageView" v-if="dropDown!=true" v-on:click="goToMessage">Messages</div>
+          <div id="routeScheduleView" v-if="dropDown!=true" v-on:click="goToSchedule">Schedules</div>
+          <div id="routeTriggerView" v-if="dropDown!=true" v-on:click="goToTrigger">Triggers</div>
+
+        </div>
+
+        <!-- BOX2 Left side with buttons NOT BLURED-->
+
+        <div id="box2" v-on:click="turnOff" v-if="bluredScreen==false">
             <MessageButton></MessageButton>
             <ScheduleButton></ScheduleButton>
             <TriggerButton></TriggerButton>
 
             <div v-if="createSwitch!=false">
 
-                <!-- Legend -->
-              <p class="inputForm" v-if="message==''">Message:<br>Required</p>
-              <p class="inputFormTrue" v-if="message!=''">Message:<br>Requred &#x2713;</p>
+                <!-- Legend for computer screen-->
+              <p class="inputForm" v-if="message.length<1">Message:<br>Required</p>
+              <p class="inputFormTrue" v-if="message.length>=1">Message:<br>Requred &#x2713;</p>
 
               <p class="inputForm" v-if="trigger.length<1">Trigger:<br>Required</p>
               <p class="inputFormTrue" v-if="trigger.length>=1">Trigger:<br>Requred &#x2713;</p>
@@ -40,11 +60,46 @@
               <p class="inputFormTrue" v-if="channel!=''">Channel:<br>Requred &#x2713;</p>
 
             </div>
+            </div>
+        
+         <!-- BOX2 Left side with buttons BLURED-->
+
+        <div id="box2Blured" v-on:click="turnOff" v-if="bluredScreen==true">
+            <MessageButton></MessageButton>
+            <ScheduleButton></ScheduleButton>
+            <TriggerButton></TriggerButton>
+
+            <div v-if="createSwitch!=false">
+
+                <!-- Legend for computer screen-->
+              <p class="inputForm" v-if="message.length<1">Message:<br>Required</p>
+              <p class="inputFormTrue" v-if="message.length>=1">Message:<br>Requred &#x2713;</p>
+
+              <p class="inputForm" v-if="trigger.length<1">Trigger:<br>Required</p>
+              <p class="inputFormTrue" v-if="trigger.length>=1">Trigger:<br>Requred &#x2713;</p>
+
+              <p class="inputForm" v-if="trigger.length<5">Trigger:<br>Min Length 5</p>
+              <p class="inputFormTrue" v-if="trigger.length>=5">Trigger:<br>Min Length 5 &#x2713;</p>
+
+              <p class="inputForm" v-if="trigger.length<5 || trigger.length>10">Trigger:<br>Max Length 10</p>
+              <p class="inputFormTrue" v-if="trigger.length>=5 && trigger.length<=10">Trigger:<br>Max Length 10 &#x2713;</p>
+
+              <p class="inputForm" v-if="channel==''">Channel:<br>Required</p>
+              <p class="inputFormTrue" v-if="channel!=''">Channel:<br>Requred &#x2713;</p>
+
+            </div>
+            </div>
+
+
+        <!-- BOX3 Right side with table NOT BLURED-->
+
+        <div id="box3" v-on:click="turnOff" v-if="bluredScreen==false">
+            <TriggerTable></TriggerTable>
         </div>
 
-        <!-- BOX3 Right side with table -->
+        <!-- BOX3 Right side with table BLURED -->
 
-        <div id="box3" v-on:click="turnOff()">
+        <div id="box3Blured" v-on:click="turnOff" v-if="bluredScreen==true">
             <TriggerTable></TriggerTable>
         </div>
 
@@ -99,13 +154,22 @@
             <p class="mobChannelTrue" v-if="channel.length>=1">Channel: Required &#x2713;</p>
 
           </div>
-        <!-- BOX4 - Bottom div ( footer ) -->
+        <!-- BOX4 - Bottom div ( footer ) NOT BLURED -->
 
-        <div id="box4" v-on:click="turnOff()"></div>
+        <div id="box4" v-on:click="turnOff" v-if="bluredScreen==false"></div>
 
-        <!-- AddButton switch - For opening "CreatedON" div -->
+         <!-- BOX4 - Bottom div ( footer ) BLURED -->
 
-        <div id="addButton" v-on:click="createNew">Add</div>
+        <div id="box4Blured" v-on:click="turnOff" v-if="bluredScreen==true"></div>
+
+
+        <!-- AddButton switch - For opening "CreatedON" div NOT BLURED -->
+
+        <div id="addButton" v-on:click="createNew" v-if="bluredScreen==false">Add</div>
+
+        <!-- AddButton switch - For opening "CreatedON" div BLURED -->
+
+        <div id="addButtonBlured" v-on:click="createNew" v-if="bluredScreen==true">Add</div>
             
     </div>
 
@@ -125,8 +189,8 @@ export default {
     ScheduleButton,
     TriggerButton,
     TriggerTable,
-    
   },
+
   data(){
     return{
       dropDown:true,
@@ -134,9 +198,12 @@ export default {
       message:'',
       trigger:'',
       channel:'',
-      extra:false
+      extra:false,
+      bluredScreen:false,
+      extraClicked:false
     }
   },
+
   methods:{
 
       //Function for opening drop down menu
@@ -175,6 +242,12 @@ export default {
       else{
         self.createSwitch=false;
       }
+      if(self.bluredScreen==false){
+        self.bluredScreen=true;
+      }
+      else{
+        self.bluredScreen=false;
+      }
     },  
     
      //Function for closing "CreatedOn" div by clicking outside of it
@@ -185,6 +258,12 @@ export default {
       }
       if(self.extra==true){
         self.extra=false;
+      }
+      if(self.bluredScreen==true){
+        self.bluredScreen=false;
+      }
+      if(self.extraClicked==true){
+        self.extraClicked=false;
       }
     },
 
@@ -197,11 +276,14 @@ export default {
       else{
         self.extra = false;
       }
+      if(self.extraClicked==false){
+        self.extraClicked=true;
+      }
+      else{
+        self.extraClicked=false;
+      }
     },
-    
   }
-
-  
 }
 </script>
 
@@ -211,7 +293,7 @@ export default {
   display: grid;
   grid-template-columns: 20% 80%;
   grid-template-rows: 5% 85% 10%;
-  width: 80vh;
+  width: 120vh;
   height: 80vh;
   margin: auto;
   top:0;
@@ -220,6 +302,20 @@ export default {
   right:0;
   position: absolute;
   background-color: rgb(207, 206, 206);
+  animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@keyframes slide-in-left {
+  0% {
+    -webkit-transform: translateX(-1000px);
+            transform: translateX(-1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 #box1{
@@ -228,6 +324,15 @@ export default {
   grid-row-start: 1;
   grid-row-end: 2;
   border: 0.1vh solid black;
+}
+
+#box1Blured{
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  border: 0.1vh solid black;
+  filter: blur(3px);
 }
 
 #title{
@@ -246,6 +351,14 @@ export default {
   grid-row-end: 3;
 }
 
+#box2Blured{
+  grid-column-start: 1;
+  grid-column-end: 2;
+  border: none;
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
 #box3{
   grid-column-start: 2;
   grid-column-end: 3;
@@ -254,12 +367,30 @@ export default {
   grid-row-end: 3;
 }
 
+#box3Blured{
+  grid-column-start: 2;
+  grid-column-end: 3;
+  border: 0.1vh solid black;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  filter:blur(3px)
+}
+
 #box4{
   grid-column-start: 1;
   grid-column-end: 3;
   border: 0.1vh solid black;
   grid-row-start: 3;
   grid-row-end: 4;
+}
+
+#box4Blured{
+  grid-column-start: 1;
+  grid-column-end: 3;
+  border: 0.1vh solid black;
+  grid-row-start: 3;
+  grid-row-end: 4;
+  filter: blur(3px);
 }
 
 #dropDownButton{
@@ -291,16 +422,36 @@ export default {
   margin: auto;
   width: 60%;
   height: 60%;
-  border: 0.2vh solid;
+  border: 0.4vh solid black;
+  z-index: 1;
+  animation: slit-in-vertical 0.45s ease-out both;
+}
+
+@keyframes slit-in-vertical {
+  0% {
+    -webkit-transform: translateZ(-800px) rotateY(90deg);
+            transform: translateZ(-800px) rotateY(90deg);
+    opacity: 0;
+  }
+  54% {
+    -webkit-transform: translateZ(-160px) rotateY(87deg);
+            transform: translateZ(-160px) rotateY(87deg);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateZ(0) rotateY(0);
+            transform: translateZ(0) rotateY(0);
+  }
 }
 
 #header{
   grid-column-start: 1;
   grid-column-end: 3;
-  border: 0.1vh solid black;
+  border:none;
   grid-row-start: 1;
   grid-row-end: 2;
   font-size: 3vh;
+  border-bottom: solid black 0.1vh;
 }
 #message{
   grid-column-start: 1;
@@ -434,6 +585,23 @@ export default {
   line-height: 150%;
 }
 
+#addButtonBlured{
+  width: 13vh;
+  height: 5vh;
+  color: black;
+  background-color:white;
+  border: 0.1vh solid rgb(0, 0, 0);
+  position: absolute;
+  right: 1%;
+  bottom: 1%;
+  text-align: center;
+  font-size:3vh;
+  font-weight: bolder;
+  cursor: pointer;
+  line-height: 150%;
+  filter:blur(3px)
+}
+
 #addButton:hover{
   width: 13vh;
   height: 5vh;
@@ -457,6 +625,18 @@ export default {
   border-radius: 10%;
   background-color: white;
   border: 1px solid white;
+  animation: flip-vertical-left 1s cubic-bezier(0.455, 0.030, 0.515, 0.955);
+}
+
+@keyframes flip-vertical-left {
+  0% {
+    -webkit-transform: rotateY(0);
+            transform: rotateY(0);
+  }
+  100% {
+    -webkit-transform: rotateY(-360deg);
+            transform: rotateY(-360deg);
+  }
 }
 
 .inputFormTrue{
@@ -467,6 +647,18 @@ export default {
   border-radius: 10%;
   background-color: white;
   border: 1px solid white;
+  animation: flip-vertical-right 1s cubic-bezier(0.455, 0.030, 0.515, 0.955);
+}
+
+@keyframes flip-vertical-right {
+  0% {
+    -webkit-transform: rotateY(0);
+            transform: rotateY(0);
+  }
+  100% {
+    -webkit-transform: rotateY(-360deg);
+            transform: rotateY(-360deg);
+  }
 }
 
 .mobileReqChannel{
@@ -501,6 +693,14 @@ export default {
   display: none;
 }
 
+#extraButtonClicked{
+  display: none;
+}
+
+#extraButtonBlured{
+  display: none;
+}
+
 @media screen and (max-width: 600px) and (orientation: portrait){
 
 #TriggerView{
@@ -526,6 +726,15 @@ export default {
   border: 0.1vw solid black;
 }
 
+#box1Blured{
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  border: 0.1vw solid black;
+  filter: blur(3px);
+}
+
 #title{
   font-size: 4vh;
   font-weight: bolder;
@@ -547,6 +756,39 @@ export default {
   font-weight: bolder;
   cursor: pointer;
   font-size: 5vw;
+}
+
+#extraButtonClicked{
+  display: unset;
+  height: 5.4%;
+  width: 10vw;
+  background-color: white;
+  position: absolute;
+  border: none;
+  right: 30%;
+  top:0.1%;
+  text-align: center;
+  font-weight: bolder;
+  cursor: pointer;
+  font-size: 5vw;
+  border-top: black 0.3vw solid;
+  border-left: black 0.3vw solid;
+}
+
+#extraButtonBlured{
+  display: unset;
+  height: 5.4%;
+  width: 10vw;
+  background-color: white;
+  position: absolute;
+  border: solid 0.3vw black;
+  right: 30%;
+  top:0.1%;
+  text-align: center;
+  font-weight: bolder;
+  cursor: pointer;
+  font-size: 5vw;
+  filter: blur(3px);
 }
 
 .mobMessage{
@@ -634,12 +876,30 @@ export default {
   grid-row-end: 3;
 }
 
+#box2Blured{
+  display: none;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  border: none;
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
 #box3{
   grid-column-start: 1;
   grid-column-end: 2;
   border: 0.1vw solid black;
   grid-row-start: 2;
   grid-row-end: 3;
+}
+
+#box3Blured{
+  grid-column-start: 1;
+  grid-column-end: 2;
+  border: 0.1vw solid black;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  filter: blur(3px);
 }
 
 #createdOn{
@@ -655,7 +915,7 @@ export default {
   margin: auto;
   width: 80%;
   height: 80%;
-  border: 0.2vh solid;
+  border: 0.5vw solid;
 }
 
 #box4{
@@ -664,6 +924,15 @@ export default {
   border: 0.1vw solid black;
   grid-row-start: 3;
   grid-row-end: 4;
+}
+
+#box4Blured{
+  grid-column-start: 1;
+  grid-column-end: 2;
+  border: 0.1vw solid black;
+  grid-row-start: 3;
+  grid-row-end: 4;
+  filter: blur(3px);
 }
 
 #dropDownButton{
@@ -709,6 +978,22 @@ export default {
   font-size:5vw;
   cursor: pointer;
   color: black;
+}
+
+#addButtonBlured{
+  width: 17vw;
+  height: 8vw;
+  color: aliceblue;
+  background-color: rgb(252, 252, 252);
+  border: 0.1vw solid rgb(0, 0, 0);
+  position: absolute;
+  right: 1%;
+  bottom: 1%;
+  text-align: center;
+  font-size:5vw;
+  cursor: pointer;
+  color: black;
+  filter: blur(3px);
 }
 
 #addButton:hover{
@@ -904,10 +1189,11 @@ export default {
 #header{
   grid-column-start: 1;
   grid-column-end: 3;
-  border: 0.1vw solid black;
+  border: none;
   grid-row-start: 1;
   grid-row-end: 2;
   font-size: 6vw;
+  border-bottom: 0.1vw solid black;
 }
 #message{
   grid-column-start: 1;
@@ -1070,6 +1356,15 @@ export default {
   border: 0.01vh solid black;
 }
 
+#box1Blured{
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  border: 0.01vh solid black;
+  filter: blur(3px);
+}
+
 #title{
   font-size: 4vh;
   font-weight: bolder;
@@ -1087,6 +1382,15 @@ export default {
   grid-row-end: 3;
 }
 
+#box2Blured{
+  display: none;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  border: none;
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
 #box3{
   grid-column-start: 1;
   grid-column-end: 2;
@@ -1095,12 +1399,30 @@ export default {
   grid-row-end: 3;
 }
 
+#box3Blured{
+  grid-column-start: 1;
+  grid-column-end: 2;
+  border: 0.01vh solid black;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  filter: blur(3px);
+}
+
 #box4{
   grid-column-start: 1;
   grid-column-end: 2;
   border: 0.01vh solid black;
   grid-row-start: 3;
   grid-row-end: 4;
+}
+
+#box4Blured{
+  grid-column-start: 1;
+  grid-column-end: 2;
+  border: 0.01vh solid black;
+  grid-row-start: 3;
+  grid-row-end: 4;
+  filter: blur(3px);
 }
 
 #dropDownButton{
@@ -1165,6 +1487,7 @@ export default {
   line-height: 10vh;
   cursor: pointer;
 }
+
 #routeScheduleView{
   display: unset;
   height: 10vh;
@@ -1324,6 +1647,7 @@ export default {
   grid-row-end: 9;
   font-size: 3.5vh;
 }
+
 .mobileReqMessage{
   display: unset;
   font-size: 4vh;
@@ -1373,6 +1697,7 @@ export default {
   top: 36%;
   left: 20%;
 }
+
 .mobileReqChannel{
   display: unset;
   font-size: 4vh;
@@ -1406,71 +1731,104 @@ export default {
   position: absolute;
   border: solid 0.3vh black;
   right: 20%;
-  top:0.1%;
+  top:0.5%;
   text-align: center;
   font-weight: bolder;
   cursor: pointer;
   font-size: 4vh;
 }
 
+#extraButtonClicked{
+  display: unset;
+  height: 6%;
+  width: 10vh;
+  background-color: white;
+  position: absolute;
+  border: none;
+  right: 20%;
+  top:0.5%;
+  text-align: center;
+  font-weight: bolder;
+  cursor: pointer;
+  font-size: 4vh;
+  border-top: black 0.3vh solid;
+  border-left: 0.3vh solid black;
+}
+
+#extraButtonBlured{
+  display: unset;
+  height: 6%;
+  width: 10vh;
+  background-color: white;
+  position: absolute;
+  border: solid 0.3vh black;
+  right: 20%;
+  top:0.1%;
+  text-align: center;
+  font-weight: bolder;
+  cursor: pointer;
+  font-size: 4vh;
+  filter: blur(3px);
+}
+
 .mobMessage{
-color: red;
-font-size: 4vh;
-font-weight: bolder;
+  color: red;
+  font-size: 4vh;
+  font-weight: bolder;
 }
 
 .mobMessageTrue{
-color: green;
-font-size: 4vh;
-font-weight: bolder;
+  color: green;
+  font-size: 4vh;
+  font-weight: bolder;
 }
 
 .mobTrigger{
-color: red;
-font-size: 4vh;
-font-weight: bolder;
+  color: red;
+  font-size: 4vh;
+  font-weight: bolder;
 }
 
 .mobTriggerTrue{
-color: green;
-font-size: vh;
-font-weight: bolder;
+  color: green;
+  font-size: vh;
+  font-weight: bolder;
 }
 
 .mobTriggerMin{
-color: red;
-font-size: 4vh;
-font-weight: bolder;
+  color: red;
+  font-size: 4vh;
+  font-weight: bolder;
 }
 
 .mobTriggerMinTrue{
-color: green;
-font-size: 4vh;
-font-weight: bolder;
+  color: green;
+  font-size: 4vh;
+  font-weight: bolder;
 }
 
 .mobTriggerMax{
-color: red;
-font-size: 4vh;
-font-weight: bolder;
+  color: red;
+  font-size: 4vh;
+  font-weight: bolder;
 }
 
 .mobTriggerMaxTrue{
-color: green;
-font-size: 4vh;
-font-weight: bolder;
+  color: green;
+  font-size: 4vh;
+  font-weight: bolder;
 }
 
 .mobChannel{
-color: red;
-font-size: 4vh;
-font-weight: bolder;
+  color: red;
+  font-size: 4vh;
+  font-weight: bolder;
 }
 
 .mobChannelTrue{
-color: green;
-font-size: 4vh;
-font-weight: bolder;
+  color: green;
+  font-size: 4vh;
+  font-weight: bolder;
 }
 
 #extra{
@@ -1486,6 +1844,33 @@ font-weight: bolder;
   bottom: 0;
   border: 0.2vh solid black;
   opacity: 90%;
+}
+
+#createdOn{
+  position: absolute;
+  display: grid;
+  grid-template-columns: 10% 90%;
+  grid-template-rows: 10% 15% 10% 10% 15% 10% 10% 10% 10%;
+  background-color: rgb(202, 202, 202);
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: 60%;
+  height: 60%;
+  border: 0.6vh solid black;
+  z-index: 1;
+}
+
+#header{
+  grid-column-start: 1;
+  grid-column-end: 3;
+  border: none;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  font-size: 3vh;
+  border-bottom: 0.1vh solid black;
 }
 }
 </style>

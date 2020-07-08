@@ -1,24 +1,31 @@
 <template>
   <div class="Login">
-    
+
+    <!--Title -->
     <div id="title">
       <h1 class="text">Welcome Bot</h1>
       <h1 class="text">Admin LOGIN</h1>
     </div>
     
+    <!--Logo picture -->
     <div id="pict"></div>
 
+    <!-- Input Form for Username and password -->
     <form id="inputForm">
       
       <label for="User" id="user">User Name</label>
-      <input type="text"  id="inputUser" v-model="UserName">
+      <div  id="inputUser"  v-on:click="openInputForUser" v-if="InputForUser==false"></div>
+      <input type="text"  id="inputUserOpened" v-model="UserName" v-if="InputForUser==true">
 
       <label for="Password" id="pw">Password</label>
-      <input type="password" id="inputPw" v-model="Password">
+      <div id="inputPw" v-on:click="openInputForPW" v-if="InputForPW==false"></div>
+      <input type="password" id="inputPwOpened" v-model="Password" v-if="InputForPW==true">
 
       <button type="button" id="loginButton" v-on:click="Login">Login</button> 
+
     </form>
     
+    <!-- Message for wrong username or password -->
     <div id="wrongUP" v-if="WrongUP!==false">Wrong User name or Password !</div>
 
   </div>
@@ -34,9 +41,13 @@ export default {
       WrongUP:false,
       UserName:'',
       Password:'',
+      InputForUser:false,
+      InputForPW:false,
         }
   },
+  
   methods:{
+
    Login(){
         let self=this;
         if(self.UserName.toLowerCase() ==="admin" && self.Password==="admin"){
@@ -44,7 +55,18 @@ export default {
         else{
         self.WrongUP=true;
         }
-    } 
+    } ,
+
+    openInputForUser(){
+      let self = this;
+      if(self.InputForUser == false) self.InputForUser = true;
+    },
+    
+    openInputForPW(){
+      let self = this;
+      if(self.InputForPW == false) self.InputForPW = true;
+    },
+
   }
 }
 
@@ -64,8 +86,63 @@ export default {
   margin: auto; 
   position: absolute;
   display: grid;
+  opacity: 80%;
   grid-template-columns: 20% 20% 20% 20% 20%;
   grid-template-rows: 25% 25% 10% 40%; 
+  animation: bounce-in-fwd 1.1s both;
+}
+
+@keyframes bounce-in-fwd {
+  0% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+    opacity: 0;
+  }
+  38% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+    opacity: 1;
+  }
+  55% {
+    -webkit-transform: scale(0.7);
+            transform: scale(0.7);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  72% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+  81% {
+    -webkit-transform: scale(0.84);
+            transform: scale(0.84);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  89% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+  95% {
+    -webkit-transform: scale(0.95);
+            transform: scale(0.95);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
 }
 
 #title{
@@ -116,6 +193,22 @@ export default {
   font-size: 3vh;
   color: rgb(199, 23, 23);
   font-weight: bold;
+  animation: focus-in-expand 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@keyframes focus-in-expand {
+  0% {
+    letter-spacing: -0.5em;
+    -webkit-filter: blur(12px);
+            filter: blur(12px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-filter: blur(0px);
+            filter: blur(0px);
+    opacity: 1;
+  }
+
 }
 
 #user{
@@ -128,12 +221,31 @@ export default {
 
 #inputUser{
   position: absolute;
-  border: 0.3vh solid grey;
   top:65%;
   left:30%;
   width: 30vh;
   height: 3vh;
+  color: white;
+  background:transparent;
+  cursor: pointer;
+  border-bottom: 0.3vh solid white;
 }
+
+#inputUserOpened{
+  position: absolute;
+  top:65%;
+  left:30%;
+  width: 30vh;
+  height: 3vh;
+  color: white;
+  background-image: linear-gradient(70deg,rgb(34, 50, 189), rgb(142, 166, 243));
+  animation: conditionalOpen 0.4s normal forwards ease-in-out;
+}
+
+ @keyframes conditionalOpen {
+        from { transform: scaleY(0) }
+        to { transform: scaleY(1) }
+    }
 
 #pw{
   position: absolute;
@@ -147,10 +259,29 @@ export default {
   position: absolute;
   left: 30%;
   top:75%;
-  border: 0.3vh solid grey;
   width: 30vh;
   height: 3vh;
+  color: white;
+  background:transparent;
+  cursor: pointer;
+  border-bottom: 0.3vh solid white;
 }
+
+#inputPwOpened{
+  position: absolute;
+  left: 30%;
+  top:75%;
+  width: 30vh;
+  height: 3vh;
+  color: white;
+  background-image: linear-gradient(70deg,rgb(34, 50, 189), rgb(142, 166, 243));
+  animation: conditionalOpen 0.4s normal forwards ease-in-out;
+}
+
+@keyframes conditionalOpen {
+        from { transform: scaleY(0) }
+        to { transform: scaleY(1) }
+    }
 
 #loginButton{
   background-color: rgb(54, 54, 54);
@@ -163,6 +294,7 @@ export default {
   font-weight: bold;
   color: rgb(247, 247, 247);
   cursor: pointer;
+  border-radius: 10%;
 }
 
 #loginButton:hover{
@@ -248,11 +380,24 @@ export default {
 
 #inputUser{
   position: absolute;
-  border: 0.3vw solid grey;
   top:60%;
   left:22%;
   width: 55vw;
   height: 6vw;
+  color: white;
+  background:transparent;
+  cursor: pointer;
+  border-bottom: 0.3vh solid white;
+}
+
+#inputUserOpened{
+  position: absolute;
+  top:60%;
+  left:22%;
+  width: 55vw;
+  height: 6vw;
+  color: white;
+  background-image: linear-gradient(70deg,rgb(34, 50, 189), rgb(142, 166, 243));
 }
 
 #pw{
@@ -267,9 +412,22 @@ export default {
   position: absolute;
   left: 22%;
   top:75%;
-  border: 0.3vw solid grey;
   width: 55vw;
   height: 6vw;
+  color: white;
+  background:transparent;
+  cursor: pointer;
+  border-bottom: 0.3vh solid white;
+}
+
+#inputPwOpened{
+  position: absolute;
+  left: 22%;
+  top:75%;
+  width: 55vw;
+  height: 6vw;
+  color: white;
+  background-image: linear-gradient(70deg,rgb(34, 50, 189), rgb(142, 166, 243));
 }
 
 #loginButton{
@@ -380,11 +538,25 @@ export default {
 
 #inputUser{
   position: absolute;
-  border: 0.3vh solid grey;
   top:65%;
   left:30%;
   width: 50vh;
-  height: 5vh;
+  height: 4vh;
+  color: white;
+  background:transparent;
+  cursor: pointer;
+  border-bottom: 0.3vh solid white;
+}
+
+#inputUserOpened{
+  position: absolute;
+  top:65%;
+  left:30%;
+  width: 50vh;
+  height: 4vh;
+  color: white;
+  background-image: linear-gradient(70deg,rgb(34, 50, 189), rgb(142, 166, 243));
+  
 }
 
 #pw{
@@ -399,9 +571,22 @@ export default {
   position: absolute;
   left: 30%;
   top:75%;
-  border: 0.3vh solid grey;
   width: 50vh;
-  height: 5vh;
+  height: 3vh;
+  color: white;
+  background:transparent;
+  cursor: pointer;
+  border-bottom: 0.3vh solid white;
+}
+
+#inputPwOpened{
+  position: absolute;
+  left: 30%;
+  top:75%;
+  width: 50vh;
+  height: 4vh;
+  color: white;
+  background-image: linear-gradient(70deg,rgb(34, 50, 189), rgb(142, 166, 243));
 }
 
 #loginButton{

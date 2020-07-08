@@ -13,13 +13,18 @@
 
 export default {
   name: 'MessageButton',
-
+ data(){
+        return {
+          clicked:false,
+        }
+  },
   methods:{
 
     //Routing to message view on click
     SwitchToMessages(){
       let self = this;
       self.$router.push('./MessagesView');
+      self.clicked=true;
     }
   }
 }
@@ -29,13 +34,13 @@ export default {
 <style scoped>
 
 .button{
-  border: 1px solid black;
+  border: 0.2vh solid black;
   margin-top: 5vh;
+  background-color: white;
   height: 5vh;
   line-height: 5vh;
   font-weight: bolder;
   text-align: center;
-  background-color: white;
   font-size: 3.2vh;
 }
 
