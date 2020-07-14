@@ -1,33 +1,25 @@
 <template>
-
   <div>
-
-      <div class="button" v-on:click="SwitchToTrigger">Triggers</div>
-
+    <div class="button" v-on:click="SwitchToTrigger">Triggers</div>
   </div>
-
 </template>
 
 <script>
-
 export default {
   name: 'TriggerButton',
 
-  methods:{
-
-    //Routing to message view on click
-    SwitchToTrigger(){
-      let self = this;
+  methods: {
+    // Routing to message view on click
+    SwitchToTrigger() {
+      const self = this;
       self.$router.push('./TriggerView');
-    }
-  }
-}
-
+    },
+  },
+};
 </script>
 
 <style scoped>
-
-.button{
+.button {
   border: 0.2vh solid black;
   margin-top: 5vh;
   background-color: white;
@@ -38,11 +30,10 @@ export default {
   font-size: 3.2vh;
 }
 
-.button:hover{
+.button:hover {
   background-color: cornflowerblue;
   cursor: pointer;
   font-size: 3.2vh;
   font-weight: bolder;
 }
-
 </style>

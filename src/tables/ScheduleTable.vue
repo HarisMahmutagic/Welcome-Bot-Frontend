@@ -1,93 +1,86 @@
 <template>
-    
-        <table>
-            <tr>
-              <td class="HeadRow1">Message</td>
-              <td class="HeadRow1">Next Run</td>
-              <td class="HeadRow1">Active At</td>
-              <td class="HeadRow1">Actions</td>
-            </tr>
-            <tr>
-              <td class="Row1"></td>
-              <td class="Row1"></td>
-              <td class="Row1"></td>
-              <td class="Row1"></td>
-            </tr>
-            <tr>
-              <td class="Row2"></td>
-              <td class="Row2"></td>
-              <td class="Row2"></td>
-              <td class="Row2"></td>
-            </tr>
-            <tr>
-              <td class="Row1"></td>
-              <td class="Row1"></td>
-              <td class="Row1"></td>
-              <td class="Row1"></td>
-            </tr>
-            <tr>
-              <td class="Row2"></td>
-              <td class="Row2"></td>
-              <td class="Row2"></td>
-              <td class="Row2"></td>
-            </tr>
-            <tr>
-              <td class="Row1"></td>
-              <td class="Row1"></td>
-              <td class="Row1"></td>
-              <td class="Row1"></td>
-            </tr>
-            <tr>
-              <td class="Row2"></td>
-              <td class="Row2"></td>
-              <td class="Row2"></td>
-              <td class="Row2"></td>
-            </tr>
-            <tr>
-              <td class="Row1"></td>
-              <td class="Row1"></td>
-              <td class="Row1"></td>
-              <td class="Row1"></td>
-            </tr>
-            <tr>
-              <td class="Row2"></td>
-              <td class="Row2"></td>
-              <td class="Row2"></td>
-              <td class="Row2"></td>
-              <AddButton></AddButton>
-            </tr>
-        </table>
-
+  <div class="table">
+    <table>
+      <tr class="headRow">
+        <td>Message</td>
+        <td>Next Run</td>
+        <td>Active At</td>
+        <td>Actions</td>
+      </tr>
+      <tr class="row" v-for="(schedule, index) in allSchedules" :key="index">
+        <td class="title">{{ schedule.message }}</td>
+        <td class="run">{{ schedule.run_date }}</td>
+        <td class="active">{{ schedule.active }}</td>
+        <td class="action">Actions</td>
+      </tr>
+    </table>
+  </div>
 </template>
 
-<style  scoped>
+<script>
+import { mapGetters, mapActions } from 'vuex';
 
-table{
+export default {
+  name: 'ScheduleTable',
+  methods: {
+    ...mapActions(['fetchSchedules']),
+  },
+  computed: mapGetters(['allSchedules']),
+  created() {
+    this.fetchSchedules();
+  },
+};
+</script>
+
+<style scoped>
+.table {
   width: 100%;
-  border-spacing: 0;
   height: 100%;
+  border-spacing: 0;
+  overflow: auto;
 }
 
-.HeadRow1{
-  width: 25%;
-  height: 5%;
+table {
+  margin: 0 auto;
+}
+
+tr {
+  position: relative;
+}
+
+td {
+  overflow: auto;
+  height: 10vh;
+}
+
+.title {
+  width: 8vw;
+  max-width: 8vw;
+}
+.run {
+  width: 23vw;
+  max-width: 23vw;
+}
+.active {
+  width: 6vw;
+  max-width: 6vw;
+}
+.action {
+  width: 10vw;
+  max-width: 10vw;
+}
+
+.headRow td {
+  height: 5vh;
   font-size: 2.5vh;
   background-color: rgb(143, 143, 143);
-  border:0.01vh solid black;
   color: white;
+  text-align: center;
 }
-
-.Row2{
-  width: 25%;
-  height: 10%;
-  background-color: rgb(192, 192, 192);
-  border: 0.01vh solid;
+.row td {
+  font-size: 2.5vh;
+  background-color: white;
+  color: black;
+  text-align: center;
 }
-
-.Row1{
-  width: 25%;
-  border: 0.01vh solid;
-  height: 10%;
-}
-
 </style>

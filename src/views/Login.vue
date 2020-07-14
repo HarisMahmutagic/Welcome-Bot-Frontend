@@ -1,158 +1,176 @@
 <template>
   <div class="Login">
-
     <!--Title -->
     <div id="title">
       <h1 class="text">Welcome Bot</h1>
       <h1 class="text">Admin LOGIN</h1>
     </div>
-    
+
     <!--Logo picture -->
     <div id="pict"></div>
 
     <!-- Input Form for Username and password -->
     <form id="inputForm">
-      
       <label for="User" id="user">User Name</label>
-      <div  id="inputUser"  v-on:click="openInputForUser" v-if="InputForUser==false"></div>
-      <input type="text"  id="inputUserOpened" v-model="UserName" v-if="InputForUser==true">
+      <div
+        id="inputUser"
+        v-on:click="openInputForUser"
+        v-if="InputForUser == false"
+      ></div>
+      <input
+        type="text"
+        id="inputUserOpened"
+        v-model="UserName"
+        v-if="InputForUser == true"
+      />
 
       <label for="Password" id="pw">Password</label>
-      <div id="inputPw" v-on:click="openInputForPW" v-if="InputForPW==false"></div>
-      <input type="password" id="inputPwOpened" v-model="Password" v-if="InputForPW==true">
+      <div
+        id="inputPw"
+        v-on:click="openInputForPW"
+        v-if="InputForPW == false"
+      ></div>
+      <input
+        type="password"
+        id="inputPwOpened"
+        v-model="Password"
+        v-if="InputForPW == true"
+      />
 
-      <button type="button" id="loginButton" v-on:click="Login">Login</button> 
-
+      <button type="button" id="loginButton" v-on:click="Login">Login</button>
     </form>
-    
-    <!-- Message for wrong username or password -->
-    <div id="wrongUP" v-if="WrongUP!==false">Wrong User name or Password !</div>
 
+    <!-- Message for wrong username or password -->
+    <div id="wrongUP" v-if="WrongUP !== false">
+      Wrong User name or Password !
+    </div>
   </div>
 </template>
 
 <script>
-
 export default {
   name: 'Login',
 
-  data(){
-        return{
-      WrongUP:false,
-      UserName:'',
-      Password:'',
-      InputForUser:false,
-      InputForPW:false,
-        }
+  data() {
+    return {
+      WrongUP: false,
+      UserName: '',
+      Password: '',
+      InputForUser: false,
+      InputForPW: false,
+    };
   },
-  
-  methods:{
 
-   Login(){
-        let self=this;
-        if(self.UserName.toLowerCase() ==="admin" && self.Password==="admin"){
-        self.$router.push('./MessagesView');}
-        else{
-        self.WrongUP=true;
-        }
-    } ,
-
-    openInputForUser(){
-      let self = this;
-      if(self.InputForUser == false) self.InputForUser = true;
-    },
-    
-    openInputForPW(){
-      let self = this;
-      if(self.InputForPW == false) self.InputForPW = true;
+  methods: {
+    Login() {
+      const self = this;
+      if (
+        self.UserName.toLowerCase() === 'admin' &&
+        self.Password === 'admin'
+      ) {
+        self.$router.push('./MessagesView');
+      } else {
+        self.WrongUP = true;
+      }
     },
 
-  }
-}
+    openInputForUser() {
+      const self = this;
+      if (self.InputForUser === false) self.InputForUser = true;
+    },
 
+    openInputForPW() {
+      const self = this;
+      if (self.InputForPW === false) self.InputForPW = true;
+    },
+  },
+};
 </script>
 
 <style scoped>
-
-.Login{
+.Login {
   width: 50vh;
   height: 50vh;
-  background-image: linear-gradient(70deg,rgb(34, 50, 189), rgb(142, 166, 243));
+  background-image: linear-gradient(
+    70deg,
+    rgb(34, 50, 189),
+    rgb(142, 166, 243)
+  );
   border-radius: 10%;
-  top: 0; 
-  left: 0; 
-  right: 0; 
-  bottom: 0; 
-  margin: auto; 
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
   position: absolute;
   display: grid;
   opacity: 80%;
   grid-template-columns: 20% 20% 20% 20% 20%;
-  grid-template-rows: 25% 25% 10% 40%; 
+  grid-template-rows: 25% 25% 10% 40%;
   animation: bounce-in-fwd 1.1s both;
 }
 
 @keyframes bounce-in-fwd {
   0% {
     -webkit-transform: scale(0);
-            transform: scale(0);
+    transform: scale(0);
     -webkit-animation-timing-function: ease-in;
-            animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
     opacity: 0;
   }
   38% {
     -webkit-transform: scale(1);
-            transform: scale(1);
+    transform: scale(1);
     -webkit-animation-timing-function: ease-out;
-            animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
     opacity: 1;
   }
   55% {
     -webkit-transform: scale(0.7);
-            transform: scale(0.7);
+    transform: scale(0.7);
     -webkit-animation-timing-function: ease-in;
-            animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
   }
   72% {
     -webkit-transform: scale(1);
-            transform: scale(1);
+    transform: scale(1);
     -webkit-animation-timing-function: ease-out;
-            animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
   }
   81% {
     -webkit-transform: scale(0.84);
-            transform: scale(0.84);
+    transform: scale(0.84);
     -webkit-animation-timing-function: ease-in;
-            animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
   }
   89% {
     -webkit-transform: scale(1);
-            transform: scale(1);
+    transform: scale(1);
     -webkit-animation-timing-function: ease-out;
-            animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
   }
   95% {
     -webkit-transform: scale(0.95);
-            transform: scale(0.95);
+    transform: scale(0.95);
     -webkit-animation-timing-function: ease-in;
-            animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
   }
   100% {
     -webkit-transform: scale(1);
-            transform: scale(1);
+    transform: scale(1);
     -webkit-animation-timing-function: ease-out;
-            animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
   }
 }
 
-#title{
+#title {
   grid-column-start: 1;
   grid-column-end: 7;
   grid-row-start: 1;
   grid-row-end: 2;
 }
 
-.text{
+.text {
   font-size: 4vh;
   font-weight: bolder;
   height: 2vh;
@@ -160,7 +178,7 @@ export default {
   text-align: center;
 }
 
-#pict{
+#pict {
   background-image: url('../assets/BOTPicture.png');
   grid-column-start: 2;
   grid-column-end: 5;
@@ -177,14 +195,14 @@ export default {
   border-radius: 50%;
 }
 
-#inputForm{
+#inputForm {
   grid-column-start: 1;
   grid-column-end: 7;
   grid-row-start: 4;
   grid-row-end: 5;
 }
 
-#wrongUP{
+#wrongUP {
   grid-column-start: 1;
   grid-column-end: 7;
   grid-row-start: 3;
@@ -193,101 +211,116 @@ export default {
   font-size: 3vh;
   color: rgb(199, 23, 23);
   font-weight: bold;
-  animation: focus-in-expand 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  animation: focus-in-expand 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 @keyframes focus-in-expand {
   0% {
     letter-spacing: -0.5em;
     -webkit-filter: blur(12px);
-            filter: blur(12px);
+    filter: blur(12px);
     opacity: 0;
   }
   100% {
     -webkit-filter: blur(0px);
-            filter: blur(0px);
+    filter: blur(0px);
     opacity: 1;
   }
-
 }
 
-#user{
+#user {
   position: absolute;
   left: 5%;
-  top:66%;
+  top: 66%;
   color: beige;
   font-size: 2.5vh;
 }
 
-#inputUser{
+#inputUser {
   position: absolute;
-  top:65%;
-  left:30%;
+  top: 65%;
+  left: 30%;
   width: 30vh;
   height: 3vh;
   color: white;
-  background:transparent;
+  background: transparent;
   cursor: pointer;
   border-bottom: 0.3vh solid white;
 }
 
-#inputUserOpened{
+#inputUserOpened {
   position: absolute;
-  top:65%;
-  left:30%;
-  width: 30vh;
-  height: 3vh;
-  color: white;
-  background-image: linear-gradient(70deg,rgb(34, 50, 189), rgb(142, 166, 243));
-  animation: conditionalOpen 0.4s normal forwards ease-in-out;
-}
-
- @keyframes conditionalOpen {
-        from { transform: scaleY(0) }
-        to { transform: scaleY(1) }
-    }
-
-#pw{
-  position: absolute;
-  left: 5%;
-  top:76%;
-  color: beige;
-  font-size: 2.5vh;
-}
-
-#inputPw{
-  position: absolute;
+  top: 65%;
   left: 30%;
-  top:75%;
   width: 30vh;
   height: 3vh;
   color: white;
-  background:transparent;
-  cursor: pointer;
-  border-bottom: 0.3vh solid white;
-}
-
-#inputPwOpened{
-  position: absolute;
-  left: 30%;
-  top:75%;
-  width: 30vh;
-  height: 3vh;
-  color: white;
-  background-image: linear-gradient(70deg,rgb(34, 50, 189), rgb(142, 166, 243));
+  background-image: linear-gradient(
+    70deg,
+    rgb(34, 50, 189),
+    rgb(142, 166, 243)
+  );
   animation: conditionalOpen 0.4s normal forwards ease-in-out;
 }
 
 @keyframes conditionalOpen {
-        from { transform: scaleY(0) }
-        to { transform: scaleY(1) }
-    }
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
 
-#loginButton{
+#pw {
+  position: absolute;
+  left: 5%;
+  top: 76%;
+  color: beige;
+  font-size: 2.5vh;
+}
+
+#inputPw {
+  position: absolute;
+  left: 30%;
+  top: 75%;
+  width: 30vh;
+  height: 3vh;
+  color: white;
+  background: transparent;
+  cursor: pointer;
+  border-bottom: 0.3vh solid white;
+}
+
+#inputPwOpened {
+  position: absolute;
+  left: 30%;
+  top: 75%;
+  width: 30vh;
+  height: 3vh;
+  color: white;
+  background-image: linear-gradient(
+    70deg,
+    rgb(34, 50, 189),
+    rgb(142, 166, 243)
+  );
+  animation: conditionalOpen 0.4s normal forwards ease-in-out;
+}
+
+@keyframes conditionalOpen {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+#loginButton {
   background-color: rgb(54, 54, 54);
   position: absolute;
   left: 65%;
-  top:88%;
+  top: 88%;
   width: 15vh;
   height: 5vh;
   font-size: 2.5vh;
@@ -297,12 +330,12 @@ export default {
   border-radius: 10%;
 }
 
-#loginButton:hover{
+#loginButton:hover {
   cursor: pointer;
   background-color: rgb(100, 100, 100);
   position: absolute;
   left: 65%;
-  top:88%;
+  top: 88%;
   width: 15vh;
   height: 5vh;
   font-size: 2.5vh;
@@ -310,320 +343,341 @@ export default {
   color: rgb(247, 247, 247);
 }
 
-@media screen and (max-width: 600px) and (orientation: portrait){
+@media screen and (max-width: 600px) and (orientation: portrait) {
+  .Login {
+    width: 99vw;
+    height: 99vh;
+    background-image: linear-gradient(
+      70deg,
+      rgb(34, 50, 189),
+      rgb(142, 166, 243)
+    );
+    border-radius: 0%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    position: absolute;
+    display: grid;
+    grid-template-columns: 99%;
+    grid-template-rows: 20% 25% 10% 45%;
+  }
 
-.Login{
-  width: 99vw;
-  height: 99vh;
-  background-image: linear-gradient(70deg,rgb(34, 50, 189), rgb(142, 166, 243));
-  border-radius: 0%;
-  top: 0; 
-  left: 0; 
-  right: 0; 
-  bottom: 0; 
-  margin: auto; 
-  position: absolute;
-  display: grid;
-  grid-template-columns: 99%;
-  grid-template-rows: 20% 25% 10% 45%; 
+  #title {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+  }
+
+  .text {
+    font-size: 6vh;
+    font-weight: bolder;
+    height: 3vh;
+    color: rgb(199, 198, 198);
+    text-align: center;
+  }
+
+  #pict {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    background-image: url('../assets/BOTPicture.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 25vh;
+    width: 25vh;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border-radius: 50%;
+  }
+
+  #inputForm {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 4;
+    grid-row-end: 5;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+
+  #user {
+    position: absolute;
+    left: 40%;
+    top: 55%;
+    color: beige;
+    font-size: 4.5vw;
+  }
+
+  #inputUser {
+    position: absolute;
+    top: 60%;
+    left: 22%;
+    width: 55vw;
+    height: 6vw;
+    color: white;
+    background: transparent;
+    cursor: pointer;
+    border-bottom: 0.3vh solid white;
+  }
+
+  #inputUserOpened {
+    position: absolute;
+    top: 60%;
+    left: 22%;
+    width: 55vw;
+    height: 6vw;
+    color: white;
+    background-image: linear-gradient(
+      70deg,
+      rgb(34, 50, 189),
+      rgb(142, 166, 243)
+    );
+  }
+
+  #pw {
+    position: absolute;
+    left: 41%;
+    top: 70%;
+    color: beige;
+    font-size: 4.5vw;
+  }
+
+  #inputPw {
+    position: absolute;
+    left: 22%;
+    top: 75%;
+    width: 55vw;
+    height: 6vw;
+    color: white;
+    background: transparent;
+    cursor: pointer;
+    border-bottom: 0.3vh solid white;
+  }
+
+  #inputPwOpened {
+    position: absolute;
+    left: 22%;
+    top: 75%;
+    width: 55vw;
+    height: 6vw;
+    color: white;
+    background-image: linear-gradient(
+      70deg,
+      rgb(34, 50, 189),
+      rgb(142, 166, 243)
+    );
+  }
+
+  #loginButton {
+    background-color: rgb(54, 54, 54);
+    position: absolute;
+    left: 35%;
+    top: 88%;
+    width: 30vw;
+    height: 10vw;
+    font-size: 2.5vw;
+    font-weight: bold;
+    color: rgb(247, 247, 247);
+    cursor: pointer;
+  }
+
+  #loginButton:hover {
+    cursor: pointer;
+    background-color: rgb(54, 54, 54);
+    position: absolute;
+    left: 35%;
+    top: 88%;
+    width: 30vw;
+    height: 10vw;
+    font-size: 2.5vw;
+    font-weight: bold;
+    color: rgb(247, 247, 247);
+  }
+
+  #wrongUP {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 3;
+    grid-row-end: 4;
+    text-align: center;
+    color: rgb(148, 3, 3);
+    font-weight: bold;
+    font-size: 5vw;
+  }
 }
 
-#title{
-  grid-column-start: 1;
-  grid-column-end: 2;
-  grid-row-start: 1;
-  grid-row-end: 2;
-}
+@media screen and (max-width: 768px) and (orientation: landscape) and (min-width: 501px) {
+  .Login {
+    width: 100vh;
+    height: 99vh;
+    background-image: linear-gradient(
+      70deg,
+      rgb(34, 50, 189),
+      rgb(142, 166, 243)
+    );
+    border-radius: 0%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    position: absolute;
+    display: grid;
+    grid-template-columns: 99%;
+    grid-template-rows: 20% 25% 10% 45%;
+  }
 
-.text{
-  font-size: 6vh;
-  font-weight: bolder;
-  height: 3vh;
-  color: rgb(199, 198, 198);
-  text-align: center;
-}
+  #title {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+  }
 
-#pict{
-  grid-column-start: 1;
-  grid-column-end: 2;
-  grid-row-start: 2;
-  grid-row-end: 3;
-  background-image: url('../assets/BOTPicture.png');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 25vh;
-  width: 25vh;
-  left: 0;
-  right: 0;
-  margin: auto;
-  border-radius: 50%;
-}
+  .text {
+    font-size: 6vh;
+    font-weight: bolder;
+    height: 3vh;
+    color: rgb(199, 198, 198);
+    text-align: center;
+  }
 
-#inputForm{
-  grid-column-start: 1;
-  grid-column-end: 2;
-  grid-row-start: 4;
-  grid-row-end: 5;
-  left: 0;
-  right: 0;
-  margin: auto;
-}
+  #pict {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    background-image: url('../assets/BOTPicture.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    width: 25vh;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border-radius: 50%;
+  }
 
-#user{
-  position: absolute;
-  left: 40%;
-  top:55%;
-  color: beige;
-  font-size: 4.5vw;
-}
+  #inputForm {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 4;
+    grid-row-end: 5;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
 
-#inputUser{
-  position: absolute;
-  top:60%;
-  left:22%;
-  width: 55vw;
-  height: 6vw;
-  color: white;
-  background:transparent;
-  cursor: pointer;
-  border-bottom: 0.3vh solid white;
-}
+  #user {
+    position: absolute;
+    left: 5%;
+    top: 65%;
+    color: beige;
+    font-size: 5vh;
+  }
 
-#inputUserOpened{
-  position: absolute;
-  top:60%;
-  left:22%;
-  width: 55vw;
-  height: 6vw;
-  color: white;
-  background-image: linear-gradient(70deg,rgb(34, 50, 189), rgb(142, 166, 243));
-}
+  #inputUser {
+    position: absolute;
+    top: 65%;
+    left: 30%;
+    width: 50vh;
+    height: 4vh;
+    color: white;
+    background: transparent;
+    cursor: pointer;
+    border-bottom: 0.3vh solid white;
+  }
 
-#pw{
-  position: absolute;
-  left: 41%;
-  top:70%;
-  color: beige;
-  font-size: 4.5vw;
-}
+  #inputUserOpened {
+    position: absolute;
+    top: 65%;
+    left: 30%;
+    width: 50vh;
+    height: 4vh;
+    color: white;
+    background-image: linear-gradient(
+      70deg,
+      rgb(34, 50, 189),
+      rgb(142, 166, 243)
+    );
+  }
 
-#inputPw{
-  position: absolute;
-  left: 22%;
-  top:75%;
-  width: 55vw;
-  height: 6vw;
-  color: white;
-  background:transparent;
-  cursor: pointer;
-  border-bottom: 0.3vh solid white;
-}
+  #pw {
+    position: absolute;
+    left: 5%;
+    top: 75%;
+    color: beige;
+    font-size: 5vh;
+  }
 
-#inputPwOpened{
-  position: absolute;
-  left: 22%;
-  top:75%;
-  width: 55vw;
-  height: 6vw;
-  color: white;
-  background-image: linear-gradient(70deg,rgb(34, 50, 189), rgb(142, 166, 243));
-}
+  #inputPw {
+    position: absolute;
+    left: 30%;
+    top: 75%;
+    width: 50vh;
+    height: 3vh;
+    color: white;
+    background: transparent;
+    cursor: pointer;
+    border-bottom: 0.3vh solid white;
+  }
 
-#loginButton{
-  background-color: rgb(54, 54, 54);
-  position: absolute;
-  left: 35%;
-  top:88%;
-  width: 30vw;
-  height: 10vw;
-  font-size: 2.5vw;
-  font-weight: bold;
-  color: rgb(247, 247, 247);
-  cursor: pointer;
-}
+  #inputPwOpened {
+    position: absolute;
+    left: 30%;
+    top: 75%;
+    width: 50vh;
+    height: 4vh;
+    color: white;
+    background-image: linear-gradient(
+      70deg,
+      rgb(34, 50, 189),
+      rgb(142, 166, 243)
+    );
+  }
 
-#loginButton:hover{
-  cursor: pointer;
-  background-color: rgb(54 , 54, 54);
-  position: absolute;
-  left: 35%;
-  top:88%;
-  width: 30vw;
-  height: 10vw;
-  font-size: 2.5vw;
-  font-weight: bold;
-  color: rgb(247, 247, 247);
-}
+  #loginButton {
+    background-color: rgb(54, 54, 54);
+    position: absolute;
+    left: 35%;
+    top: 88%;
+    width: 30vh;
+    height: 10vh;
+    font-size: 3vh;
+    font-weight: bold;
+    color: rgb(247, 247, 247);
+    cursor: pointer;
+  }
 
-#wrongUP{
-  grid-column-start: 1;
-  grid-column-end: 2;
-  grid-row-start: 3;
-  grid-row-end: 4;
-  text-align: center;
-  color: rgb(148, 3, 3);
-  font-weight: bold;
-  font-size: 5vw;
-}
-}
+  #loginButton:hover {
+    background-color: rgb(54, 54, 54);
+    position: absolute;
+    left: 35%;
+    top: 88%;
+    width: 30vh;
+    height: 10vh;
+    font-size: 3vh;
+    font-weight: bold;
+    color: rgb(247, 247, 247);
+    cursor: pointer;
+  }
 
-@media screen and (max-width: 768px) and (orientation: landscape) and (min-width:501px){
-
-.Login{
-  width: 100vh;
-  height: 99vh;
-  background-image: linear-gradient(70deg,rgb(34, 50, 189), rgb(142, 166, 243));
-  border-radius: 0%;
-  top: 0; 
-  left: 0; 
-  right: 0; 
-  bottom: 0; 
-  margin: auto; 
-  position: absolute;
-  display: grid;
-  grid-template-columns: 99%;
-  grid-template-rows: 20% 25% 10% 45%; 
-}
-
-#title{
-  grid-column-start: 1;
-  grid-column-end: 2;
-  grid-row-start: 1;
-  grid-row-end: 2;
-}
-
-.text{
-  font-size: 6vh;
-  font-weight: bolder;
-  height: 3vh;
-  color: rgb(199, 198, 198);
-  text-align: center;
-}
-
-#pict{
-  grid-column-start: 1;
-  grid-column-end: 2;
-  grid-row-start: 2;
-  grid-row-end: 3;
-  background-image: url('../assets/BOTPicture.png');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 100%;
-  width: 25vh;
-  left: 0;
-  right: 0;
-  margin: auto;
-  border-radius: 50%;
-}
-
-#inputForm{
-  grid-column-start: 1;
-  grid-column-end: 2;
-  grid-row-start: 4;
-  grid-row-end: 5;
-  left: 0;
-  right: 0;
-  margin: auto;
-}
-
-#user{
-  position: absolute;
-  left: 5%;
-  top:65%;
-  color: beige;
-  font-size: 5vh;
-}
-
-#inputUser{
-  position: absolute;
-  top:65%;
-  left:30%;
-  width: 50vh;
-  height: 4vh;
-  color: white;
-  background:transparent;
-  cursor: pointer;
-  border-bottom: 0.3vh solid white;
-}
-
-#inputUserOpened{
-  position: absolute;
-  top:65%;
-  left:30%;
-  width: 50vh;
-  height: 4vh;
-  color: white;
-  background-image: linear-gradient(70deg,rgb(34, 50, 189), rgb(142, 166, 243));
-  
-}
-
-#pw{
-  position: absolute;
-  left: 5%;
-  top:75%;
-  color: beige;
-  font-size: 5vh;
-}
-
-#inputPw{
-  position: absolute;
-  left: 30%;
-  top:75%;
-  width: 50vh;
-  height: 3vh;
-  color: white;
-  background:transparent;
-  cursor: pointer;
-  border-bottom: 0.3vh solid white;
-}
-
-#inputPwOpened{
-  position: absolute;
-  left: 30%;
-  top:75%;
-  width: 50vh;
-  height: 4vh;
-  color: white;
-  background-image: linear-gradient(70deg,rgb(34, 50, 189), rgb(142, 166, 243));
-}
-
-#loginButton{
-  background-color: rgb(54, 54, 54);
-  position: absolute;
-  left: 35%;
-  top:88%;
-  width: 30vh;
-  height: 10vh;
-  font-size: 3vh;
-  font-weight: bold;
-  color: rgb(247, 247, 247);
-  cursor: pointer;
-}
-
-#loginButton:hover{
-  background-color: rgb(54, 54, 54);
-  position: absolute;
-  left: 35%;
-  top:88%;
-  width: 30vh;
-  height: 10vh;
-  font-size: 3vh;
-  font-weight: bold;
-  color: rgb(247, 247, 247);
-  cursor: pointer;
-}
-
-#wrongUP{
-  grid-column-start: 1;
-  grid-column-end: 7;
-  grid-row-start: 3;
-  grid-row-end: 4;
-  text-align: center;
-  font-size: 5vh;
-  color: rgb(148, 3, 3);
-  font-weight: bold;
-}
+  #wrongUP {
+    grid-column-start: 1;
+    grid-column-end: 7;
+    grid-row-start: 3;
+    grid-row-end: 4;
+    text-align: center;
+    font-size: 5vh;
+    color: rgb(148, 3, 3);
+    font-weight: bold;
+  }
 }
 </style>
