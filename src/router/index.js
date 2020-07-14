@@ -1,39 +1,38 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Login from '../views/Login.vue'
-import MessagesView from '../views/MessagesView.vue'
-import SchedulesView from '../views/SchedulesView.vue'
-import TriggerView from '../views/TriggerView.vue'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import Login from '../views/Login.vue';
+import MessagesView from '../views/MessagesView.vue';
+import SchedulesView from '../views/SchedulesView.vue';
+import TriggerView from '../views/TriggerView.vue';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
-  const routes = [
+const routes = [
   {
     path: '/',
     name: 'Login',
-    component:Login
+    component: Login,
   },
   {
     path: '/MessagesView',
     name: 'MessagesView',
-    component:MessagesView
+    component: MessagesView,
   },
   {
     path: '/SchedulesView',
     name: 'SchedulesView',
-    component:SchedulesView
+    component: SchedulesView,
   },
   {
     path: '/TriggerView',
     name: 'TriggerView',
-    component:TriggerView
+    component: TriggerView,
   },
-  
-]
+];
 
 const router = new VueRouter({
-  mode:"history",
+  mode: 'history',
   routes,
-})
+});
 
-export default router
+export default router;
