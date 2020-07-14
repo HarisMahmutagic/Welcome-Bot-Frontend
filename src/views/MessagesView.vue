@@ -103,17 +103,21 @@
         </p>
 
         <p class="inputForm" v-if="title.length < 5">
-          Title:<br />Min Length:5
+          Title:
+          <br />Min Length:5
         </p>
         <p class="inputFormTrue" v-if="title.length >= 5">
-          Title:<br />Min Length:5 &#x2713;
+          Title:
+          <br />Min Length:5 &#x2713;
         </p>
 
         <p class="inputForm" v-if="title.length > 30 || title.length < 1">
-          Title:<br />Max Length:30
+          Title:
+          <br />Max Length:30
         </p>
         <p class="inputFormTrue" v-if="title.length <= 30 && title.length >= 1">
-          Title:<br />Max Length:30 &#x2713;
+          Title:
+          <br />Max Length:30 &#x2713;
         </p>
 
         <p class="inputForm" v-if="text.length < 1">Text: Required</p>
@@ -121,9 +125,13 @@
           Text:Requred &#x2713;
         </p>
 
-        <p class="inputForm" v-if="text.length < 20">Text<br />Min Length:20</p>
+        <p class="inputForm" v-if="text.length < 20">
+          Text
+          <br />Min Length:20
+        </p>
         <p class="inputFormTrue" v-if="text.length >= 20">
-          Text<br />Min Length:20 &#x2713;
+          Text
+          <br />Min Length:20 &#x2713;
         </p>
       </div>
     </div>
@@ -144,17 +152,21 @@
         </p>
 
         <p class="inputForm" v-if="title.length < 5">
-          Title:<br />Min Length:5
+          Title:
+          <br />Min Length:5
         </p>
         <p class="inputFormTrue" v-if="title.length >= 5">
-          Title:<br />Min Length:5 &#x2713;
+          Title:
+          <br />Min Length:5 &#x2713;
         </p>
 
         <p class="inputForm" v-if="title.length > 30 || title.length < 1">
-          Title:<br />Max Length:30
+          Title:
+          <br />Max Length:30
         </p>
         <p class="inputFormTrue" v-if="title.length <= 30 && title.length >= 1">
-          Title:<br />Max Length:30 &#x2713;
+          Title:
+          <br />Max Length:30 &#x2713;
         </p>
 
         <p class="inputForm" v-if="text.length < 1">Text: Required</p>
@@ -162,9 +174,13 @@
           Text:Requred &#x2713;
         </p>
 
-        <p class="inputForm" v-if="text.length < 20">Text<br />Min Length:20</p>
+        <p class="inputForm" v-if="text.length < 20">
+          Text
+          <br />Min Length:20
+        </p>
         <p class="inputFormTrue" v-if="text.length >= 20">
-          Text<br />Min Length:20 &#x2713;
+          Text
+          <br />Min Length:20 &#x2713;
         </p>
       </div>
     </div>
@@ -414,7 +430,6 @@ export default {
   grid-column-end: 3;
   grid-row-start: 1;
   grid-row-end: 2;
-  border: 0.1vh solid black;
 }
 
 #box1Blur {
@@ -422,7 +437,6 @@ export default {
   grid-column-end: 3;
   grid-row-start: 1;
   grid-row-end: 2;
-  border: 0.1vh solid black;
   filter: blur(3px);
 }
 
@@ -465,40 +479,43 @@ export default {
 #box2 {
   grid-column-start: 1;
   grid-column-end: 2;
-  border: 0.1vh solid black;
   grid-row-start: 2;
   grid-row-end: 3;
+  border-top: 0.1vh solid black;
+  border-bottom: 0.1vh solid black;
 }
 
 #box2Blur {
   grid-column-start: 1;
   grid-column-end: 2;
-  border: 0.1vh solid rgb(207, 206, 206);
   grid-row-start: 2;
   grid-row-end: 3;
+  border-top: 0.1vh solid black;
+  border-bottom: 0.1vh solid black;
 }
 
 #box3 {
   grid-column-start: 2;
   grid-column-end: 3;
-  border: 0.1vh solid black;
   grid-row-start: 2;
   grid-row-end: 3;
+  border-top: 0.1vh solid black;
+  border-bottom: 0.1vh solid black;
 }
 
 #box3Blur {
   grid-column-start: 2;
   grid-column-end: 3;
-  border: 0.1vh solid black;
   grid-row-start: 2;
   grid-row-end: 3;
   filter: blur(3px);
+  border-top: 0.1vh solid black;
+  border-bottom: 0.1vh solid black;
 }
 
 #box4 {
   grid-column-start: 1;
   grid-column-end: 3;
-  border: 0.1vh solid black;
   grid-row-start: 3;
   grid-row-end: 4;
 }
@@ -506,7 +523,6 @@ export default {
 #box4Blur {
   grid-column-start: 1;
   grid-column-end: 3;
-  border: 0.1vh solid black;
   grid-row-start: 3;
   grid-row-end: 4;
   filter: blur(3px);
