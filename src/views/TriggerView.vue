@@ -437,7 +437,6 @@ export default {
   grid-column-end: 3;
   grid-row-start: 1;
   grid-row-end: 2;
-  border: 0.1vh solid black;
 }
 
 #box1Blured {
@@ -445,7 +444,6 @@ export default {
   grid-column-end: 3;
   grid-row-start: 1;
   grid-row-end: 2;
-  border: 0.1vh solid black;
   filter: blur(3px);
 }
 
@@ -460,40 +458,43 @@ export default {
 #box2 {
   grid-column-start: 1;
   grid-column-end: 2;
-  border: 0.1vh solid black;
   grid-row-start: 2;
   grid-row-end: 3;
+  border-top: 0.1vh solid black;
+  border-bottom: 0.1vh solid black;
 }
 
 #box2Blured {
   grid-column-start: 1;
   grid-column-end: 2;
-  border: none;
   grid-row-start: 2;
   grid-row-end: 3;
+  border-top: 0.1vh solid black;
+  border-bottom: 0.1vh solid black;
 }
 
 #box3 {
   grid-column-start: 2;
   grid-column-end: 3;
-  border: 0.1vh solid black;
   grid-row-start: 2;
   grid-row-end: 3;
+  border-top: 0.1vh solid black;
+  border-bottom: 0.1vh solid black;
 }
 
 #box3Blured {
   grid-column-start: 2;
   grid-column-end: 3;
-  border: 0.1vh solid black;
   grid-row-start: 2;
   grid-row-end: 3;
   filter: blur(3px);
+  border-top: 0.1vh solid black;
+  border-bottom: 0.1vh solid black;
 }
 
 #box4 {
   grid-column-start: 1;
   grid-column-end: 3;
-  border: 0.1vh solid black;
   grid-row-start: 3;
   grid-row-end: 4;
 }
@@ -501,7 +502,6 @@ export default {
 #box4Blured {
   grid-column-start: 1;
   grid-column-end: 3;
-  border: 0.1vh solid black;
   grid-row-start: 3;
   grid-row-end: 4;
   filter: blur(3px);
