@@ -1,39 +1,30 @@
 <template>
-
   <div>
-
-      <div class="button" v-on:click="SwitchToMessages">Messages</div>
-
+    <div class="button" v-on:click="SwitchToMessages">Messages</div>
   </div>
-
 </template>
 
 <script>
-
-
 export default {
   name: 'MessageButton',
- data(){
-        return {
-          clicked:false,
-        }
+  data() {
+    return {
+      clicked: false,
+    };
   },
-  methods:{
-
-    //Routing to message view on click
-    SwitchToMessages(){
-      let self = this;
+  methods: {
+    // Routing to message view on click
+    SwitchToMessages() {
+      const self = this;
       self.$router.push('./MessagesView');
-      self.clicked=true;
-    }
-  }
-}
-
+      self.clicked = true;
+    },
+  },
+};
 </script>
 
 <style scoped>
-
-.button{
+.button {
   border: 0.2vh solid black;
   margin-top: 5vh;
   background-color: white;
@@ -44,11 +35,10 @@ export default {
   font-size: 3.2vh;
 }
 
-.button:hover{
+.button:hover {
   background-color: cornflowerblue;
   cursor: pointer;
   font-weight: bolder;
   font-size: 3.2vh;
 }
-
 </style>
