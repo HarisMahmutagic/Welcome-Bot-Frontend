@@ -104,9 +104,9 @@ export default {
   margin: auto;
   position: absolute;
   display: grid;
-  opacity: 80%;
   grid-template-columns: 20% 20% 20% 20% 20%;
   grid-template-rows: 25% 25% 10% 40%;
+  -webkit-animation: bounce-in-fwd 1.1s both;
   animation: bounce-in-fwd 1.1s both;
 }
 
@@ -116,14 +116,12 @@ export default {
     transform: scale(0);
     -webkit-animation-timing-function: ease-in;
     animation-timing-function: ease-in;
-    opacity: 0;
   }
   38% {
     -webkit-transform: scale(1);
     transform: scale(1);
     -webkit-animation-timing-function: ease-out;
     animation-timing-function: ease-out;
-    opacity: 1;
   }
   55% {
     -webkit-transform: scale(0.7);
