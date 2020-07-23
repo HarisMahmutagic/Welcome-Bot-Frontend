@@ -27,6 +27,9 @@
       >
         &#x26A1; Triggers
       </div>
+      <div id="routeLoginView" v-if="dropDown != true" v-on:click="goToLogin">
+        &#x1F3E0; Logout
+      </div>
     </div>
     <!-- BOX2 Left side with buttons -->
 
@@ -173,7 +176,7 @@ export default {
     this.fetchSchedules();
   },
   methods: {
-    ...mapActions(['fetchMessages', 'fetchSchedules']),
+    ...mapActions(['fetchMessages', 'fetchSchedules', 'getToken']),
     changeRepeat() {
       this.checkRepeat = !this.checkRepeat;
       // eslint-disable-next-line eqeqeq
@@ -211,7 +214,12 @@ export default {
       const self = this;
       self.$router.push('./TriggerView');
     },
-
+    // Router to Login view
+    goToLogin() {
+      const empty = '';
+      this.$store.commit('getToken', empty);
+      this.$router.push('/');
+    },
     // Function for opening "CreatedOn" div
     createNew() {
       const self = this;
@@ -226,6 +234,7 @@ export default {
         self.blurScreen = false;
       }
     },
+    // Function for checking date, since past aren't allow
     checkDate() {
       const today = new Date();
       const day = today.getUTCDate();
@@ -270,6 +279,7 @@ export default {
       this.allowSend = 0;
       this.checkRepeat = false;
     },
+    // Create new Schedule into database
     async addNewSchedule() {
       // eslint-disable-next-line eqeqeq
       if (this.messageTitle != '') {
@@ -406,6 +416,10 @@ export default {
 }
 
 #routeTriggerView {
+  display: none;
+}
+
+#routeLoginView {
   display: none;
 }
 
@@ -852,6 +866,23 @@ export default {
     cursor: pointer;
   }
 
+  #routeLoginView {
+    display: unset;
+    height: 10vw;
+    width: 30vw;
+    background-color: rgb(109, 109, 109);
+    border: 0.1vw solid black;
+    margin-right: 2%;
+    position: absolute;
+    right: 0;
+    top: 35vw;
+    text-align: center;
+    font-size: 5vw;
+    color: white;
+    line-height: 10vw;
+    cursor: pointer;
+  }
+
   #createdOn {
     position: absolute;
     display: grid;
@@ -1180,6 +1211,23 @@ export default {
     position: absolute;
     right: 0;
     top: 25vh;
+    text-align: center;
+    font-size: 5vh;
+    color: white;
+    line-height: 10vh;
+    cursor: pointer;
+  }
+
+  #routeLoginView {
+    display: unset;
+    height: 10vh;
+    width: 30vh;
+    background-color: rgb(109, 109, 109);
+    border: 0.1vh solid black;
+    margin-right: 2%;
+    position: absolute;
+    right: 0;
+    top: 35vh;
     text-align: center;
     font-size: 5vh;
     color: white;

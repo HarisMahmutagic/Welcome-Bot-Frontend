@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 <template>
   <div id="MessageView">
-    <!-- Extra button NOT BLURED -->
+    <!-- Extra button -->
     <div
       v-on:click="openExtra"
       v-bind:class="{
@@ -12,7 +12,7 @@
       ?
     </div>
 
-    <!-- BOX1 First row - Header NOT BLURED-->
+    <!-- BOX1 First row - Header -->
 
     <div v-on:click="turnOff" class="box1">
       <a id="title">Messages View !</a>
@@ -39,6 +39,9 @@
         v-on:click="goToTrigger"
       >
         &#x26A1; Triggers
+      </div>
+      <div id="routeLoginView" v-if="dropDown != true" v-on:click="goToLogin">
+        &#x1F3E0; Logout
       </div>
     </div>
 
@@ -203,10 +206,10 @@
       </p>
     </div>
 
-    <!-- BOX4 - Bottom div ( footer ) NOT BLURED-->
+    <!-- BOX4 - Bottom div ( footer ) -->
 
     <div v-on:click="turnOff" class="box4"></div>
-    <!-- AddButton switch - For opening "CreatedON" div NOT BLURED -->
+    <!-- AddButton switch - For opening "CreatedON" div  -->
 
     <div v-on:click="createNew" class="addButton">
       Add
@@ -248,9 +251,8 @@ export default {
   created() {
     this.fetchMessages();
   },
-
   methods: {
-    ...mapActions(['fetchMessages']),
+    ...mapActions(['fetchMessages', 'getToken']),
     // Function for opening drop down menu
     dropDownOnOff() {
       const self = this;
@@ -260,6 +262,7 @@ export default {
         self.dropDown = false;
       }
     },
+    // Function for checking the presence of symbols
     checkSymbols() {
       const symbols = [
         '!',
@@ -328,6 +331,12 @@ export default {
       self.$router.push('./TriggerView');
     },
 
+    // Router to Login view
+    goToLogin() {
+      const empty = '';
+      this.$store.commit('getToken', empty);
+      this.$router.push('/');
+    },
     // Function for opening "CreatedOn" div
     createNew() {
       const self = this;
@@ -495,6 +504,9 @@ export default {
   display: none;
 }
 
+#routeLoginView {
+  display: none;
+}
 #title {
   font-size: 2.4vh;
   font-weight: bolder;
@@ -969,6 +981,22 @@ export default {
     cursor: pointer;
   }
 
+  #routeLoginView {
+    display: unset;
+    height: 10vw;
+    width: 30vw;
+    background-color: rgb(109, 109, 109);
+    border: 0.1vw solid black;
+    margin-right: 2%;
+    position: absolute;
+    right: 0;
+    top: 35vw;
+    text-align: center;
+    font-size: 5vw;
+    color: white;
+    line-height: 10vw;
+    cursor: pointer;
+  }
   #createdOn {
     position: absolute;
     display: grid;
@@ -1355,6 +1383,23 @@ export default {
     position: absolute;
     right: 0;
     top: 25vh;
+    text-align: center;
+    font-size: 5vh;
+    color: white;
+    line-height: 10vh;
+    cursor: pointer;
+  }
+
+  #routeLoginView {
+    display: unset;
+    height: 10vh;
+    width: 30vh;
+    background-color: rgb(109, 109, 109);
+    border: 0.1vh solid black;
+    margin-right: 2%;
+    position: absolute;
+    right: 0;
+    top: 35vh;
     text-align: center;
     font-size: 5vh;
     color: white;

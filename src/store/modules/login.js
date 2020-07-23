@@ -13,7 +13,6 @@ const mutations = {
   getToken(state, token) {
     // eslint-disable-next-line no-param-reassign
     state.token = token;
-    console.log(token);
   },
 };
 

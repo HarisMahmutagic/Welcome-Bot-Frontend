@@ -1,6 +1,6 @@
 <template>
   <div id="TriggerView">
-    <!-- Extra Button NOT BLURED -->
+    <!-- Extra Button -->
     <div class="extraButton" v-on:click="openExtra">
       ?
     </div>
@@ -31,6 +31,9 @@
         v-on:click="goToTrigger"
       >
         &#x26A1; Triggers
+      </div>
+      <div id="routeLoginView" v-if="dropDown != true" v-on:click="goToLogin">
+        &#x1F3E0; Logout
       </div>
     </div>
     <!-- BOX2 Left side with buttons -->
@@ -85,7 +88,7 @@
       </div>
     </div>
 
-    <!-- BOX3 Right side with table NOT BLURED-->
+    <!-- BOX3 Right side with table -->
 
     <div v-on:click="turnOff" class="box3">
       <div
@@ -248,7 +251,7 @@ export default {
     this.fetchTriggers();
   },
   methods: {
-    ...mapActions(['fetchMessages', 'fetchTriggers']),
+    ...mapActions(['fetchMessages', 'fetchTriggers', 'getToken']),
     // Function for opening drop down menu
     dropDownOnOff() {
       const self = this;
@@ -275,6 +278,12 @@ export default {
     goToTrigger() {
       const self = this;
       self.dropDown = true;
+    },
+    // Router to Login view
+    goToLogin() {
+      const empty = '';
+      this.$store.commit('getToken', empty);
+      this.$router.push('/');
     },
     checkSymbols() {
       const symbols = [
@@ -359,6 +368,7 @@ export default {
       self.active = false;
       self.allowSend = 0;
     },
+    // Add new trigger into database
     async addNewTrigger() {
       if (this.message !== '') {
         if (this.trigger !== '') {
@@ -496,6 +506,10 @@ export default {
 }
 
 #routeTriggerView {
+  display: none;
+}
+
+#routeLoginView {
   display: none;
 }
 
@@ -1098,6 +1112,23 @@ export default {
     cursor: pointer;
   }
 
+  #routeLoginView {
+    display: unset;
+    height: 10vw;
+    width: 30vw;
+    background-color: rgb(109, 109, 109);
+    border: 0.1vw solid black;
+    margin-right: 2%;
+    position: absolute;
+    right: 0;
+    top: 35vw;
+    text-align: center;
+    font-size: 5vw;
+    color: white;
+    line-height: 10vw;
+    cursor: pointer;
+  }
+
   .mobileReqMessage {
     display: unset;
     font-size: 4vw;
@@ -1456,6 +1487,23 @@ export default {
     position: absolute;
     right: 0;
     top: 25vh;
+    text-align: center;
+    font-size: 5vh;
+    color: white;
+    line-height: 10vh;
+    cursor: pointer;
+  }
+
+  #routeLoginView {
+    display: unset;
+    height: 10vh;
+    width: 30vh;
+    background-color: rgb(109, 109, 109);
+    border: 0.1vh solid black;
+    margin-right: 2%;
+    position: absolute;
+    right: 0;
+    top: 35vh;
     text-align: center;
     font-size: 5vh;
     color: white;
