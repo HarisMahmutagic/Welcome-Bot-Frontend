@@ -21,7 +21,7 @@ export default {
 <style scoped>
 .button {
   border: 0.2vh solid rgb(126, 125, 125);
-  margin-top: 5vh;
+  margin-top: 3vh;
   background-color: white;
   height: 5vh;
   margin-left: auto;
