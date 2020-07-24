@@ -246,7 +246,12 @@ export default {
       allowSend: 0,
     };
   },
-  computed: mapGetters(['allMessages', 'allTriggers', 'tokenTest']),
+  computed: mapGetters([
+    'allMessages',
+    'allTriggers',
+    'tokenTest',
+    'controller',
+  ]),
   created() {
     this.fetchMessages();
     this.fetchTriggers();
@@ -338,16 +343,18 @@ export default {
     },
     // Function for opening "CreatedOn" div
     createNew() {
-      const self = this;
-      if (self.createSwitch === false) {
-        self.createSwitch = true;
-      } else {
-        self.createSwitch = false;
-      }
-      if (self.bluredScreen === false) {
-        self.bluredScreen = true;
-      } else {
-        self.bluredScreen = false;
+      if (this.controller === false) {
+        const self = this;
+        if (self.createSwitch === false) {
+          self.createSwitch = true;
+        } else {
+          self.createSwitch = false;
+        }
+        if (self.bluredScreen === false) {
+          self.bluredScreen = true;
+        } else {
+          self.bluredScreen = false;
+        }
       }
     },
 

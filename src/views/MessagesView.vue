@@ -214,7 +214,6 @@
     <div v-on:click="createNew" class="addButton">
       Add
     </div>
-    <p>{{ tokenTest }}</p>
   </div>
 </template>
 
@@ -248,7 +247,7 @@ export default {
       blurScreen: false,
     };
   },
-  computed: mapGetters(['allMessages', 'tokenTest']),
+  computed: mapGetters(['allMessages', 'tokenTest', 'controller']),
   created() {
     this.fetchMessages();
   },
@@ -340,19 +339,21 @@ export default {
     },
     // Function for opening "CreatedOn" div
     createNew() {
-      const self = this;
-      if (self.createSwitch === false) {
-        self.createSwitch = true;
-      } else {
-        self.createSwitch = false;
-      }
-      if (self.extra === true) {
-        self.extra = false;
-      }
-      if (self.blurScreen === false) {
-        self.blurScreen = true;
-      } else {
-        self.blurScreen = false;
+      if (this.controller === false) {
+        const self = this;
+        if (self.createSwitch === false) {
+          self.createSwitch = true;
+        } else {
+          self.createSwitch = false;
+        }
+        if (self.extra === true) {
+          self.extra = false;
+        }
+        if (self.blurScreen === false) {
+          self.blurScreen = true;
+        } else {
+          self.blurScreen = false;
+        }
       }
     },
 

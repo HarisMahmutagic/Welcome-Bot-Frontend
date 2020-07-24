@@ -171,7 +171,12 @@ export default {
       allowSend: 0,
     };
   },
-  computed: mapGetters(['allMessages', 'allSchedules', 'tokenTest']),
+  computed: mapGetters([
+    'allMessages',
+    'allSchedules',
+    'tokenTest',
+    'controller',
+  ]),
   created() {
     this.fetchMessages();
     this.fetchSchedules();
@@ -223,16 +228,18 @@ export default {
     },
     // Function for opening "CreatedOn" div
     createNew() {
-      const self = this;
-      if (self.createSwitch === false) {
-        self.createSwitch = true;
-      } else {
-        self.createSwitch = false;
-      }
-      if (self.blurScreen === false) {
-        self.blurScreen = true;
-      } else {
-        self.blurScreen = false;
+      if (this.controller === false) {
+        const self = this;
+        if (self.createSwitch === false) {
+          self.createSwitch = true;
+        } else {
+          self.createSwitch = false;
+        }
+        if (self.blurScreen === false) {
+          self.blurScreen = true;
+        } else {
+          self.blurScreen = false;
+        }
       }
     },
     // Function for checking date, since past aren't allow

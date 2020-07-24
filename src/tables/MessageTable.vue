@@ -1,6 +1,11 @@
 <template>
   <div class="table">
-    <table v-bind:class="{ table1: !blurScreen, table1Blur: blurScreen }">
+    <table
+      v-bind:class="{
+        table1: !blurScreen,
+        table1Blur: blurScreen,
+      }"
+    >
       <tr class="headRow">
         <td>Title</td>
         <td>Text</td>
@@ -157,7 +162,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['fetchMessages']),
+    ...mapActions(['fetchMessages', 'fetchController']),
     async deleteMessage(messagetitle) {
       await MessagesService.deleteMessage(messagetitle);
       this.fetchMessages();
@@ -215,6 +220,7 @@ export default {
     turnOff() {
       // eslint-disable-next-line eqeqeq
       if (this.edit == true) {
+        this.fetchController();
         this.edit = false;
         this.title = '';
         this.text = '';
@@ -223,6 +229,7 @@ export default {
       }
     },
     editOpen(messageTitle, messageText) {
+      this.fetchController();
       this.title = messageTitle;
       this.text = messageText;
       this.edit = true;
@@ -243,6 +250,7 @@ export default {
                 setTimeout(() => {
                   this.allowSend = 0;
                   this.fetchMessages();
+                  this.fetchController();
                   this.edit = false;
                   this.blurScreen = false;
                 }, 2500);

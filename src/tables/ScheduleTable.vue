@@ -128,7 +128,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['fetchSchedules', 'fetchMessages']),
+    ...mapActions(['fetchSchedules', 'fetchMessages', 'fetchController']),
     async deleteSchedule(messageTitle) {
       await SchedulesService.deleteSchedule(messageTitle);
       this.fetchSchedules();
@@ -136,6 +136,7 @@ export default {
     editOpenFunction(messagetitle, schdate, schactive, schrepeat) {
       this.editOpen = true;
       this.messageTitle = messagetitle;
+      this.fetchController();
       this.active = schactive;
       // eslint-disable-next-line eqeqeq
       if (this.active == 'true') {
@@ -166,6 +167,7 @@ export default {
     turnOff() {
       if (this.editOpen === true) {
         this.editOpen = false;
+        this.fetchController();
         this.messageTitle = '';
         this.date = '';
         this.repeat = 0;
@@ -238,6 +240,7 @@ export default {
             this.repeat = 0;
             this.active = false;
             this.checkRepeat = false;
+            this.fetchController();
             this.allowSend = 0;
           }, 2500);
           this.fetchSchedules();

@@ -140,7 +140,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['fetchTriggers', 'fetchMessages']),
+    ...mapActions(['fetchTriggers', 'fetchMessages', 'fetchController']),
     async deleteTrigger(trigger) {
       await TriggersService.deleteTrigger(trigger);
       this.fetchTriggers();
@@ -162,6 +162,7 @@ export default {
               this.trigger = '';
               this.allowSend = 0;
               this.channel = '';
+              this.fetchController();
               this.active = false;
               this.Switch = false;
               this.fetchTriggers();
@@ -184,6 +185,7 @@ export default {
     openEdit(trigg, act, mess, chan) {
       this.Switch = true;
       this.trigger = trigg;
+      this.fetchController();
       if (act === 'false') {
         this.active = false;
       } else {
@@ -198,6 +200,7 @@ export default {
         this.trigger = '';
         this.channel = '';
         this.active = false;
+        this.fetchController();
         this.Switch = false;
         this.allowSend = 0;
       }
