@@ -214,6 +214,7 @@
     <div v-on:click="createNew" class="addButton">
       Add
     </div>
+    <p>{{ tokenTest }}</p>
   </div>
 </template>
 
@@ -247,7 +248,7 @@ export default {
       blurScreen: false,
     };
   },
-  computed: mapGetters(['allMessages']),
+  computed: mapGetters(['allMessages', 'tokenTest']),
   created() {
     this.fetchMessages();
   },

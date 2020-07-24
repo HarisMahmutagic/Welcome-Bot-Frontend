@@ -95,7 +95,7 @@
           "
           >&#x2713;</label
         >
-        <input type="text" id="inputForTitle" v-model="title" />
+        <div id="inputForTitle">{{ title }}</div>
       </form>
       <form id="inputText">
         <label for="text" id="labelForText">Text</label>

@@ -10,6 +10,12 @@ class LoginService {
       pass,
     });
   }
+
+  static test(token) {
+    return axios.post(`${url}test`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  }
 }
 
 export default LoginService;

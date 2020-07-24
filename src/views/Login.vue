@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import LoginService from '../store/modules/loginService';
 
 export default {
@@ -70,7 +70,7 @@ export default {
       error: '',
     };
   },
-
+  computed: mapGetters(['tokenTest']),
   methods: {
     ...mapActions(['getToken']),
     async Login(UserName, Password) {
@@ -83,7 +83,6 @@ export default {
         this.WrongUP = true;
       }
     },
-
     openInputForUser() {
       const self = this;
       if (self.InputForUser === false) self.InputForUser = true;

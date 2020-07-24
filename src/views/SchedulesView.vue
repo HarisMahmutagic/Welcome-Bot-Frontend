@@ -135,6 +135,7 @@
     <div v-on:click="createNew" class="addButton">
       Add
     </div>
+    <p>{{ tokenTest }}</p>
   </div>
 </template>
 
@@ -170,7 +171,7 @@ export default {
       allowSend: 0,
     };
   },
-  computed: mapGetters(['allMessages', 'allSchedules']),
+  computed: mapGetters(['allMessages', 'allSchedules', 'tokenTest']),
   created() {
     this.fetchMessages();
     this.fetchSchedules();
