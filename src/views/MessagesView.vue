@@ -173,6 +173,13 @@
       >
         &#x2713;
       </button>
+      <button
+        id="allowSendCheck"
+        v-on:click="addMessage"
+        v-if="(allowSend == 3)"
+      >
+        Title already exist! Try again !
+      </button>
     </div>
     <!-- Extra div- Included informations about input-->
     <div id="extra" v-if="extra != false">
@@ -211,7 +218,10 @@
     <div v-on:click="turnOff" class="box4"></div>
     <!-- AddButton switch - For opening "CreatedON" div  -->
 
-    <div v-on:click="createNew" class="addButton">
+    <div
+      v-on:click="createNew"
+      v-bind:class="{ addButton: !controller, addButtonBlur: controller }"
+    >
       Add
     </div>
   </div>
@@ -247,9 +257,13 @@ export default {
       blurScreen: false,
     };
   },
-  computed: mapGetters(['allMessages', 'tokenTest', 'controller']),
+  computed: mapGetters(['allMessages', 'token', 'controller']),
   created() {
-    this.fetchMessages();
+    if (this.token !== '') {
+      this.fetchMessages(this.token);
+    } else {
+      this.$router.push('/');
+    }
   },
   methods: {
     ...mapActions(['fetchMessages', 'getToken']),
@@ -413,16 +427,39 @@ export default {
           const temp = this.title.split('');
           if (!temp.includes(' ')) {
             if (this.checkSymbols() === true) {
-              await MessagesService.addMessage(this.title, this.text, cr_date);
-              this.allowSend = 1;
-              this.fetchMessages();
-              setTimeout(() => {
-                this.createSwitch = false;
-                this.blurScreen = false;
-                this.title = '';
-                this.text = '';
-                this.allowSend = 0;
-              }, 2500);
+              if (this.token !== '') {
+                try {
+                  await MessagesService.addMessage(
+                    this.title,
+                    this.text,
+                    cr_date,
+                    this.token
+                  );
+                  this.allowSend = 1;
+                  this.fetchMessages(this.token);
+                  setTimeout(() => {
+                    this.createSwitch = false;
+                    this.blurScreen = false;
+                    this.title = '';
+                    this.text = '';
+                    this.allowSend = 0;
+                  }, 2500);
+                } catch (err) {
+                  // Check is title already exist
+                  if (
+                    err.toString() ===
+                    'Error: Request failed with status code 302'
+                  ) {
+                    this.allowSend = 3;
+                  }
+                  // Check connection with database
+                  if (err.toString() === 'Error: Network Error') {
+                    this.$router.push('./ErrorView');
+                  }
+                }
+              } else {
+                this.$router.push('/');
+              }
             } else {
               this.allowSend = 2;
             }
@@ -713,6 +750,23 @@ export default {
   line-height: 150%;
 }
 
+.addButtonBlur {
+  width: 13vh;
+  height: 5vh;
+  color: black;
+  background-color: white;
+  filter: blur(3px);
+  border: 0.1vh solid rgb(0, 0, 0);
+  position: absolute;
+  right: 1%;
+  bottom: 1%;
+  text-align: center;
+  font-size: 3vh;
+  font-weight: bolder;
+  cursor: pointer;
+  line-height: 150%;
+}
+
 .addButton:hover {
   width: 13vh;
   height: 5vh;
@@ -819,6 +873,19 @@ export default {
     -webkit-transform: scaleX(1);
     transform: scaleX(1);
   }
+}
+#allowSendCheck {
+  grid-row-start: 4;
+  grid-row-end: 5;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  text-align: center;
+  font-weight: bold;
+  line-height: 0%;
+  font-size: 3vh;
+  cursor: pointer;
+  background-color: rgb(238, 255, 0);
+  animation: scale-up-hor-center 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;
 }
 
 @media screen and (max-width: 600px) {
@@ -1160,6 +1227,20 @@ export default {
     cursor: pointer;
   }
 
+  #allowSendCheck {
+    grid-row-start: 4;
+    grid-row-end: 5;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    text-align: center;
+    font-weight: bold;
+    line-height: 0%;
+    font-size: 5vw;
+    cursor: pointer;
+    background-color: rgb(238, 255, 0);
+    animation: scale-up-hor-center 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+  }
+
   .addButton {
     width: 17vw;
     height: 8vw;
@@ -1167,6 +1248,22 @@ export default {
     background-color: rgb(252, 252, 252);
     border: 0.1vw solid rgb(0, 0, 0);
     position: absolute;
+    right: 1%;
+    bottom: 1%;
+    text-align: center;
+    font-size: 5vw;
+    cursor: pointer;
+    color: black;
+  }
+
+  .addButtonBlur {
+    width: 17vw;
+    height: 8vw;
+    color: aliceblue;
+    background-color: rgb(252, 252, 252);
+    border: 0.1vw solid rgb(0, 0, 0);
+    position: absolute;
+    filter: blur(3px);
     right: 1%;
     bottom: 1%;
     text-align: center;
@@ -1476,6 +1573,23 @@ export default {
     border: 0.1vh solid rgb(0, 0, 0);
     position: absolute;
     right: 1%;
+    bottom: 1%;
+    text-align: center;
+    font-size: 3vh;
+    font-weight: bolder;
+    cursor: pointer;
+    line-height: 220%;
+  }
+
+  .addButtonBlur {
+    width: 13vh;
+    height: 7vh;
+    color: black;
+    background-color: white;
+    border: 0.1vh solid rgb(0, 0, 0);
+    position: absolute;
+    right: 1%;
+    filter: blur(3px);
     bottom: 1%;
     text-align: center;
     font-size: 3vh;

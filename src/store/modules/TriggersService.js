@@ -1,31 +1,47 @@
 import axios from 'axios';
 
-const url = 'https://welcome-bot-slack.herokuapp.com/api/triggers/';
+const url = 'http://localhost:5000/api/triggers/';
+// const url = 'https://welcome-bot-slack.herokuapp.com/api/triggers/';
 
 class SchedulesService {
   // eslint-disable-next-line camelcase
-  static addTrigger(message, trigger_word, channel, active) {
-    return axios.post(url, {
-      message,
-      trigger_word,
-      channel,
-      active,
-    });
+  static addTrigger(message, trigger_word, channel, active, token) {
+    return axios.post(
+      url,
+      {
+        message,
+        trigger_word,
+        channel,
+        active,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
   }
 
-  static deleteTrigger(trigger) {
-    return axios.delete(`${url}${trigger}`);
+  static deleteTrigger(trigger, token) {
+    return axios.delete(`${url}${trigger}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
   }
 
   // eslint-disable-next-line camelcase
-  static editTrigger(message, trigger_word, channel, active) {
+  static editTrigger(message, trigger_word, channel, active, token) {
     // eslint-disable-next-line camelcase
-    return axios.post(`${url}${trigger_word}`, {
-      message,
-      trigger_word,
-      channel,
-      active,
-    });
+    return axios.post(
+      // eslint-disable-next-line camelcase
+      `${url}${trigger_word}`,
+      {
+        message,
+        trigger_word,
+        channel,
+        active,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
   }
 }
 

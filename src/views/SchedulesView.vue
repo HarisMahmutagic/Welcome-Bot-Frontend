@@ -51,9 +51,11 @@
         <p class="inputFormTrue" v-if="date != ''">
           Run At:<br />Required &#x2713;
         </p>
-        <p class="inputForm" v-if="!checkDate()">Date:<br />Past not allowed</p>
+        <p class="inputForm" v-if="!checkDate()">
+          Date:<br />Past and Present not allowed
+        </p>
         <p class="inputFormTrue" v-if="checkDate()">
-          Date:<br />Past not allowed
+          Date:<br />Past and Present not allowed
         </p>
       </div>
     </div>
@@ -132,10 +134,12 @@
 
     <!-- AddButton switch - For opening "CreatedON" div -->
 
-    <div v-on:click="createNew" class="addButton">
+    <div
+      v-on:click="createNew"
+      v-bind:class="{ addButton: !controller, addButtonBlur: controller }"
+    >
       Add
     </div>
-    <p>{{ tokenTest }}</p>
   </div>
 </template>
 
@@ -171,15 +175,14 @@ export default {
       allowSend: 0,
     };
   },
-  computed: mapGetters([
-    'allMessages',
-    'allSchedules',
-    'tokenTest',
-    'controller',
-  ]),
+  computed: mapGetters(['allMessages', 'allSchedules', 'token', 'controller']),
   created() {
-    this.fetchMessages();
-    this.fetchSchedules();
+    if (this.token !== '') {
+      this.fetchMessages(this.token);
+      this.fetchSchedules(this.token);
+    } else {
+      this.$router.push('/');
+    }
   },
   methods: {
     ...mapActions(['fetchMessages', 'fetchSchedules', 'getToken']),
@@ -206,7 +209,9 @@ export default {
     // Router to Message view
     goToMessage() {
       const self = this;
-      self.$router.push('./MessagesView');
+      if (self.token !== '') {
+        self.$router.push('./MessagesView');
+      } else self.$router.push('/');
     },
 
     // Router to Schedule view
@@ -218,7 +223,9 @@ export default {
     // Router to Trigger view
     goToTrigger() {
       const self = this;
-      self.$router.push('./TriggerView');
+      if (self.token !== '') {
+        self.$router.push('./TriggerView');
+      } else self.$router.push('/');
     },
     // Router to Login view
     goToLogin() {
@@ -242,7 +249,7 @@ export default {
         }
       }
     },
-    // Function for checking date, since past aren't allow
+    // Function for checking date, since past and present aren't allow
     checkDate() {
       const today = new Date();
       const day = today.getUTCDate();
@@ -266,7 +273,7 @@ export default {
         tempDate[6] +
         tempDate[7];
 
-      if (date1 >= DateToday) {
+      if (date1 > DateToday) {
         return true;
       }
       return false;
@@ -302,24 +309,31 @@ export default {
           const month = tempDate[5] + tempDate[6];
           const year = tempDate[0] + tempDate[1] + tempDate[2] + tempDate[3];
           const fullDate = `${day}/${month}/${year}`;
-          await SchedulesService.addSchedule(
-            this.messageTitle,
-            fullDate,
-            this.active.toString(),
-            this.repeat.toString()
-          );
-          this.allowSend = 1;
-          setTimeout(() => {
-            this.date = '';
-            this.repeat = 0;
-            this.active = false;
-            this.checkRepeat = false;
-            this.messageTitle = '';
-            this.allowSend = 0;
-            this.createSwitch = false;
-            this.blurScreen = false;
-          }, 2500);
-          this.fetchSchedules();
+          try {
+            await SchedulesService.addSchedule(
+              this.messageTitle,
+              fullDate,
+              this.active.toString(),
+              this.repeat.toString(),
+              this.token
+            );
+            this.allowSend = 1;
+            setTimeout(() => {
+              this.date = '';
+              this.repeat = 0;
+              this.active = false;
+              this.checkRepeat = false;
+              this.messageTitle = '';
+              this.allowSend = 0;
+              this.createSwitch = false;
+              this.blurScreen = false;
+            }, 2500);
+            this.fetchSchedules(this.token);
+          } catch (err) {
+            if (err.toString() === 'Error: Network Error') {
+              this.$router.push('./ErrorView');
+            }
+          }
         } else {
           this.allowSend = 2;
         }
@@ -663,6 +677,23 @@ export default {
   position: absolute;
   right: 1%;
   bottom: 1%;
+  text-align: center;
+  font-size: 3vh;
+  font-weight: bolder;
+  cursor: pointer;
+  line-height: 150%;
+}
+
+.addButtonBlur {
+  width: 13vh;
+  height: 5vh;
+  color: black;
+  background-color: white;
+  border: 0.1vh solid rgb(0, 0, 0);
+  position: absolute;
+  right: 1%;
+  bottom: 1%;
+  filter: blur(3px);
   text-align: center;
   font-size: 3vh;
   font-weight: bolder;
@@ -1090,6 +1121,22 @@ export default {
     color: black;
   }
 
+  .addButtonBlur {
+    width: 17vw;
+    height: 8vw;
+    color: aliceblue;
+    background-color: rgb(252, 252, 252);
+    border: 0.1vw solid rgb(0, 0, 0);
+    position: absolute;
+    filter: blur(3px);
+    right: 1%;
+    bottom: 1%;
+    text-align: center;
+    font-size: 5vw;
+    cursor: pointer;
+    color: black;
+  }
+
   .addButton:hover {
     width: 17vw;
     height: 8vw;
@@ -1250,6 +1297,23 @@ export default {
     background-color: white;
     border: 0.1vh solid rgb(0, 0, 0);
     position: absolute;
+    right: 1%;
+    bottom: 1%;
+    text-align: center;
+    font-size: 3vh;
+    font-weight: bolder;
+    cursor: pointer;
+    line-height: 220%;
+  }
+
+  .addButtonBlur {
+    width: 13vh;
+    height: 7vh;
+    color: black;
+    background-color: white;
+    border: 0.1vh solid rgb(0, 0, 0);
+    position: absolute;
+    filter: blur(3px);
     right: 1%;
     bottom: 1%;
     text-align: center;

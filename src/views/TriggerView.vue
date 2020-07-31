@@ -133,9 +133,9 @@
       <a class="mobileReqChannelTrue" v-if="channel != ''">&#x2713;</a>
 
       <select id="selectChannel" v-model="channel">
-        <option value="General">General</option>
-        <option value="Private">Private</option>
-        <option value="Slackbot-Test">Slackbot-Test</option>
+        <option v-for="channel in allChannels.tempArray" :key="channel.id">
+          {{ channel }}</option
+        >
       </select>
 
       <input type="checkbox" id="checkActive" v-model="active" />
@@ -154,6 +154,13 @@
         v-if="(allowSend == 2)"
       >
         SAVE
+      </button>
+      <button
+        id="allowSendExist"
+        v-on:click="addNewTrigger"
+        v-if="(allowSend == 3)"
+      >
+        Trigger already exist! Try again!
       </button>
       <button
         id="allowSendTrue"
@@ -207,10 +214,12 @@
 
     <!-- AddButton switch - For opening "CreatedON" div -->
 
-    <div v-on:click="createNew" class="addButton">
+    <div
+      v-on:click="createNew"
+      v-bind:class="{ addButton: !controller, addButtonBlur: controller }"
+    >
       Add
     </div>
-    <p>{{ tokenTest }}</p>
   </div>
 </template>
 
@@ -249,15 +258,26 @@ export default {
   computed: mapGetters([
     'allMessages',
     'allTriggers',
-    'tokenTest',
+    'token',
     'controller',
+    'allChannels',
   ]),
   created() {
-    this.fetchMessages();
-    this.fetchTriggers();
+    if (this.token !== '') {
+      this.fetchMessages(this.token);
+      this.fetchTriggers(this.token);
+      this.fetchChannels(this.token);
+    } else {
+      this.$router.push('/');
+    }
   },
   methods: {
-    ...mapActions(['fetchMessages', 'fetchTriggers', 'getToken']),
+    ...mapActions([
+      'fetchMessages',
+      'fetchTriggers',
+      'getToken',
+      'fetchChannels',
+    ]),
     // Function for opening drop down menu
     dropDownOnOff() {
       const self = this;
@@ -382,23 +402,36 @@ export default {
         if (this.trigger !== '') {
           if (this.channel !== '') {
             if (this.trigger.length >= 5 && this.trigger.length <= 10) {
-              await TriggersService.addTrigger(
-                this.message,
-                this.trigger,
-                this.channel,
-                this.active.toString()
-              );
-              this.allowSend = 1;
-              setTimeout(() => {
-                this.message = '';
-                this.trigger = '';
-                this.channel = '';
-                this.active = false;
-                this.bluredScreen = false;
-                this.allowSend = 0;
-                this.createSwitch = false;
-              }, 2500);
-              this.fetchTriggers();
+              try {
+                await TriggersService.addTrigger(
+                  this.message,
+                  this.trigger,
+                  this.channel,
+                  this.active.toString(),
+                  this.token
+                );
+                this.allowSend = 1;
+                setTimeout(() => {
+                  this.message = '';
+                  this.trigger = '';
+                  this.channel = '';
+                  this.active = false;
+                  this.bluredScreen = false;
+                  this.allowSend = 0;
+                  this.createSwitch = false;
+                }, 2500);
+                this.fetchTriggers(this.token);
+              } catch (err) {
+                if (err.toString() === 'Error: Network Error') {
+                  this.$router.push('./ErrorView');
+                }
+                if (
+                  err.toString() ===
+                  'Error: Request failed with status code 302'
+                ) {
+                  this.allowSend = 3;
+                }
+              }
             } else this.allowSend = 2;
           } else {
             this.allowSend = 2;
@@ -710,6 +743,23 @@ export default {
   line-height: 150%;
 }
 
+.addButtonBlur {
+  width: 13vh;
+  height: 5vh;
+  color: black;
+  background-color: white;
+  border: 0.1vh solid rgb(0, 0, 0);
+  position: absolute;
+  filter: blur(3px);
+  right: 1%;
+  bottom: 1%;
+  text-align: center;
+  font-size: 3vh;
+  font-weight: bolder;
+  cursor: pointer;
+  line-height: 150%;
+}
+
 .addButton:hover {
   width: 13vh;
   height: 5vh;
@@ -827,6 +877,19 @@ export default {
     -webkit-transform: scaleX(1);
     transform: scaleX(1);
   }
+}
+
+#allowSendExist {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  border: 0.1vh solid black;
+  grid-row-start: 9;
+  grid-row-end: 10;
+  font-size: 3vh;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: rgb(251, 255, 0);
+  animation: scale-up-hor-center 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;
 }
 
 #allowSendTrue {
@@ -1047,6 +1110,22 @@ export default {
     background-color: rgb(252, 252, 252);
     border: 0.1vw solid rgb(0, 0, 0);
     position: absolute;
+    right: 1%;
+    bottom: 1%;
+    text-align: center;
+    font-size: 5vw;
+    cursor: pointer;
+    color: black;
+  }
+
+  .addButtonBlur {
+    width: 17vw;
+    height: 8vw;
+    color: aliceblue;
+    background-color: rgb(252, 252, 252);
+    border: 0.1vw solid rgb(0, 0, 0);
+    position: absolute;
+    filter: blur(3px);
     right: 1%;
     bottom: 1%;
     text-align: center;
@@ -1337,6 +1416,18 @@ export default {
     animation: scale-up-hor-center 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;
   }
 
+  #allowSendExist {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    border: 0.1vw solid black;
+    grid-row-start: 9;
+    grid-row-end: 10;
+    font-size: 4vw;
+    font-weight: bold;
+    background-color: rgb(251, 255, 0);
+    animation: scale-up-hor-center 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+  }
+
   #allowSendFalse {
     grid-column-start: 1;
     grid-column-end: 3;
@@ -1373,6 +1464,23 @@ export default {
     background-color: white;
     border: 0.1vh solid rgb(0, 0, 0);
     position: absolute;
+    right: 1%;
+    bottom: 1%;
+    text-align: center;
+    font-size: 3vh;
+    font-weight: bolder;
+    cursor: pointer;
+    line-height: 220%;
+  }
+
+  .addButtonBlur {
+    width: 13vh;
+    height: 7vh;
+    color: black;
+    background-color: white;
+    border: 0.1vh solid rgb(0, 0, 0);
+    position: absolute;
+    filter: blur(3px);
     right: 1%;
     bottom: 1%;
     text-align: center;

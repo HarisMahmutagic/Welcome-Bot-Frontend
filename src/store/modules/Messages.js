@@ -2,8 +2,8 @@
 /* eslint-disable no-return-assign */
 import axios from 'axios';
 
-// const url = 'http://localhost:5000/api/messages';
-const url = 'https://welcome-bot-slack.herokuapp.com/api/messages/';
+const url = 'http://localhost:5000/api/messages';
+// const url = 'https://welcome-bot-slack.herokuapp.com/api/messages/';
 
 /* eslint no-shadow: ["error", { "allow": ["state"] }] */
 const state = {
@@ -18,8 +18,10 @@ const getters = {
 };
 
 const actions = {
-  async fetchMessages({ commit }) {
-    const response = await axios.get(url);
+  async fetchMessages({ commit }, token) {
+    const response = await axios.get(url, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
 
     commit('setMessages', response.data);
   },

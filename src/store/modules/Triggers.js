@@ -2,8 +2,8 @@
 /* eslint-disable no-return-assign */
 import axios from 'axios';
 
-// const url = 'http://localhost:5000/api/triggers';
-const url = 'https://welcome-bot-slack.herokuapp.com/api/triggers';
+const url = 'http://localhost:5000/api/triggers/';
+// const url = 'https://welcome-bot-slack.herokuapp.com/api/triggers';
 
 /* eslint no-shadow: ["error", { "allow": ["state"] }] */
 const state = {
@@ -15,8 +15,10 @@ const getters = {
 };
 
 const actions = {
-  async fetchTriggers({ commit }) {
-    const response = await axios.get(url);
+  async fetchTriggers({ commit }, token) {
+    const response = await axios.get(url, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
 
     commit('setTriggers', response.data);
   },

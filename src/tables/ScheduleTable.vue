@@ -128,10 +128,15 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['fetchSchedules', 'fetchMessages', 'fetchController']),
+    ...mapActions([
+      'fetchSchedules',
+      'fetchMessages',
+      'fetchController',
+      'getToken',
+    ]),
     async deleteSchedule(messageTitle) {
-      await SchedulesService.deleteSchedule(messageTitle);
-      this.fetchSchedules();
+      await SchedulesService.deleteSchedule(messageTitle, this.token);
+      this.fetchSchedules(this.token);
     },
     editOpenFunction(messagetitle, schdate, schactive, schrepeat) {
       this.editOpen = true;
@@ -225,40 +230,51 @@ export default {
         const month = tempDate[5] + tempDate[6];
         const year = tempDate[0] + tempDate[1] + tempDate[2] + tempDate[3];
         const fullDate = `${day}/${month}/${year}`;
-        try {
-          await SchedulesService.editSchedule(
-            this.messageTitle,
-            fullDate,
-            this.active.toString(),
-            this.repeat.toString()
-          );
-          this.allowSend = 1;
-          setTimeout(() => {
-            this.editOpen = false;
-            this.messageTitle = '';
-            this.date = '';
-            this.repeat = 0;
-            this.active = false;
-            this.checkRepeat = false;
-            this.fetchController();
-            this.allowSend = 0;
-          }, 2500);
-          this.fetchSchedules();
-        } catch (err) {
-          this.error = err;
-          if (err.toString() === 'Error: Request failed with status code 304') {
-            this.allowSend = 3;
+        if (this.token !== '') {
+          try {
+            await SchedulesService.editSchedule(
+              this.messageTitle,
+              fullDate,
+              this.active.toString(),
+              this.repeat.toString(),
+              this.token
+            );
+            this.allowSend = 1;
+            setTimeout(() => {
+              this.editOpen = false;
+              this.messageTitle = '';
+              this.date = '';
+              this.repeat = 0;
+              this.active = false;
+              this.checkRepeat = false;
+              this.fetchController();
+              this.allowSend = 0;
+            }, 2500);
+            this.fetchSchedules(this.token);
+          } catch (err) {
+            if (
+              err.toString() === 'Error: Request failed with status code 404'
+            ) {
+              this.allowSend = 3;
+            }
+            if (err.toString() === 'Error: Network Error') {
+              this.$router.push('./ErrorView');
+            }
           }
+        } else {
+          this.$router.push('/');
         }
       } else {
         this.allowSend = 2;
       }
     },
   },
-  computed: mapGetters(['allSchedules', 'allMessages']),
+  computed: mapGetters(['allSchedules', 'allMessages', 'token']),
   created() {
-    this.fetchMessages();
-    this.fetchSchedules();
+    if (this.token !== '') {
+      this.fetchMessages(this.token);
+      this.fetchSchedules(this.token);
+    }
   },
 };
 </script>

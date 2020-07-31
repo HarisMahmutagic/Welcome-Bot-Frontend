@@ -2,30 +2,29 @@
 /* eslint-disable no-return-assign */
 import axios from 'axios';
 
-const url = 'http://localhost:5000/api/schedules';
-// const url = 'https://welcome-bot-slack.herokuapp.com/api/schedules';
+const url = 'http://localhost:5000/api/channels/';
 
 /* eslint no-shadow: ["error", { "allow": ["state"] }] */
 const state = {
-  schedules: [],
+  channels: [],
 };
 
 const getters = {
-  allSchedules: (state) => state.schedules,
+  allChannels: (state) => state.channels,
 };
 
 const actions = {
-  async fetchSchedules({ commit }, token) {
+  async fetchChannels({ commit }, token) {
     const response = await axios.get(url, {
       headers: { Authorization: `Bearer ${token}` },
     });
 
-    commit('setSchedules', response.data);
+    commit('setChannels', response.data);
   },
 };
 
 const mutations = {
-  setSchedules: (state, schedules) => (state.schedules = schedules),
+  setChannels: (state, channels) => (state.channels = channels),
 };
 
 export default {

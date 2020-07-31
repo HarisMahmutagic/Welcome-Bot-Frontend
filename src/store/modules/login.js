@@ -4,7 +4,7 @@ const state = {
 
 const getters = {
   // eslint-disable-next-line no-shadow
-  tokenTest: (state) => state.token,
+  token: (state) => state.token,
 };
 
 const actions = {

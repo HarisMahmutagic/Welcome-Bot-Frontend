@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const url = 'https://welcome-bot-slack.herokuapp.com/login/';
+const url = 'http://localhost:5000/login';
+// const url = 'https://welcome-bot-slack.herokuapp.com/login/';
 
 class LoginService {
   // eslint-disable-next-line camelcase
@@ -8,12 +9,6 @@ class LoginService {
     return axios.post(url, {
       username,
       pass,
-    });
-  }
-
-  static test(token) {
-    return axios.post(`${url}test`, {
-      headers: { Authorization: `Bearer ${token}` },
     });
   }
 }

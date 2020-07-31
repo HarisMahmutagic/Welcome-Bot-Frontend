@@ -4,6 +4,7 @@ import Login from '../views/Login.vue';
 import MessagesView from '../views/MessagesView.vue';
 import SchedulesView from '../views/SchedulesView.vue';
 import TriggerView from '../views/TriggerView.vue';
+import ErrorView from '../views/ErrorView.vue';
 
 Vue.use(VueRouter);
 
@@ -27,6 +28,11 @@ const routes = [
     path: '/TriggerView',
     name: 'TriggerView',
     component: TriggerView,
+  },
+  {
+    path: '/ErrorView',
+    name: 'ErrorView',
+    component: ErrorView,
   },
 ];
 

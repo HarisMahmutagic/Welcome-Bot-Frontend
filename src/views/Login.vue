@@ -70,7 +70,7 @@ export default {
       error: '',
     };
   },
-  computed: mapGetters(['tokenTest']),
+  computed: mapGetters(['token']),
   methods: {
     ...mapActions(['getToken']),
     async Login(UserName, Password) {
@@ -78,9 +78,13 @@ export default {
         const response = await LoginService.logIn(UserName, Password);
         this.$store.commit('getToken', response.data.token.toString());
         this.$router.push('./MessagesView');
-      } catch (err) {
-        this.error = err;
-        this.WrongUP = true;
+      } catch (error) {
+        if (error.toString() === 'Error: Request failed with status code 406') {
+          this.WrongUP = true;
+        }
+        if (error.toString() === 'Error: Network Error') {
+          this.$router.push('./ErrorView');
+        }
       }
     },
     openInputForUser() {

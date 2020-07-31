@@ -72,9 +72,9 @@
       <a class="mobileReqChannelTrue" v-if="channel != ''">&#x2713;</a>
 
       <select id="selectChannel" v-model="channel">
-        <option value="General">General</option>
-        <option value="Private">Private</option>
-        <option value="Slackbot-Test">Slackbot-Test</option>
+        <option v-for="channel in allChannels.tempArray" :key="channel.id">
+          {{ channel }}</option
+        >
       </select>
 
       <input type="checkbox" id="checkActive" v-model="active" />
@@ -140,10 +140,15 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['fetchTriggers', 'fetchMessages', 'fetchController']),
+    ...mapActions([
+      'fetchTriggers',
+      'fetchMessages',
+      'fetchController',
+      'fetchChannels',
+    ]),
     async deleteTrigger(trigger) {
-      await TriggersService.deleteTrigger(trigger);
-      this.fetchTriggers();
+      await TriggersService.deleteTrigger(trigger, this.token);
+      this.fetchTriggers(this.token);
     },
     async editTrigger(triggerWord) {
       if (this.message !== '') {
@@ -153,7 +158,8 @@ export default {
               this.message,
               triggerWord,
               this.channel,
-              this.active.toString()
+              this.active.toString(),
+              this.token
             );
 
             this.allowSend = 1;
@@ -165,14 +171,16 @@ export default {
               this.fetchController();
               this.active = false;
               this.Switch = false;
-              this.fetchTriggers();
+              this.fetchTriggers(this.token);
             }, 2500);
           } catch (err) {
-            this.error = err;
             if (
-              err.toString() === 'Error: Request failed with status code 304'
+              err.toString() === 'Error: Request failed with status code 404'
             ) {
               this.allowSend = 3;
+            }
+            if (err.toString() === 'Error: Network Error') {
+              this.$router.push('./ErrorView');
             }
           }
         } else {
@@ -206,10 +214,13 @@ export default {
       }
     },
   },
-  computed: mapGetters(['allMessages', 'allTriggers']),
+  computed: mapGetters(['allMessages', 'allTriggers', 'token', 'allChannels']),
   created() {
-    this.fetchTriggers();
-    this.fetchMessages();
+    if (this.token !== '') {
+      this.fetchTriggers(this.token);
+      this.fetchMessages(this.token);
+      this.fetchChannels(this.token);
+    }
   },
 };
 </script>

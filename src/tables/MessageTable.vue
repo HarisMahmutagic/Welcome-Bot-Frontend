@@ -162,10 +162,10 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['fetchMessages', 'fetchController']),
+    ...mapActions(['fetchMessages', 'fetchController', 'getToken']),
     async deleteMessage(messagetitle) {
-      await MessagesService.deleteMessage(messagetitle);
-      this.fetchMessages();
+      await MessagesService.deleteMessage(messagetitle, this.token);
+      this.fetchMessages(this.token);
     },
     checkSymbols() {
       const symbols = [
@@ -244,24 +244,36 @@ export default {
           const temp = this.title.split('');
           if (!temp.includes(' ')) {
             if (this.checkSymbols() === true) {
-              try {
-                await MessagesService.editMessage(this.title, this.text);
-                this.allowSend = 1;
-                setTimeout(() => {
-                  this.allowSend = 0;
-                  this.fetchMessages();
-                  this.fetchController();
-                  this.edit = false;
-                  this.blurScreen = false;
-                }, 2500);
-              } catch (err) {
-                this.error = err;
-                if (
-                  err.toString() ===
-                  'Error: Request failed with status code 304'
-                ) {
-                  this.allowSend = 3;
+              if (this.token !== '') {
+                try {
+                  await MessagesService.editMessage(
+                    this.title,
+                    this.text,
+                    this.token
+                  );
+                  this.allowSend = 1;
+                  setTimeout(() => {
+                    this.allowSend = 0;
+                    this.fetchMessages(this.token);
+                    this.blurScreen = false;
+                    this.fetchController();
+                    this.edit = false;
+                  }, 2500);
+                } catch (err) {
+                  // Checks to see if there has been any change
+                  if (
+                    err.toString() ===
+                    'Error: Request failed with status code 404'
+                  ) {
+                    this.allowSend = 3;
+                  }
+                  // Check connection with database
+                  if (err.toString() === 'Error: Network Error') {
+                    this.$router.push('./ErrorView');
+                  }
                 }
+              } else {
+                this.$router.push('/');
               }
             } else {
               this.allowSend = 2;
@@ -286,9 +298,11 @@ export default {
       return false;
     },
   },
-  computed: mapGetters(['allMessages']),
+  computed: mapGetters(['allMessages', 'token']),
   created() {
-    this.fetchMessages();
+    if (this.token !== '') {
+      this.fetchMessages(this.token);
+    }
   },
 };
 </script>
