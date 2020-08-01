@@ -22,7 +22,6 @@ const actions = {
     const response = await axios.get(url, {
       headers: { Authorization: `Bearer ${token}` },
     });
-
     commit('setMessages', response.data);
   },
   fetchController({ commit }) {

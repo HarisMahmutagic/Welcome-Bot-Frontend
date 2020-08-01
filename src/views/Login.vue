@@ -79,11 +79,11 @@ export default {
         this.$store.commit('getToken', response.data.token.toString());
         this.$router.push('./MessagesView');
       } catch (error) {
-        if (error.toString() === 'Error: Request failed with status code 406') {
-          this.WrongUP = true;
-        }
         if (error.toString() === 'Error: Network Error') {
           this.$router.push('./ErrorView');
+        }
+        if (error.toString() === 'Error: Request failed with status code 406') {
+          this.WrongUP = true;
         }
       }
     },

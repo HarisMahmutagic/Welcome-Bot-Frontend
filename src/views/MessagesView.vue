@@ -264,9 +264,12 @@ export default {
     } else {
       this.$router.push('/');
     }
+    if (this.controller === true) {
+      this.fetchController();
+    }
   },
   methods: {
-    ...mapActions(['fetchMessages', 'getToken']),
+    ...mapActions(['fetchMessages', 'getToken', 'fetchController']),
     // Function for opening drop down menu
     dropDownOnOff() {
       const self = this;
@@ -445,16 +448,13 @@ export default {
                     this.allowSend = 0;
                   }, 2500);
                 } catch (err) {
-                  // Check is title already exist
-                  if (
-                    err.toString() ===
-                    'Error: Request failed with status code 302'
-                  ) {
-                    this.allowSend = 3;
-                  }
                   // Check connection with database
                   if (err.toString() === 'Error: Network Error') {
                     this.$router.push('./ErrorView');
+                  }
+                  // Check is title already exist
+                  if (err.response.statusText === 'Found') {
+                    this.allowSend = 3;
                   }
                 }
               } else {

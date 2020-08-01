@@ -260,16 +260,12 @@ export default {
                     this.edit = false;
                   }, 2500);
                 } catch (err) {
-                  // Checks to see if there has been any change
-                  if (
-                    err.toString() ===
-                    'Error: Request failed with status code 404'
-                  ) {
-                    this.allowSend = 3;
-                  }
                   // Check connection with database
                   if (err.toString() === 'Error: Network Error') {
                     this.$router.push('./ErrorView');
+                  }
+                  if (err.response.statusText === 'Not Found') {
+                    this.allowSend = 3;
                   }
                 }
               } else {

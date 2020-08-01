@@ -192,9 +192,10 @@ export default {
     },
     checkDate() {
       const today = new Date();
-      const day = today.getUTCDate();
+      let day = today.getUTCDate();
       let month = today.getUTCMonth() + 1;
       if (month < 10) month = `0${month}`;
+      if (day < 19) day = `0${day}`;
       const year = today.getUTCFullYear();
       const DateToday = `${year}${month}${day}`;
       const tempDate = [];
@@ -212,8 +213,7 @@ export default {
         tempDate[5] +
         tempDate[6] +
         tempDate[7];
-
-      if (date1 >= DateToday) {
+      if (date1 > DateToday) {
         return true;
       }
       return false;
@@ -252,13 +252,11 @@ export default {
             }, 2500);
             this.fetchSchedules(this.token);
           } catch (err) {
-            if (
-              err.toString() === 'Error: Request failed with status code 404'
-            ) {
-              this.allowSend = 3;
-            }
             if (err.toString() === 'Error: Network Error') {
               this.$router.push('./ErrorView');
+            }
+            if (err.response.statusText === 'Not Found') {
+              this.allowSend = 3;
             }
           }
         } else {

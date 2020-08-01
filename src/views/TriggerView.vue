@@ -270,6 +270,9 @@ export default {
     } else {
       this.$router.push('/');
     }
+    if (this.controller === true) {
+      this.fetchController();
+    }
   },
   methods: {
     ...mapActions([
@@ -277,6 +280,7 @@ export default {
       'fetchTriggers',
       'getToken',
       'fetchChannels',
+      'fetchController',
     ]),
     // Function for opening drop down menu
     dropDownOnOff() {
@@ -425,10 +429,7 @@ export default {
                 if (err.toString() === 'Error: Network Error') {
                   this.$router.push('./ErrorView');
                 }
-                if (
-                  err.toString() ===
-                  'Error: Request failed with status code 302'
-                ) {
+                if (err.response.statusText === 'Found') {
                   this.allowSend = 3;
                 }
               }

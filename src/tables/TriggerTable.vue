@@ -174,13 +174,11 @@ export default {
               this.fetchTriggers(this.token);
             }, 2500);
           } catch (err) {
-            if (
-              err.toString() === 'Error: Request failed with status code 404'
-            ) {
-              this.allowSend = 3;
-            }
             if (err.toString() === 'Error: Network Error') {
               this.$router.push('./ErrorView');
+            }
+            if (err.response.statusText === 'Method Not Allowed') {
+              this.allowSend = 3;
             }
           }
         } else {

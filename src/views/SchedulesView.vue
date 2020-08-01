@@ -183,9 +183,17 @@ export default {
     } else {
       this.$router.push('/');
     }
+    if (this.controller === true) {
+      this.fetchController();
+    }
   },
   methods: {
-    ...mapActions(['fetchMessages', 'fetchSchedules', 'getToken']),
+    ...mapActions([
+      'fetchMessages',
+      'fetchSchedules',
+      'getToken',
+      'fetchController',
+    ]),
     changeRepeat() {
       this.checkRepeat = !this.checkRepeat;
       // eslint-disable-next-line eqeqeq
@@ -252,9 +260,10 @@ export default {
     // Function for checking date, since past and present aren't allow
     checkDate() {
       const today = new Date();
-      const day = today.getUTCDate();
+      let day = today.getUTCDate();
       let month = today.getUTCMonth() + 1;
       if (month < 10) month = `0${month}`;
+      if (day < 10) day = `0${day}`;
       const year = today.getUTCFullYear();
       const DateToday = `${year}${month}${day}`;
       const tempDate = [];
