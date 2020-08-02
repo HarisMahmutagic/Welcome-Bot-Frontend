@@ -19,4 +19,4 @@ app.get(/.*/, (req, res) => {
 });
 
 const port = 5005;
-app.listen(port, () => console.log('Listening'));
+app.listen(port, () => console.log(`Listening ${port}`));

@@ -2,7 +2,8 @@
 /* eslint-disable no-return-assign */
 import axios from 'axios';
 
-const url = 'http://localhost:5000/api/channels/';
+// const url = 'http://localhost:5000/api/channels/';
+const url = 'http://localhost/api/channels/';
 
 /* eslint no-shadow: ["error", { "allow": ["state"] }] */
 const state = {
