@@ -8,7 +8,7 @@
     <!-- BOX1 First row - Header -->
 
     <div v-on:click="turnOff" class="box1">
-      <a id="title"> Trigger View !</a>
+      <a id="title"> Trigger View</a>
 
       <div id="dropDownButton" v-on:click="dropDownOnOff">&#9776;</div>
       <div
@@ -470,7 +470,6 @@ export default {
   bottom: 0;
   right: 0;
   position: absolute;
-  background-color: rgb(207, 206, 206);
   animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
@@ -514,8 +513,6 @@ export default {
   grid-column-end: 2;
   grid-row-start: 2;
   grid-row-end: 3;
-  border-top: 0.1vh solid black;
-  border-bottom: 0.1vh solid black;
 }
 
 .box3 {
@@ -523,8 +520,6 @@ export default {
   grid-column-end: 3;
   grid-row-start: 2;
   grid-row-end: 3;
-  border-top: 0.1vh solid black;
-  border-bottom: 0.1vh solid black;
   overflow: auto;
 }
 
@@ -733,7 +728,6 @@ export default {
   height: 5vh;
   color: black;
   background-color: white;
-  border: 0.1vh solid rgb(0, 0, 0);
   position: absolute;
   right: 1%;
   bottom: 1%;
@@ -742,6 +736,8 @@ export default {
   font-weight: bolder;
   cursor: pointer;
   line-height: 150%;
+  box-shadow: 5px 5px;
+  opacity: 0.7;
 }
 
 .addButtonBlur {

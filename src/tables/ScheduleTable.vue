@@ -285,8 +285,17 @@ export default {
   overflow: auto;
 }
 
-table {
+.table1 {
   margin: 0 auto;
+  overflow: auto;
+  opacity: 0.8;
+}
+
+tr:nth-child(even) {
+  background: lightgray;
+}
+tr:nth-child(odd) {
+  background: white;
 }
 
 tr {
@@ -333,7 +342,6 @@ td {
 }
 .row td {
   font-size: 2.5vh;
-  background-color: white;
   color: black;
   text-align: center;
 }

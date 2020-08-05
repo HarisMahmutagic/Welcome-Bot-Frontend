@@ -11,7 +11,7 @@
 
     <!-- Input Form for Username and password -->
     <form id="inputForm">
-      <label for="User" id="user">User Name</label>
+      <label for="User" id="user">Username: </label>
       <div
         id="inputUser"
         v-on:click="openInputForUser"
@@ -24,7 +24,7 @@
         v-if="InputForUser == true"
       />
 
-      <label for="Password" id="pw">Password</label>
+      <label for="Password" id="pw">Password: </label>
       <div
         id="inputPw"
         v-on:click="openInputForPW"
@@ -102,14 +102,9 @@ export default {
 
 <style scoped>
 .Login {
+  text-align: center;
   width: 50vh;
   height: 50vh;
-  background-image: linear-gradient(
-    70deg,
-    rgb(34, 50, 189),
-    rgb(142, 166, 243)
-  );
-  border-radius: 10%;
   top: 0;
   left: 0;
   right: 0;
@@ -121,6 +116,11 @@ export default {
   grid-template-rows: 25% 25% 10% 40%;
   -webkit-animation: bounce-in-fwd 1.1s both;
   animation: bounce-in-fwd 1.1s both;
+  color: black;
+}
+
+.Login > * {
+  color: black;
 }
 
 @keyframes bounce-in-fwd {
@@ -185,7 +185,6 @@ export default {
   font-size: 4vh;
   font-weight: bolder;
   height: 2vh;
-  color: rgb(199, 198, 198);
   text-align: center;
 }
 
@@ -211,6 +210,10 @@ export default {
   grid-column-end: 7;
   grid-row-start: 4;
   grid-row-end: 5;
+}
+
+#inputForm > label {
+  font-style: italic;
 }
 
 #wrongUP {
@@ -243,7 +246,6 @@ export default {
   position: absolute;
   left: 5%;
   top: 66%;
-  color: beige;
   font-size: 2.5vh;
 }
 
@@ -253,7 +255,6 @@ export default {
   left: 30%;
   width: 30vh;
   height: 3vh;
-  color: white;
   background: transparent;
   cursor: pointer;
   border-bottom: 0.3vh solid white;
@@ -266,12 +267,7 @@ export default {
   left: 30%;
   width: 30vh;
   height: 3vh;
-  color: white;
-  background-image: linear-gradient(
-    70deg,
-    rgb(34, 50, 189),
-    rgb(142, 166, 243)
-  );
+  background-color: wheat;
   animation: conditionalOpen 0.4s normal forwards ease-in-out;
 }
 
@@ -288,7 +284,6 @@ export default {
   position: absolute;
   left: 5%;
   top: 76%;
-  color: beige;
   font-size: 2.5vh;
 }
 
@@ -298,7 +293,6 @@ export default {
   top: 75%;
   width: 30vh;
   height: 3vh;
-  color: white;
   background: transparent;
   cursor: pointer;
   border-bottom: 0.3vh solid white;
@@ -311,12 +305,7 @@ export default {
   top: 75%;
   width: 30vh;
   height: 3vh;
-  color: white;
-  background-image: linear-gradient(
-    70deg,
-    rgb(34, 50, 189),
-    rgb(142, 166, 243)
-  );
+  background-color: wheat;
   animation: conditionalOpen 0.4s normal forwards ease-in-out;
 }
 
@@ -330,7 +319,9 @@ export default {
 }
 
 #loginButton {
-  background-color: rgb(54, 54, 54);
+  background: linear-gradient(-70deg, #66b3ba, #8eb19d);
+  box-shadow: 5px 10px;
+  opacity: 0.7;
   position: absolute;
   left: 65%;
   top: 88%;
@@ -338,14 +329,15 @@ export default {
   height: 5vh;
   font-size: 2.5vh;
   font-weight: bold;
-  color: rgb(247, 247, 247);
   cursor: pointer;
-  border-radius: 10%;
+  border: none;
 }
 
 #loginButton:hover {
   cursor: pointer;
-  background-color: rgb(100, 100, 100);
+  background: linear-gradient(-70deg, #8eb19d, #66b3ba);
+  box-shadow: 5px 10px;
+  opacity: 1;
   position: absolute;
   left: 65%;
   top: 88%;
@@ -353,18 +345,12 @@ export default {
   height: 5vh;
   font-size: 2.5vh;
   font-weight: bold;
-  color: rgb(247, 247, 247);
 }
 
 @media screen and (max-width: 600px) and (orientation: portrait) {
   .Login {
     width: 99vw;
     height: 99vh;
-    background-image: linear-gradient(
-      70deg,
-      rgb(34, 50, 189),
-      rgb(142, 166, 243)
-    );
     border-radius: 0%;
     top: 0;
     left: 0;
@@ -388,7 +374,6 @@ export default {
     font-size: 6vh;
     font-weight: bolder;
     height: 3vh;
-    color: rgb(199, 198, 198);
     text-align: center;
   }
 
@@ -423,7 +408,6 @@ export default {
     position: absolute;
     left: 40%;
     top: 55%;
-    color: beige;
     font-size: 4.5vw;
   }
 
@@ -433,7 +417,6 @@ export default {
     left: 22%;
     width: 55vw;
     height: 6vw;
-    color: white;
     background: transparent;
     cursor: pointer;
     border-bottom: 0.3vh solid white;
@@ -445,7 +428,6 @@ export default {
     left: 22%;
     width: 55vw;
     height: 6vw;
-    color: white;
     background-image: linear-gradient(
       70deg,
       rgb(34, 50, 189),
@@ -457,7 +439,6 @@ export default {
     position: absolute;
     left: 41%;
     top: 70%;
-    color: beige;
     font-size: 4.5vw;
   }
 
@@ -467,7 +448,6 @@ export default {
     top: 75%;
     width: 55vw;
     height: 6vw;
-    color: white;
     background: transparent;
     cursor: pointer;
     border-bottom: 0.3vh solid white;
@@ -479,7 +459,6 @@ export default {
     top: 75%;
     width: 55vw;
     height: 6vw;
-    color: white;
     background-image: linear-gradient(
       70deg,
       rgb(34, 50, 189),
@@ -496,7 +475,6 @@ export default {
     height: 10vw;
     font-size: 2.5vw;
     font-weight: bold;
-    color: rgb(247, 247, 247);
     cursor: pointer;
   }
 
@@ -529,11 +507,6 @@ export default {
   .Login {
     width: 100vh;
     height: 99vh;
-    background-image: linear-gradient(
-      70deg,
-      rgb(34, 50, 189),
-      rgb(142, 166, 243)
-    );
     border-radius: 0%;
     top: 0;
     left: 0;
@@ -557,8 +530,8 @@ export default {
     font-size: 6vh;
     font-weight: bolder;
     height: 3vh;
-    color: rgb(199, 198, 198);
     text-align: center;
+    opacity: 0.5;
   }
 
   #pict {
@@ -592,7 +565,6 @@ export default {
     position: absolute;
     left: 5%;
     top: 65%;
-    color: beige;
     font-size: 5vh;
   }
 
@@ -602,7 +574,6 @@ export default {
     left: 30%;
     width: 50vh;
     height: 4vh;
-    color: white;
     background: transparent;
     cursor: pointer;
     border-bottom: 0.3vh solid white;
@@ -614,7 +585,6 @@ export default {
     left: 30%;
     width: 50vh;
     height: 4vh;
-    color: white;
     background-image: linear-gradient(
       70deg,
       rgb(34, 50, 189),
@@ -626,7 +596,6 @@ export default {
     position: absolute;
     left: 5%;
     top: 75%;
-    color: beige;
     font-size: 5vh;
   }
 
@@ -636,7 +605,6 @@ export default {
     top: 75%;
     width: 50vh;
     height: 3vh;
-    color: white;
     background: transparent;
     cursor: pointer;
     border-bottom: 0.3vh solid white;
@@ -648,7 +616,6 @@ export default {
     top: 75%;
     width: 50vh;
     height: 4vh;
-    color: white;
     background-image: linear-gradient(
       70deg,
       rgb(34, 50, 189),
@@ -665,7 +632,6 @@ export default {
     height: 10vh;
     font-size: 3vh;
     font-weight: bold;
-    color: rgb(247, 247, 247);
     cursor: pointer;
   }
 
@@ -678,7 +644,6 @@ export default {
     height: 10vh;
     font-size: 3vh;
     font-weight: bold;
-    color: rgb(247, 247, 247);
     cursor: pointer;
   }
 

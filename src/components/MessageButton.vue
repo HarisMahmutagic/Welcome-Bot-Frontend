@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="button" v-on:click="SwitchToMessages">
-      &#x2709; Messages
+      Messages
     </div>
   </div>
 </template>
@@ -27,7 +27,6 @@ export default {
 
 <style scoped>
 .button {
-  border: 0.2vh solid rgb(126, 125, 125);
   margin-top: 2vh;
   margin-left: auto;
   margin-right: auto;
@@ -40,6 +39,8 @@ export default {
   font-size: 3.2vh;
   z-index: 1;
   text-shadow: 3px 3px 3px grey;
+  box-shadow: 5px 10px;
+  opacity: 0.7;
 }
 
 .button:hover {
@@ -49,5 +50,6 @@ export default {
   font-size: 3.2vh;
   z-index: 1;
   text-shadow: 3px 3px 3px grey;
+  opacity: 1;
 }
 </style>

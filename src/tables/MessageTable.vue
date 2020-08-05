@@ -314,6 +314,14 @@ export default {
 .table1 {
   margin: 0 auto;
   overflow: auto;
+  opacity: 0.8;
+}
+
+tr:nth-child(even) {
+  background: lightgray;
+}
+tr:nth-child(odd) {
+  background: white;
 }
 
 .table1Blur {
@@ -340,7 +348,7 @@ td {
   max-width: 23vw;
 }
 .date {
-  width: 6vw;
+  width: 10vw;
   max-width: 6vw;
 }
 .action {
@@ -358,7 +366,6 @@ td {
 
 .row td {
   font-size: 1.3vw;
-  background-color: white;
   color: black;
   text-align: center;
 }

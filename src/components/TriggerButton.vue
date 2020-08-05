@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="button" v-on:click="SwitchToTrigger">&#x26A1; Triggers</div>
+    <div class="button" v-on:click="SwitchToTrigger">Triggers</div>
   </div>
 </template>
 
@@ -20,7 +20,6 @@ export default {
 
 <style scoped>
 .button {
-  border: 0.2vh solid rgb(126, 125, 125);
   margin-top: 3vh;
   background-color: white;
   height: 5vh;
@@ -32,6 +31,8 @@ export default {
   text-align: center;
   font-size: 3.2vh;
   text-shadow: 3px 3px 3px grey;
+  box-shadow: 5px 10px;
+  opacity: 0.7;
 }
 
 .button:hover {
@@ -40,5 +41,6 @@ export default {
   font-size: 3.2vh;
   font-weight: bolder;
   text-shadow: 3px 3px 3px grey;
+  opacity: 1;
 }
 </style>
