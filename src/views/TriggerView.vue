@@ -32,6 +32,13 @@
       >
         &#x26A1; Triggers
       </div>
+      <div
+        id="routeReportsView"
+        v-if="dropDown != true"
+        v-on:click="goToReports"
+      >
+        &#x211D; Reports
+      </div>
       <div id="routeLoginView" v-if="dropDown != true" v-on:click="goToLogin">
         &#x1F3E0; Logout
       </div>
@@ -42,6 +49,7 @@
       <MessageButton></MessageButton>
       <ScheduleButton></ScheduleButton>
       <TriggerButton></TriggerButton>
+      <ReportsButton></ReportsButton>
       <LogOutButton></LogOutButton>
       <div v-if="createSwitch != false">
         <!-- Legend for computer screen-->
@@ -230,6 +238,7 @@ import MessageButton from '../components/MessageButton.vue';
 import ScheduleButton from '../components/ScheduleButton.vue';
 import TriggerButton from '../components/TriggerButton.vue';
 import TriggerTable from '../tables/TriggerTable.vue';
+import ReportsButton from '../components/ReportsButton.vue';
 import LogOutButton from '../components/LogOutButton.vue';
 
 export default {
@@ -240,6 +249,7 @@ export default {
     TriggerButton,
     TriggerTable,
     LogOutButton,
+    ReportsButton,
   },
 
   data() {
@@ -309,6 +319,13 @@ export default {
       const self = this;
       self.dropDown = true;
     },
+
+    // Router to Reports view
+    goToReports() {
+      const self = this;
+      self.$router.push('./ReportsView');
+    },
+
     // Router to Login view
     goToLogin() {
       const empty = '';
@@ -563,7 +580,7 @@ export default {
   margin: auto;
   width: 60%;
   height: 60%;
-  border: 0.4vh solid black;
+  border: 0.3vh solid black;
   z-index: 1;
   animation: slit-in-vertical 0.45s ease-out both;
 }
@@ -1156,10 +1173,11 @@ export default {
     right: 2%;
     top: 6.3vw;
     text-align: center;
-    font-size: 5vw;
+    font-size: 4.5vw;
     color: white;
     line-height: 10vw;
     cursor: pointer;
+    z-index: 1;
   }
 
   #routeScheduleView {
@@ -1173,10 +1191,11 @@ export default {
     right: 0;
     top: 15vw;
     text-align: center;
-    font-size: 5vw;
+    font-size: 4.5vw;
     color: white;
     line-height: 10vw;
     cursor: pointer;
+    z-index: 1;
   }
 
   #routeTriggerView {
@@ -1190,10 +1209,29 @@ export default {
     right: 0;
     top: 25vw;
     text-align: center;
-    font-size: 5vw;
+    font-size: 4.5vw;
     color: white;
     line-height: 10vw;
     cursor: pointer;
+    z-index: 1;
+  }
+
+  #routeReportsView {
+    display: unset;
+    height: 10vw;
+    width: 30vw;
+    background-color: rgb(109, 109, 109);
+    border: 0.1vw solid black;
+    margin-right: 2%;
+    position: absolute;
+    right: 0;
+    top: 35vw;
+    text-align: center;
+    font-size: 4.5vw;
+    color: white;
+    line-height: 10vw;
+    cursor: pointer;
+    z-index: 1;
   }
 
   #routeLoginView {
@@ -1205,86 +1243,87 @@ export default {
     margin-right: 2%;
     position: absolute;
     right: 0;
-    top: 35vw;
+    top: 45vw;
     text-align: center;
-    font-size: 5vw;
+    font-size: 4.5vw;
     color: white;
     line-height: 10vw;
     cursor: pointer;
+    z-index: 1;
   }
 
   .mobileReqMessage {
     display: unset;
-    font-size: 4vw;
+    font-size: 7vw;
     color: red;
     height: 3vw;
     width: 9vw;
     position: absolute;
     font-weight: bolder;
-    top: 13%;
+    top: 11%;
     left: 40%;
   }
 
   .mobileReqMessageTrue {
     display: unset;
-    font-size: 4vw;
+    font-size: 7vw;
     color: green;
     height: 3vw;
     font-weight: bolder;
     width: 9vw;
     position: absolute;
     font-weight: bolder;
-    top: 13%;
+    top: 11%;
     left: 40%;
   }
 
   .mobileReqTrigger {
     display: unset;
-    font-size: 4vw;
+    font-size: 7vw;
     color: red;
     height: 3vw;
     width: 9vw;
     position: absolute;
     font-weight: bolder;
-    top: 38%;
+    top: 36%;
     left: 40%;
   }
 
   .mobileReqTriggerTrue {
     display: unset;
-    font-size: 4vw;
+    font-size: 7vw;
     color: green;
     height: 3vh;
     font-weight: bolder;
     width: 9vw;
     position: absolute;
     font-weight: bolder;
-    top: 38%;
+    top: 36%;
     left: 40%;
   }
 
   .mobileReqChannel {
     display: unset;
-    font-size: 4vw;
+    font-size: 7vw;
     color: red;
     height: 3vw;
     width: 9vw;
     position: absolute;
     font-weight: bolder;
-    top: 61%;
+    top: 59%;
     left: 40%;
   }
 
   .mobileReqChannelTrue {
     display: unset;
-    font-size: 4vw;
+    font-size: 7vw;
     color: green;
     height: 3vw;
     font-weight: bolder;
     width: 9vw;
     position: absolute;
     font-weight: bolder;
-    top: 61%;
+    top: 59%;
     left: 40%;
   }
 
@@ -1567,10 +1606,11 @@ export default {
     right: 2%;
     top: 6.3vh;
     text-align: center;
-    font-size: 5vh;
+    font-size: 4vh;
     color: white;
     line-height: 10vh;
     cursor: pointer;
+    z-index: 1;
   }
 
   #routeScheduleView {
@@ -1584,10 +1624,11 @@ export default {
     right: 0;
     top: 15vh;
     text-align: center;
-    font-size: 5vh;
+    font-size: 4vh;
     color: white;
     line-height: 10vh;
     cursor: pointer;
+    z-index: 1;
   }
 
   #routeTriggerView {
@@ -1601,10 +1642,29 @@ export default {
     right: 0;
     top: 25vh;
     text-align: center;
-    font-size: 5vh;
+    font-size: 4vh;
     color: white;
     line-height: 10vh;
     cursor: pointer;
+    z-index: 1;
+  }
+
+  #routeReportsView {
+    display: unset;
+    height: 10vh;
+    width: 30vh;
+    background-color: rgb(109, 109, 109);
+    border: 0.1vh solid black;
+    margin-right: 2%;
+    position: absolute;
+    right: 0;
+    top: 35vh;
+    text-align: center;
+    font-size: 4vh;
+    color: white;
+    line-height: 10vh;
+    cursor: pointer;
+    z-index: 1;
   }
 
   #routeLoginView {
@@ -1616,12 +1676,13 @@ export default {
     margin-right: 2%;
     position: absolute;
     right: 0;
-    top: 35vh;
+    top: 45vh;
     text-align: center;
-    font-size: 5vh;
+    font-size: 4vh;
     color: white;
     line-height: 10vh;
     cursor: pointer;
+    z-index: 1;
   }
 
   #trigger {
@@ -1725,7 +1786,7 @@ export default {
     position: absolute;
     font-weight: bolder;
     top: 12%;
-    left: 20%;
+    left: 25%;
   }
 
   .mobileReqMessageTrue {
@@ -1738,7 +1799,7 @@ export default {
     position: absolute;
     font-weight: bolder;
     top: 11%;
-    left: 20%;
+    left: 25%;
   }
 
   .mobileReqTrigger {
@@ -1750,7 +1811,7 @@ export default {
     position: absolute;
     font-weight: bolder;
     top: 37%;
-    left: 20%;
+    left: 25%;
   }
 
   .mobileReqTriggerTrue {
@@ -1763,7 +1824,7 @@ export default {
     position: absolute;
     font-weight: bolder;
     top: 36%;
-    left: 20%;
+    left: 25%;
   }
 
   .mobileReqChannel {
@@ -1775,7 +1836,7 @@ export default {
     position: absolute;
     font-weight: bolder;
     top: 61%;
-    left: 20%;
+    left: 25%;
   }
 
   .mobileReqChannelTrue {
@@ -1788,7 +1849,7 @@ export default {
     position: absolute;
     font-weight: bolder;
     top: 60%;
-    left: 20%;
+    left: 25%;
   }
 
   .extraButton {
@@ -1824,7 +1885,7 @@ export default {
 
   .mobTriggerTrue {
     color: green;
-    font-size: vh;
+    font-size: 4vh;
     font-weight: bolder;
   }
 
@@ -1892,7 +1953,7 @@ export default {
     margin: auto;
     width: 60%;
     height: 60%;
-    border: 0.6vh solid black;
+    border: 0.5vh solid black;
     z-index: 1;
   }
 

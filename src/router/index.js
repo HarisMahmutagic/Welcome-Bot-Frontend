@@ -5,6 +5,7 @@ import MessagesView from '../views/MessagesView.vue';
 import SchedulesView from '../views/SchedulesView.vue';
 import TriggerView from '../views/TriggerView.vue';
 import ErrorView from '../views/ErrorView.vue';
+import ReportsView from '../views/ReportsView.vue';
 
 Vue.use(VueRouter);
 
@@ -33,6 +34,11 @@ const routes = [
     path: '/ErrorView',
     name: 'ErrorView',
     component: ErrorView,
+  },
+  {
+    path: '/ReportsView',
+    name: 'ReportsView',
+    component: ReportsView,
   },
 ];
 

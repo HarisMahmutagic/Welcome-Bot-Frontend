@@ -316,7 +316,7 @@ td {
   margin: auto;
   width: 60%;
   height: 60%;
-  border: 0.4vh solid black;
+  border: 0.3vh solid black;
   z-index: 1;
   animation: slit-in-vertical 0.45s ease-out both;
 }
@@ -577,8 +577,8 @@ td {
 
 #legend {
   position: absolute;
-  left: 1%;
-  top: 50%;
+  left: 1.5%;
+  top: 55%;
   z-index: 2;
   width: 10vw;
   text-align: center;
@@ -692,15 +692,15 @@ td {
   }
 
   #Edit {
-    width: 9vw;
-    height: 9vw;
+    width: 11vw;
+    height: 11vw;
     font-size: 4vh;
     cursor: pointer;
   }
 
   #Delete {
-    width: 9vw;
-    height: 9vw;
+    width: 11vw;
+    height: 11vw;
     font-size: 4vw;
     cursor: pointer;
   }
@@ -946,46 +946,46 @@ td {
   .mobileReqChannel {
     display: unset;
     position: absolute;
-    font-size: 6vw;
+    font-size: 8vw;
     color: red;
     left: 40%;
     font-weight: bolder;
-    top: 60%;
+    top: 58%;
   }
 
   .mobileReqChannelTrue {
     display: unset;
-    font-size: 6vw;
+    font-size: 8vw;
     position: absolute;
     font-weight: bolder;
     color: green;
-    top: 60%;
+    top: 58%;
     left: 40%;
   }
 
   .mobileReqMessage {
     display: unset;
-    font-size: 6vw;
+    font-size: 8vw;
     color: red;
     position: absolute;
     left: 40%;
     font-weight: bolder;
-    top: 12%;
+    top: 10%;
   }
 
   .mobileReqMessageTrue {
     display: unset;
-    font-size: 6vw;
+    font-size: 8vw;
     position: absolute;
     font-weight: bolder;
     color: green;
-    top: 12%;
+    top: 10%;
     left: 40%;
   }
 
   .mobileReqTrigger {
     display: unset;
-    font-size: 6vw;
+    font-size: 8vw;
     position: absolute;
     color: red;
     font-weight: bolder;
@@ -995,7 +995,7 @@ td {
 
   .mobileReqTriggerTrue {
     display: unset;
-    font-size: 6vw;
+    font-size: 8vw;
     font-weight: bolder;
     color: green;
     position: absolute;
@@ -1307,56 +1307,56 @@ td {
     color: red;
     left: 25%;
     font-weight: bolder;
-    top: 60%;
+    top: 58%;
   }
 
   .mobileReqChannelTrue {
     display: unset;
-    font-size: 4.5vh;
+    font-size: 6vh;
     position: absolute;
     font-weight: bolder;
     color: green;
-    top: 60%;
+    top: 58%;
     left: 25%;
   }
 
   .mobileReqMessage {
     display: unset;
-    font-size: 4.5vh;
+    font-size: 6vh;
     color: red;
     position: absolute;
     left: 25%;
     font-weight: bolder;
-    top: 12%;
+    top: 9%;
   }
 
   .mobileReqMessageTrue {
     display: unset;
-    font-size: 4.5vh;
+    font-size: 6vh;
     position: absolute;
     font-weight: bolder;
     color: green;
-    top: 12%;
+    top: 9%;
     left: 25%;
   }
 
   .mobileReqTrigger {
     display: unset;
-    font-size: 4.5vh;
+    font-size: 6vh;
     position: absolute;
     color: red;
     font-weight: bolder;
-    top: 36%;
+    top: 34%;
     left: 25%;
   }
 
   .mobileReqTriggerTrue {
     display: unset;
-    font-size: 4.5vh;
+    font-size: 6vh;
     font-weight: bolder;
     color: green;
     position: absolute;
-    top: 36%;
+    top: 34%;
     left: 25%;
   }
 

@@ -366,7 +366,7 @@ td {
   position: absolute;
   margin-top: 13%;
   background-color: rgb(202, 202, 202);
-  border: 0.4vh solid black;
+  border: 0.3vh solid black;
   z-index: 1;
   animation: slit-in-vertical 0.45s ease-out both;
   display: grid;
@@ -627,8 +627,8 @@ td {
 
 #legend {
   position: absolute;
-  left: 1%;
-  top: 50%;
+  left: 1.5%;
+  top: 55%;
   z-index: 2;
   width: 15%;
   text-align: center;
@@ -702,8 +702,8 @@ td {
     max-width: 6vw;
   }
   .action {
-    width: 15vw;
-    max-width: 15vw;
+    width: 10vw;
+    max-width: 10vw;
   }
 
   .headRow td {
@@ -721,15 +721,15 @@ td {
   }
 
   #Edit {
-    width: 9vw;
-    height: 9vw;
+    width: 11vw;
+    height: 11vw;
     font-size: 4vw;
     cursor: pointer;
   }
 
   #Delete {
-    width: 9vw;
-    height: 9vw;
+    width: 11vw;
+    height: 11vw;
     font-size: 4vw;
     cursor: pointer;
   }
@@ -1332,7 +1332,7 @@ td {
     display: unset;
     font-size: 6vh;
     color: red;
-    margin-left: 200%;
+    margin-left: 250%;
     font-weight: bolder;
     line-height: 150%;
   }
@@ -1343,14 +1343,14 @@ td {
     font-weight: bolder;
     color: green;
     line-height: 150%;
-    margin-left: 200%;
+    margin-left: 250%;
   }
 
   .mobileReqDate {
     display: unset;
     font-size: 6vh;
     color: red;
-    margin-left: 11%;
+    margin-left: 16%;
     font-weight: bolder;
     margin-top: 17%;
   }
@@ -1361,7 +1361,7 @@ td {
     font-weight: bolder;
     color: green;
     margin-top: 17%;
-    margin-left: 11%;
+    margin-left: 16%;
   }
 
   #legend {

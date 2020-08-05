@@ -428,11 +428,7 @@ export default {
     left: 22%;
     width: 55vw;
     height: 6vw;
-    background-image: linear-gradient(
-      70deg,
-      rgb(34, 50, 189),
-      rgb(142, 166, 243)
-    );
+    background-color: wheat;
   }
 
   #pw {
@@ -459,11 +455,7 @@ export default {
     top: 75%;
     width: 55vw;
     height: 6vw;
-    background-image: linear-gradient(
-      70deg,
-      rgb(34, 50, 189),
-      rgb(142, 166, 243)
-    );
+    background-color: wheat;
   }
 
   #loginButton {
@@ -473,22 +465,23 @@ export default {
     top: 88%;
     width: 30vw;
     height: 10vw;
-    font-size: 2.5vw;
+    font-size: 4vw;
     font-weight: bold;
     cursor: pointer;
   }
 
   #loginButton:hover {
     cursor: pointer;
-    background-color: rgb(54, 54, 54);
+    background: linear-gradient(-70deg, #8eb19d, #66b3ba);
+    box-shadow: 5px 10px;
+    opacity: 1;
     position: absolute;
     left: 35%;
     top: 88%;
     width: 30vw;
     height: 10vw;
-    font-size: 2.5vw;
+    font-size: 4vw;
     font-weight: bold;
-    color: rgb(247, 247, 247);
   }
 
   #wrongUP {
@@ -585,11 +578,7 @@ export default {
     left: 30%;
     width: 50vh;
     height: 4vh;
-    background-image: linear-gradient(
-      70deg,
-      rgb(34, 50, 189),
-      rgb(142, 166, 243)
-    );
+    background-color: wheat;
   }
 
   #pw {
@@ -616,11 +605,7 @@ export default {
     top: 75%;
     width: 50vh;
     height: 4vh;
-    background-image: linear-gradient(
-      70deg,
-      rgb(34, 50, 189),
-      rgb(142, 166, 243)
-    );
+    background-color: wheat;
   }
 
   #loginButton {
@@ -636,7 +621,10 @@ export default {
   }
 
   #loginButton:hover {
-    background-color: rgb(54, 54, 54);
+    cursor: pointer;
+    background: linear-gradient(-70deg, #8eb19d, #66b3ba);
+    box-shadow: 5px 10px;
+    opacity: 1;
     position: absolute;
     left: 35%;
     top: 88%;
@@ -644,9 +632,7 @@ export default {
     height: 10vh;
     font-size: 3vh;
     font-weight: bold;
-    cursor: pointer;
   }
-
   #wrongUP {
     grid-column-start: 1;
     grid-column-end: 7;

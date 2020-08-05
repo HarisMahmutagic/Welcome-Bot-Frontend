@@ -645,8 +645,8 @@ td {
 
 #legend {
   position: absolute;
-  left: 1%;
-  top: 50%;
+  left: 1.5%;
+  top: 55%;
   z-index: 2;
   width: 20vh;
   text-align: center;
@@ -658,16 +658,16 @@ td {
     max-width: 10vw;
   }
   .text {
-    width: 50vw;
-    max-width: 50vw;
+    width: 40vw;
+    max-width: 40vw;
   }
   .date {
     width: 18vw;
     max-width: 18vw;
   }
   .action {
-    width: 10vw;
-    max-width: 10vw;
+    width: 11vw;
+    max-width: 11vw;
   }
 
   .headRow td {
@@ -684,15 +684,15 @@ td {
     text-align: center;
   }
   #Edit {
-    width: 9vw;
-    height: 9vw;
+    width: 11vw;
+    height: 11vw;
     font-size: 4vw;
     cursor: pointer;
   }
 
   #Delete {
-    width: 9vw;
-    height: 9vw;
+    width: 11vw;
+    height: 11vw;
     font-size: 4vw;
     cursor: pointer;
   }
@@ -808,7 +808,7 @@ td {
     color: red;
     font-weight: bolder;
     position: absolute;
-    left: 30%;
+    left: 35%;
     top: 21%;
   }
 
@@ -818,7 +818,7 @@ td {
     font-weight: bolder;
     color: green;
     position: absolute;
-    left: 30%;
+    left: 35%;
     top: 20%;
   }
   #mobileCheckFalseText {
@@ -828,7 +828,7 @@ td {
     position: absolute;
     font-weight: bolder;
     top: 56%;
-    left: 30%;
+    left: 35%;
   }
 
   #mobileCheckTrueText {
@@ -838,7 +838,7 @@ td {
     color: green;
     position: absolute;
     top: 55%;
-    left: 30%;
+    left: 35%;
   }
 
   #allowSendTrue {
