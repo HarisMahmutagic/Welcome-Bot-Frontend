@@ -51,7 +51,48 @@
     </div>
     <!-- BOX3 Right side with table -->
 
-    <div class="box3"><!-- MJESTO ZA EMIRA --></div>
+    <!-- MJESTO ZA EMIRA -->
+    <div class="box3">
+      <div class="header">
+        <div v-on:click="setToUsage">Bot graph</div>
+        <div v-on:click="setToReports">Bot report</div>
+      </div>
+      <div class="usage" v-if="switcher">
+        <div class="graph">
+          <graph-line
+            :width="550"
+            :height="350"
+            :shape="'normal'"
+            :axis-min="0"
+            :axis-full-mode="true"
+            :labels="labels"
+            :names="names"
+            :values="values"
+          >
+            <note :text="'Bot usage'"></note>
+            <tooltip :names="names" :position="'right'"></tooltip>
+            <legends :names="names"></legends>
+            <guideline :tooltip-y="true"></guideline>
+          </graph-line>
+        </div>
+      </div>
+      <div class="reports" v-if="!switcher">
+        <table>
+          <tr>
+            <th>ID</th>
+            <th>Report Name</th>
+            <th>Report Value</th>
+            <th>Updated</th>
+          </tr>
+          <tr v-for="report in reports" :key="report.id">
+            <th>{{ report.id }}</th>
+            <th>{{ report.report_name }}</th>
+            <th>{{ report.report_value }}</th>
+            <th>{{ report.last_update }}</th>
+          </tr>
+        </table>
+      </div>
+    </div>
 
     <!-- BOX4 - Bottom div ( footer ) -->
 
@@ -60,7 +101,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import MessageButton from '../components/MessageButton.vue';
 import ScheduleButton from '../components/ScheduleButton.vue';
 import TriggerButton from '../components/TriggerButton.vue';
@@ -73,6 +114,8 @@ export default {
   data() {
     return {
       dropDown: true,
+      names: ['BOT used'],
+      switcher: true,
     };
   },
   components: {
@@ -82,13 +125,24 @@ export default {
     ReportsButton,
     LogOutButton,
   },
-  computed: mapGetters(['token']),
+  computed: mapGetters(['token', 'labels', 'values', 'reports']),
   created() {
+    if (this.token !== '') {
+      this.fetchUsage(this.token);
+      this.fetchReports(this.token);
+    }
     if (this.token === '') {
       this.$router.push('/');
     }
   },
   methods: {
+    setToUsage() {
+      this.switcher = true;
+    },
+    setToReports() {
+      this.switcher = false;
+    },
+    ...mapActions(['fetchUsage', 'fetchReports']),
     // Function for opening drop down menu
     dropDownOnOff() {
       const self = this;
@@ -189,6 +243,40 @@ export default {
   grid-row-start: 2;
   grid-row-end: 3;
   overflow: auto;
+  display: grid;
+  grid-template-rows: 7vh 60vh;
+}
+.header {
+  display: grid;
+  grid-template-columns: 15vh 15vh;
+  justify-content: space-around;
+}
+.header > * {
+  background-color: white;
+  height: 5vh;
+  width: 20vh;
+  line-height: 5vh;
+  font-weight: bolder;
+  text-align: center;
+  font-size: 3.2vh;
+  z-index: 1;
+  text-shadow: 3px 3px 3px grey;
+  box-shadow: 5px 10px;
+  opacity: 0.7;
+}
+.header > *:hover {
+  background-color: cornflowerblue;
+  cursor: pointer;
+  font-weight: bolder;
+  font-size: 3.2vh;
+  z-index: 1;
+  text-shadow: 3px 3px 3px grey;
+  opacity: 1;
+}
+.usage {
+  text-align: center;
+  opacity: 0.7;
+  padding-top: 1vh;
 }
 
 .box4 {

@@ -5,6 +5,7 @@ import Messages from './modules/Messages';
 import Schedules from './modules/Schedules';
 import Triggers from './modules/Triggers';
 import Channels from './modules/Channels';
+import Reports from './modules/Reports';
 
 Vue.use(Vuex);
 
@@ -15,5 +16,6 @@ export default new Vuex.Store({
     Schedules,
     Triggers,
     Channels,
+    Reports,
   },
 });
