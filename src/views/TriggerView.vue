@@ -144,6 +144,7 @@
         <option v-for="channel in allChannels.tempArray" :key="channel.id">
           {{ channel }}</option
         >
+        <option>Private</option>
       </select>
 
       <input type="checkbox" id="checkActive" v-model="active" />

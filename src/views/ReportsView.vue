@@ -68,6 +68,7 @@
             :labels="labels"
             :names="names"
             :values="values"
+            :opacity="1"
           >
             <note :text="'Bot usage'"></note>
             <tooltip :names="names" :position="'right'"></tooltip>
@@ -246,6 +247,7 @@ export default {
   display: grid;
   grid-template-rows: 7vh 60vh;
 }
+
 .header {
   display: grid;
   grid-template-columns: 15vh 15vh;
@@ -275,8 +277,8 @@ export default {
 }
 .usage {
   text-align: center;
-  opacity: 0.7;
   padding-top: 1vh;
+  opacity: 0.7;
 }
 
 .box4 {
