@@ -815,7 +815,6 @@ export default {
     bottom: 0;
     right: 0;
     position: absolute;
-    background-color: rgb(207, 206, 206);
   }
 
   .box1 {
@@ -1206,7 +1205,6 @@ export default {
     bottom: 0;
     right: 0;
     position: absolute;
-    background-color: rgb(207, 206, 206);
   }
 
   .box1 {
@@ -1214,7 +1212,6 @@ export default {
     grid-column-end: 2;
     grid-row-start: 1;
     grid-row-end: 2;
-    border: 0.01vh solid black;
   }
 
   #title {
@@ -1229,7 +1226,6 @@ export default {
     display: none;
     grid-column-start: 1;
     grid-column-end: 2;
-    border: 0.01vh solid black;
     grid-row-start: 2;
     grid-row-end: 3;
   }
@@ -1237,7 +1233,6 @@ export default {
   .box3 {
     grid-column-start: 1;
     grid-column-end: 2;
-    border: 0.01vh solid black;
     grid-row-start: 2;
     grid-row-end: 3;
     overflow: auto;
@@ -1246,7 +1241,6 @@ export default {
   .box4 {
     grid-column-start: 1;
     grid-column-end: 2;
-    border: 0.01vh solid black;
     grid-row-start: 3;
     grid-row-end: 4;
   }

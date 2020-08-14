@@ -50,17 +50,14 @@
       <LogOutButton></LogOutButton>
     </div>
     <!-- BOX3 Right side with table -->
-
-    <!-- MJESTO ZA EMIRA -->
     <div class="box3">
       <div class="header">
-        <div v-on:click="setToUsage">Bot graph</div>
-        <div v-on:click="setToReports">Bot report</div>
+        <div v-on:click="setToUsage" id="graphButton">Bot graph</div>
+        <div v-on:click="setToReports" id="reportButton">Bot report</div>
       </div>
       <div class="usage" v-if="switcher">
         <div class="graph">
           <graph-line
-            :width="550"
             :height="350"
             :shape="'normal'"
             :axis-min="0"
@@ -79,13 +76,13 @@
       </div>
       <div class="reports" v-if="!switcher">
         <table>
-          <tr>
+          <tr id="headRow">
             <th>ID</th>
             <th>Report Name</th>
             <th>Report Value</th>
             <th>Updated</th>
           </tr>
-          <tr v-for="report in reports" :key="report.id">
+          <tr v-for="report in reports" :key="report.id" id="list">
             <th>{{ report.id }}</th>
             <th>{{ report.report_name }}</th>
             <th>{{ report.report_value }}</th>
@@ -253,32 +250,127 @@ export default {
   grid-template-columns: 15vh 15vh;
   justify-content: space-around;
 }
-.header > * {
+
+#graphButton {
+  grid-column-start: 1;
+  grid-column-end: 2;
   background-color: white;
-  height: 5vh;
-  width: 20vh;
-  line-height: 5vh;
+  height: 4vh;
+  width: 12vh;
+  margin-left: 20%;
+  font-size: 2vh;
   font-weight: bolder;
   text-align: center;
-  font-size: 3.2vh;
-  z-index: 1;
   text-shadow: 3px 3px 3px grey;
-  box-shadow: 5px 10px;
+  box-shadow: -5px 5px;
   opacity: 0.7;
-}
-.header > *:hover {
-  background-color: cornflowerblue;
+  line-height: 3vh;
   cursor: pointer;
-  font-weight: bolder;
-  font-size: 3.2vh;
-  z-index: 1;
-  text-shadow: 3px 3px 3px grey;
-  opacity: 1;
 }
+
+#graphButton:hover {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  background-color: white;
+  height: 4vh;
+  width: 12vh;
+  margin-left: 20%;
+  font-size: 2vh;
+  font-weight: bolder;
+  text-align: center;
+  text-shadow: 3px 3px 3px grey;
+  box-shadow: -5px 5px;
+  opacity: none;
+  line-height: 3vh;
+  cursor: pointer;
+  background-color: cornflowerblue;
+}
+
+#reportButton {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  background-color: white;
+  height: 4vh;
+  width: 12vh;
+  font-size: 2vh;
+  font-weight: bolder;
+  text-align: center;
+  text-shadow: 3px 3px 3px grey;
+  box-shadow: -5px 5px;
+  opacity: 0.7;
+  line-height: 3vh;
+  cursor: pointer;
+}
+
+#reportButton:hover {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  background-color: white;
+  height: 4vh;
+  width: 12vh;
+  font-size: 2vh;
+  font-weight: bolder;
+  text-align: center;
+  text-shadow: 3px 3px 3px grey;
+  box-shadow: -5px 5px;
+  opacity: none;
+  line-height: 3vh;
+  cursor: pointer;
+  background-color: cornflowerblue;
+}
+
 .usage {
   text-align: center;
   padding-top: 1vh;
   opacity: 0.7;
+  width: 100%;
+  height: 100%;
+}
+
+.reports {
+  text-align: center;
+  padding-top: 1vh;
+  opacity: 0.7;
+  width: 100%;
+  height: 100%;
+}
+
+table {
+  width: 100%;
+  height: 100%;
+  border-spacing: 0;
+  overflow: auto;
+  background: white;
+}
+
+#headRow {
+  background-color: rgb(143, 143, 143);
+  color: white;
+  text-align: center;
+  font-size: 2.5vh;
+}
+
+tr {
+  position: relative;
+}
+
+#list {
+  background: lightgray;
+  font-size: 1.8vh;
+  color: black;
+}
+
+th {
+  overflow: auto;
+  height: 1vh;
+}
+
+.graph {
+  width: 100%;
+}
+
+graph-line {
+  width: 100%;
 }
 
 .box4 {
@@ -325,7 +417,6 @@ export default {
     bottom: 0;
     right: 0;
     position: absolute;
-    background-color: rgb(207, 206, 206);
   }
 
   .box1 {
@@ -360,6 +451,138 @@ export default {
     grid-row-start: 2;
     grid-row-end: 3;
     overflow: auto;
+  }
+
+  .header {
+    display: grid;
+    grid-template-columns: 15vw 15vw;
+    justify-content: space-around;
+  }
+
+  #graphButton {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    background-color: white;
+    margin-top: 10%;
+    height: 8vw;
+    width: 15vw;
+    margin-left: 5%;
+    font-size: 4vw;
+    font-weight: bolder;
+    text-align: center;
+    text-shadow: 2px 2px 2px grey;
+    box-shadow: -2px 2px;
+    opacity: 0.7;
+    line-height: 4vw;
+    cursor: pointer;
+  }
+
+  #graphButton:hover {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    background-color: white;
+    height: 8vw;
+    width: 15vw;
+    margin-top: 10%;
+    margin-left: 5%;
+    font-size: 4vw;
+    font-weight: bolder;
+    text-align: center;
+    text-shadow: 2px 2px 2px grey;
+    box-shadow: -2px 2px;
+    opacity: none;
+    line-height: 4vw;
+    cursor: pointer;
+    background-color: cornflowerblue;
+  }
+
+  #reportButton {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    background-color: white;
+    height: 8vw;
+    margin-top: 10%;
+    width: 15vw;
+    font-size: 4vw;
+    font-weight: bolder;
+    text-align: center;
+    text-shadow: 2px 2px 2px grey;
+    box-shadow: -2px 2px;
+    opacity: 0.7;
+    line-height: 4vw;
+    cursor: pointer;
+  }
+
+  #reportButton:hover {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    background-color: white;
+    margin-top: 10%;
+    height: 8vw;
+    width: 15vw;
+    font-size: 4vw;
+    font-weight: bolder;
+    text-align: center;
+    text-shadow: 2px 2px 2px grey;
+    box-shadow: -2px 2px;
+    opacity: none;
+    line-height: 4vw;
+    cursor: pointer;
+    background-color: cornflowerblue;
+  }
+
+  .usage {
+    text-align: center;
+    padding-top: 1vw;
+    opacity: 0.7;
+    width: 99%;
+  }
+
+  .reports {
+    text-align: center;
+    padding-top: 1vw;
+    opacity: 0.7;
+    width: 100%;
+    height: 100%;
+  }
+
+  table {
+    width: 100%;
+    height: 74vh;
+    margin-top: 4%;
+    border-spacing: 0;
+    overflow: auto;
+    background: white;
+  }
+
+  #headRow {
+    background-color: rgb(143, 143, 143);
+    color: white;
+    text-align: center;
+    font-size: 4vw;
+  }
+
+  tr {
+    position: relative;
+  }
+
+  #list {
+    background: lightgray;
+    font-size: 4vw;
+    color: black;
+  }
+
+  th {
+    overflow: auto;
+  }
+
+  .graph {
+    margin-top: 5%;
+    width: 99vw;
+  }
+
+  graph-line {
+    width: 99vw;
   }
 
   .box4 {
@@ -485,7 +708,6 @@ export default {
     left: 0;
     bottom: 0;
     right: 0;
-    background-color: rgb(207, 206, 206);
   }
 
   .box1 {
@@ -493,7 +715,6 @@ export default {
     grid-column-end: 2;
     grid-row-start: 1;
     grid-row-end: 2;
-    border: 0.01vh solid black;
   }
 
   #title {
@@ -508,7 +729,6 @@ export default {
     display: none;
     grid-column-start: 1;
     grid-column-end: 2;
-    border: 0.01vh solid black;
     grid-row-start: 2;
     grid-row-end: 3;
   }
@@ -516,7 +736,6 @@ export default {
   .box3 {
     grid-column-start: 1;
     grid-column-end: 2;
-    border: 0.01vh solid black;
     grid-row-start: 2;
     grid-row-end: 3;
   }
@@ -524,7 +743,6 @@ export default {
   .box4 {
     grid-column-start: 1;
     grid-column-end: 2;
-    border: 0.01vh solid black;
     grid-row-start: 3;
     grid-row-end: 4;
   }
@@ -630,6 +848,128 @@ export default {
     line-height: 10vh;
     cursor: pointer;
     z-index: 1;
+  }
+
+  #graphButton {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    background-color: white;
+    margin-top: 10%;
+    height: 8vh;
+    width: 15vh;
+    margin-left: 5%;
+    font-size: 4vh;
+    font-weight: bolder;
+    text-align: center;
+    text-shadow: 2px 2px 2px grey;
+    box-shadow: -2px 2px;
+    opacity: 0.7;
+    line-height: 4vh;
+    cursor: pointer;
+  }
+
+  #graphButton:hover {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    background-color: white;
+    height: 8vh;
+    width: 15vh;
+    margin-top: 10%;
+    margin-left: 5%;
+    font-size: 4vh;
+    font-weight: bolder;
+    text-align: center;
+    text-shadow: 2px 2px 2px grey;
+    box-shadow: -2px 2px;
+    opacity: none;
+    line-height: 4vh;
+    cursor: pointer;
+    background-color: cornflowerblue;
+  }
+
+  #reportButton {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    background-color: white;
+    height: 8vh;
+    margin-top: 10%;
+    width: 15vh;
+    font-size: 4vh;
+    font-weight: bolder;
+    text-align: center;
+    text-shadow: 2px 2px 2px grey;
+    box-shadow: -2px 2px;
+    opacity: 0.7;
+    line-height: 4vh;
+    cursor: pointer;
+  }
+
+  #reportButton:hover {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    background-color: white;
+    margin-top: 10%;
+    height: 8vh;
+    width: 15vh;
+    font-size: 4vh;
+    font-weight: bolder;
+    text-align: center;
+    text-shadow: 2px 2px 2px grey;
+    box-shadow: -2px 2px;
+    opacity: none;
+    line-height: 4vh;
+    cursor: pointer;
+    background-color: cornflowerblue;
+  }
+
+  .usage {
+    text-align: center;
+    padding-top: 1vh;
+    opacity: 0.7;
+    width: 99%;
+  }
+
+  .reports {
+    text-align: center;
+    padding-top: 1vh;
+    opacity: 0.7;
+    width: 100%;
+    height: 100%;
+  }
+
+  table {
+    width: 100%;
+    height: 74vh;
+    margin-top: 2%;
+    border-spacing: 0;
+    overflow: auto;
+    background: white;
+  }
+
+  #headRow {
+    background-color: rgb(143, 143, 143);
+    color: white;
+    text-align: center;
+    font-size: 4vh;
+  }
+
+  tr {
+    position: relative;
+  }
+
+  #list {
+    background: lightgray;
+    font-size: 4vh;
+    color: black;
+  }
+
+  th {
+    overflow: auto;
+  }
+
+  .graph {
+    margin-top: 5%;
+    width: 149vh;
   }
 }
 </style>

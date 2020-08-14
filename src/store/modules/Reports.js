@@ -3,7 +3,7 @@
 /* eslint-disable no-shadow */
 import axios from 'axios';
 
-const url = 'http://localhost/api/reports';
+const url = 'http://localhost:5000/api/reports';
 
 const state = {
   labels: [],

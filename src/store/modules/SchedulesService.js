@@ -1,8 +1,8 @@
 /* eslint-disable camelcase */
 import axios from 'axios';
 
-// const url = 'http://localhost:5000/api/schedules/';
-const url = 'http://localhost/api/schedules/';
+const url = 'http://localhost:5000/api/schedules/';
+// const url = 'http://localhost/api/schedules/';
 // const url = 'https://welcome-bot-slack.herokuapp.com/api/schedules/';
 
 class SchedulesService {
