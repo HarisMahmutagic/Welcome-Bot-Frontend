@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const url = 'http://localhost:5000/api/messages/';
-// const url = 'http://localhost/api/messages/';
-// const url = 'https://welcome-bot-slack.herokuapp.com/api/messages/';
+// const url = 'http://localhost:5000/api/messages/';
+const url = 'http://localhost/api/messages/';
+
 class MessagesService {
   // eslint-disable-next-line camelcase
   static addMessage(title, text, cr_date, token) {

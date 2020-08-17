@@ -1,8 +1,7 @@
 import axios from 'axios';
 
-const url = 'http://localhost:5000/login';
-// const url = 'http://localhost/login';
-// const url = 'https://welcome-bot-slack.herokuapp.com/login/';
+// const url = 'http://localhost:5000/login';
+const url = 'http://localhost/login';
 
 class LoginService {
   // eslint-disable-next-line camelcase
