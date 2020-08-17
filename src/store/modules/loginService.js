@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 // const url = 'http://localhost:5000/login';
-const url = 'http://localhost/login';
+// const url = 'http://localhost/login';
+const url = 'https://praksans.dyndns.org:450/login';
 
 class LoginService {
   // eslint-disable-next-line camelcase

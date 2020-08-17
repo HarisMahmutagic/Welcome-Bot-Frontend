@@ -2,7 +2,8 @@
 import axios from 'axios';
 
 // const url = 'http://localhost:5000/api/schedules/';
-const url = 'http://localhost/api/schedules/';
+// const url = 'http://localhost/api/schedules/';
+const url = 'https://praksans.dyndns.org:450/api/schedules/';
 
 class SchedulesService {
   static addSchedule(message, run_date, active, repeat_range, token) {

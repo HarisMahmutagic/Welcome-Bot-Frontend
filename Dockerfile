@@ -1,18 +1,7 @@
-FROM node:12
-
-# App Directory
-WORKDIR /
-
-# Install dependencies
-COPY package*.json ./
-
-RUN npm install
-
-# Bundle app source
-COPY . .
-
-# Expose port
-EXPOSE 5005
-
-# Run app
-CMD [ "node", "server.js" ]
+U2FsdGVkX1805tq1GFnaaHLqm+3y12Itr2HWTZampBJxGOxuRs+sjV7e0wno0E4F
+/+X7nkC/SGYG62DHoemS9eP9NLRX3Q3QLLT4SV7zILX4vYOMBtvBISIcBBkJ3X7G
+koZR5TVdG/7qUC30FGvf3s7mSOPJsCOGZPLgH5pMZvypqYJWI3mViaMgwOYnN3Uo
+EJkVeg9YqAdsOQxocBn5pO36fTnGSVYXMadVZHJ1MZWPfOEvq2ulkWWSrj1wzUtQ
+w39OpuNAiPoO10x8G+hFf25oyZXtQtYfeA4wRSsMpLo86FvSBfWolnosTxyPHcWg
+NBSRvbRGPWEYEJqRyBcoBI11zcUr17/puUPLYp7p1lPHkDRlmZPwk2DK4lodJT3y
+rqvvclfPqTjVDF5Sku2S5er6EitGmmpdjQ0xhpP668o=

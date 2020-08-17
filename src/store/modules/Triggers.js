@@ -3,7 +3,8 @@
 import axios from 'axios';
 
 // const url = 'http://localhost:5000/api/triggers/';
-const url = 'http://localhost/api/triggers/';
+// const url = 'http://localhost/api/triggers/';
+const url = 'https://praksans.dyndns.org:450/api/triggers/';
 
 /* eslint no-shadow: ["error", { "allow": ["state"] }] */
 const state = {

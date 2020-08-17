@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 // const url = 'http://localhost:5000/api/messages/';
-const url = 'http://localhost/api/messages/';
+// const url = 'http://localhost/api/messages/';
+const url = 'https://praksans.dyndns.org:450/api/messages/';
 
 class MessagesService {
   // eslint-disable-next-line camelcase
